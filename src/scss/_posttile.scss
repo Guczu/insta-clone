@@ -1,0 +1,50 @@
+.posttile--container {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+    img {
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+    }
+
+    &:hover {
+        cursor: pointer;
+        .posttile--hovered {
+            display: flex;
+        }
+    }
+}
+
+.posttile--hovered {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.267);
+}
+
+.posttile--likes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+    i {
+        filter: invert(1);
+        transform: scaleX(-1);
+    }
+
+    p {
+        font-size: 20px;
+        padding: 10px;
+        color: white;
+    }
+}

@@ -1,0 +1,20 @@
+.mainpage--container {
+    display: flex;
+    width: 100%;
+}
+
+.mainpage--wrapper {
+    width: 1335px;
+    display: flex;
+}
+
+.mainpage--content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: $primary-color;
+}
+
+.mainpage--left {
+    width: 335px;
+}

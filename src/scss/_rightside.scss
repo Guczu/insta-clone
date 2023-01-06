@@ -1,0 +1,153 @@
+.mainpage--right {
+    width: 400px;
+    height: 500px;
+    margin-top: 20px;
+}
+
+.mainpage--info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 100px;
+
+    img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50px;
+    }
+
+    button {
+        background-color: $primary-color;
+        border: none;
+        color: $blue-color;
+        font-weight: bold;
+    }
+
+}
+
+.rightside--names {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 200px;
+    height: 75px;
+
+    p {
+        margin: 0;
+        margin-left: 10px;
+        padding: 2px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    span {
+        margin: 0;
+        margin-left: 10px;
+        padding: 2px;
+    }
+}
+
+.mainpage--names {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 250px;
+    height: 80px;
+
+    p {
+        margin: 0;
+        margin-left: 10px;
+        padding: 2px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    span {
+        margin: 0;
+        margin-left: 10px;
+        padding: 2px;
+    }
+}
+
+.mainpage--recommendedinfo {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+.mainpage--recommended {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 400px;
+    height: 250px;
+}
+
+.mainpage--recommendeduser {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 75px;
+
+    img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50px;
+    }
+
+    button {
+        background-color: $primary-color;
+        border: none;
+        font-weight: bold;
+        color: $blue-color;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.rightside--image {
+    width: 75px;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainpage--recommendedfooter {
+    p {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+.rightside--button {
+    width: 125px;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gray {
+    color: gray !important;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.unclickable {
+    cursor: default !important;
+}

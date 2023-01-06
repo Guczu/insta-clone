@@ -1,0 +1,105 @@
+.editprofile--container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(128, 128, 128, 0.616);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.editprofile--form {
+    position: relative;
+    padding: 32px;
+    width: 100%;
+    min-height: 600px;
+    max-width: 640px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    hr {
+        border: 1px solid $border-color;
+        width: 500px;
+    }
+}
+
+.editpost--title {
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.editpost--upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 30px;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    img {
+        max-width: 300px;
+    }
+}
+
+.editpost--label {
+    width: 70px;
+    height: 70px;
+    border: none;
+    background-color: transparent;
+    border: 1px solid $border-color;
+    border-radius: 18px;
+    margin-top: 20px;
+    color: gray;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.editprofile--button {
+    margin-top: 40px;
+    border: 1px solid $border-color;
+    background-color: transparent;
+    border-radius: 20px;
+    padding: 10px;
+    height: 40px;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.editprofile--close {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    background-color: transparent;
+    font-size: 25px;
+    color: $border-color;
+    border: none;
+    margin: 10px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}

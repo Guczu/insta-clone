@@ -1,0 +1,38 @@
+.loadingscreen--container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: white;
+}
+
+.loadingscreen--image {
+    img {
+        width: 100px;
+        animation-name: animation;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+    }
+}
+
+@keyframes animation {
+    0% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(-25deg);
+    }
+    50% {
+        transform: rotate(0);
+    }
+    75% {
+        transform: rotate(25deg);
+    }
+    100% {
+        transform: rotate(0);
+    }
+}

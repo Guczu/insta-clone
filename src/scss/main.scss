@@ -1,0 +1,32 @@
+@import './variables';
+@import './loginpage';
+@import './mainpage';
+@import './navbar';
+@import './posts';
+@import './posttemplate';
+@import './rightside';
+@import './profile';
+@import './registerpage';
+@import './addpost';
+@import './posttile';
+@import './postpreview';
+@import './followedusers';
+@import './loadingscreen';
+@import './editprofile';
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    background: $primary-color;
+    color: black;
+    width: 100%;
+    margin: 0;
+}
+
+.app-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
