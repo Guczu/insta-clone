@@ -67,7 +67,8 @@ export default function Profile() {
               const querySnapshot = await getDocs(q);
     
               querySnapshot.forEach(async (doc) => {
-                setFollowedList(state => [...state, doc.data()]);
+                const userData = await fetchOneUser(doc.data().user_followed);
+                setFollowedList(state => [...state, userData]);
               })
         }
 
@@ -77,7 +78,8 @@ export default function Profile() {
               const querySnapshot = await getDocs(q);
     
               querySnapshot.forEach(async (doc) => {
-                setFollowingList(state => [...state, doc.data()]);
+                const userData = await fetchOneUser(doc.data().user_following);
+                setFollowingList(state => [...state, userData]);
               })
         }
 

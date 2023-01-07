@@ -3,21 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import fetchProfilePicture from '../methods/fetchProfilePicture';
 
 export default function FollowedUsers(props) {
-  const [picture, setPicture] = useState("");
   const navigate = useNavigate();
-
+  
   const showFollowers = props.followedList.map((follower, i) => {
-
-    const getPicture = async () => {
-      const pic = await fetchProfilePicture(follower.user_followed);
-      setPicture(pic);
-    }
-    getPicture();
 
     return (
       <div key={i} className='followedusers--tile'>
-        <img src={picture}></img>
-        <p onClick={() => {checkProfile(follower.user_followed)}} className='clickable'>{follower.user_followed}</p>
+        <img src={follower.data.picture}></img>
+        <p onClick={() => {checkProfile(follower.data.username)}} className='clickable'>{follower.data.username}</p>
       </div>
     )
   });
