@@ -5,6 +5,8 @@ import fetchUsers from '../methods/fetchUsers';
 import useChangeRoute from '../methods/useChangeRoute';
 import UserLabel from './UserLabel';
 import fetchOneUserById from '../methods/fetchOneUserById'
+import getPostLikes from '../methods/getPostLikes';
+import addLikeToPost from '../methods/addLikeToPost';
 
 export default function SearchBar(props) {
     const [userList, setUserList] = useState([]);
@@ -65,13 +67,15 @@ export default function SearchBar(props) {
     }))
 
     const showRecentUsers = recentSearches !== 0 && (recentSearches.map((user, i) => {
-        console.log(recentSearches)
         return (
             <div key={i}>
                 <UserLabel userData={user} checkProfile={changeRoute} />
             </div>
         )
     }))
+
+    //addLikeToPost();
+    //getPostLikes();
 
   return (
     <div className='navbar--searchbar'>

@@ -47,6 +47,7 @@ export default function AddPost(props) {
             description: description,
             timeStamp: serverTimestamp(),
           });
+        
         }
         catch(err) {
           console.log(err);

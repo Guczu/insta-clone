@@ -16,6 +16,7 @@ export default function Posts() {
   const user = useSelector(state => state.user);
   //const loggedUserFollowers = user.followed;
   const [loggedUserFollows, setLoggedUserFollows] = useState(null);
+  const uid = localStorage.getItem('uid');
 
   useEffect(() => {
     async function getUser() {
@@ -52,11 +53,12 @@ export default function Posts() {
             const querySnapshot2 = await getDocs(postQuery);
             querySnapshot2.forEach(async (doc) => {
               //setPosts(state => [...state, doc.data()]);
-              unsortedPosts.push(doc.data());
+              //unsortedPosts.push(doc.data());
+              unsortedPosts.push({id: doc.id, data: doc.data()});
             })
             const sortedPosts = unsortedPosts.sort((a, b) => {
-              const timeStampA = a.timeStamp.seconds;
-              const timeStampB = b.timeStamp.seconds;
+              const timeStampA = a.data.timeStamp.seconds;
+              const timeStampB = b.data.timeStamp.seconds;
               if (timeStampA < timeStampB) {
                 return 1;
               }

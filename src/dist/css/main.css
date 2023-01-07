@@ -107,7 +107,7 @@
 
 .navbar--container {
   position: fixed;
-  width: 765px;
+  width: 335px;
   height: 100vh;
   display: flex;
   flex-direction: row;
@@ -537,6 +537,10 @@
 }
 .mainpage--addcomment button:hover {
   cursor: pointer;
+}
+
+.red--heart {
+  color: red;
 }
 
 .mainpage--right {
