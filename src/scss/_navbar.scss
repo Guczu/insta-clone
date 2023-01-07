@@ -1,3 +1,11 @@
+.navbar--container {
+    position: fixed;
+    width: 765px;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
 .mainpage--navbar {
     width: 335px;
     height: 100vh;
@@ -6,18 +14,20 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    position:fixed;
-    
-    .mainpage--logo {
-        img {
-            width: 150px;
-            padding: 20px;
-            &:hover {
-                cursor: pointer;
-            }
-        }
-    }
+}
 
+.mainpage--logo {
+    width: 190px;
+    height: 95px;
+}
+
+.navbar--image {
+    width: 150px;
+    height: 55px;
+    padding: 20px;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .mainpage--link {
@@ -128,4 +138,74 @@
     margin-left: 5px;
     transition: .1s;
     color: black;
+}
+
+.navbar--searchbar {
+    width: 400px;
+    height: 100vh;
+    background-color: red;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 5px 0 2px -2px rgba(65, 65, 65, 0.411);
+
+    input {
+        background-color: $primary-color;
+        width: 300px;
+        height: 25px;
+        border-radius: 10px;
+        border: 1px solid $border-color;
+        margin-bottom: 20px;
+        padding: 10px;
+    }
+
+    hr {
+        width: 400px;
+        background-color: $border-color;
+    }
+
+    p {
+        width: 400px;
+        height: 40px;
+        display: flex;
+        align-items: flex-start;
+        margin-left: 30px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #0c0c0c;
+    }
+}
+
+.navbar--searchbar--close {
+    position: absolute;
+    margin: 20px;
+    top: 0;
+    right: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: $border-color;
+
+    &:hover {
+        cursor: pointer
+    }
+}
+
+.navbar--searchbar--users {
+    width: 400px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navbar--searchbar--notfound {
+    font-weight: normal !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 !important;
 }

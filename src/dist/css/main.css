@@ -105,6 +105,14 @@
   width: 335px;
 }
 
+.navbar--container {
+  position: fixed;
+  width: 765px;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
 .mainpage--navbar {
   width: 335px;
   height: 100vh;
@@ -113,13 +121,19 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  position: fixed;
 }
-.mainpage--navbar .mainpage--logo img {
+
+.mainpage--logo {
+  width: 190px;
+  height: 95px;
+}
+
+.navbar--image {
   width: 150px;
+  height: 55px;
   padding: 20px;
 }
-.mainpage--navbar .mainpage--logo img:hover {
+.navbar--image:hover {
   cursor: pointer;
 }
 
@@ -221,6 +235,72 @@
   margin-left: 5px;
   transition: 0.1s;
   color: black;
+}
+
+.navbar--searchbar {
+  width: 400px;
+  height: 100vh;
+  background-color: red;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 5px 0 2px -2px rgba(65, 65, 65, 0.411);
+}
+.navbar--searchbar input {
+  background-color: #fafafa;
+  width: 300px;
+  height: 25px;
+  border-radius: 10px;
+  border: 1px solid #dbdbdb;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+.navbar--searchbar hr {
+  width: 400px;
+  background-color: #dbdbdb;
+}
+.navbar--searchbar p {
+  width: 400px;
+  height: 40px;
+  display: flex;
+  align-items: flex-start;
+  margin-left: 30px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #0c0c0c;
+}
+
+.navbar--searchbar--close {
+  position: absolute;
+  margin: 20px;
+  top: 0;
+  right: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #dbdbdb;
+}
+.navbar--searchbar--close:hover {
+  cursor: pointer;
+}
+
+.navbar--searchbar--users {
+  width: 400px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbar--searchbar--notfound {
+  font-weight: normal !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 !important;
 }
 
 .mainpage--middle {
@@ -1451,6 +1531,73 @@ hr {
 }
 .editprofile--close:hover {
   cursor: pointer;
+}
+
+.userlabel--container {
+  width: 250px;
+  height: 70px;
+  background-color: transparent;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.userlabel--container:hover {
+  cursor: pointer;
+  background-color: #fafafa;
+}
+
+.userlabel--image {
+  width: 60px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.userlabel--image img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+}
+
+.userlabel--names {
+  width: 90px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.userlabel--username {
+  width: 90px;
+  height: 25px;
+  display: flex;
+}
+.userlabel--username p {
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.userlabel--fullname {
+  width: 90px;
+  height: 20px;
+}
+.userlabel--fullname p {
+  width: 120px;
+  height: 20px;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  color: gray;
+}
+
+.userlabel--user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 html {
