@@ -108,7 +108,7 @@ export default function Profile() {
         return (
             <PostTile 
                 key={i}
-                posts={post} 
+                post={post} 
             />
         )
     })

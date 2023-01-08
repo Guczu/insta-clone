@@ -9,7 +9,7 @@ export default async function fetchUsers(id) {
     const posts = [];
 
     querySnapshot2.forEach(async (doc) => {
-        posts.push(doc.data())
+        posts.push({id: doc.id, data: doc.data()})
     });
 
     return posts;
