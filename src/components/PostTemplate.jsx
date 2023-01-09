@@ -5,10 +5,19 @@ import getDate from '../methods/getDate';
 import addLikeToPost from '../methods/addLikeToPost';
 import removeLikeFromPost from '../methods/removeLikeFromPost';
 import getPostLikes from '../methods/getPostLikes';
+import getPostComments from '../methods/getPostComments';
+import addComment from '../methods/addComment';
+import PostPreview from './PostPreview';
+import fetchOneUser from '../methods/fetchOneUser';
 
 export default function PostTemplate(props) {
     const [postDate, setPostDate] = useState(null);
     const [liked, setLiked] = useState(false);
+    const [comments, setComments] = useState([]);
+    const [commentContent, setCommentContent] = useState("");
+    const [commentsAmount, setCommentsAmount] = useState(props.post.data.comments);
+    const [previewTrigger, setPreviewTrigger] = useState(false);
+    const [postAuthor, setPostAuthor] = useState(null);
     const [likesAmount, setLikesAmount] = useState(props.post.data.likes);
     const uid = localStorage.getItem('uid');
     const navigate = useNavigate();
@@ -18,7 +27,6 @@ export default function PostTemplate(props) {
         setPostDate(getDate(timestamp))
 
         const checkIfLiked = async () => {
-          const user_id = localStorage.getItem('uid');
           const post_data = props.post;
           const isLiked = await getPostLikes(uid, post_data);
           if(isLiked) {
@@ -26,7 +34,25 @@ export default function PostTemplate(props) {
           }
         }
         checkIfLiked(props.post);
+
+        const getComments = async () => {
+          const comments = await getPostComments(props.post);
+          setComments(comments);
+        }
+        getComments();
+
+        const getPostAuthor = async () => {
+          const user = await fetchOneUser(props.post.data.author);
+          setPostAuthor(user);
+        }
+        getPostAuthor();
     }, [props.post])
+
+    const addCommentToPost = async () => {
+      addComment(uid, props.post, commentContent);
+      setCommentsAmount(state => state + 1);
+      setCommentContent("");
+    }
 
     const checkProfile = (user) => {
       navigate(`/${user}`, { replace: true });
@@ -48,11 +74,16 @@ export default function PostTemplate(props) {
         setLikesAmount(state => state - 1);
       }
     }
-    
+
+    const handlePreviewTrigger = () => {
+      setPreviewTrigger(oldState => !oldState);
+    }
+
   return (
     <div className='mainpage--post'>
+                {previewTrigger && <PostPreview handleTrigger={handlePreviewTrigger} post={props.post} comments={comments}/>}
                 <div className='mainpage--author'>
-                    <img src={storyimg}></img>
+                    <img src={postAuthor !== null ? postAuthor.data.picture : storyimg}></img>
                     <p onClick={() => {checkProfile(props.post.data.author)}}>{props.post.data.author}</p>
                     <i className="fa-solid fa-ellipsis fa-xl"></i>
                 </div>
@@ -75,13 +106,12 @@ export default function PostTemplate(props) {
                 </div>
 
                 <div className='mainpage--comments'>
-                  <p className='bold'>username</p>
-                  <p>Random comment</p>
-                  <span>więcej</span>
+                  <p className='bold'>{props.post.data.author}</p>
+                  <p>{props.post.data.description}</p>
                 </div>
 
                 <div className='mainpage--morecomments'>
-                  <span>Zobacz wszystkie komentarze: {props.post.data.comments}</span>
+                  <span onClick={handlePreviewTrigger}>Zobacz wszystkie komentarze: {commentsAmount}</span>
                 </div>
 
                 <div className='mainpage--date'>
@@ -90,8 +120,8 @@ export default function PostTemplate(props) {
                 <hr></hr>
                 <div className='mainpage--addcomment'>
                   <i className="fa-regular fa-face-smile fa-2x"></i>
-                  <input type="text" placeholder='Dodaj komentarz...'></input>
-                  <button>Opublikuj</button>
+                  <input type="text" value={commentContent} placeholder='Dodaj komentarz...' onChange={e => setCommentContent(e.target.value)}></input>
+                  <button onClick={addCommentToPost}>Opublikuj</button>
                 </div>
             </div>
   )

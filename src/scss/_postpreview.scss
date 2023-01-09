@@ -85,14 +85,24 @@
 
 .postpreview--comments {
     width: 500px;
-    min-height: 545px;
+    height: 545px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+
+    &::-webkit-scrollbar {
+        display: none;  /* Safari and Chrome */
+    }
 
     span {
         margin-top: 30px;
     }
 }
+
+
 
 .postpreview--stats {
     width: 500px;

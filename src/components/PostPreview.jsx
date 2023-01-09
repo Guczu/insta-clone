@@ -5,13 +5,22 @@ import getDate from '../methods/getDate';
 import getPostLikes from '../methods/getPostLikes';
 import addLikeToPost from '../methods/addLikeToPost';
 import removeLikeFromPost from '../methods/removeLikeFromPost';
+import Comment from './Comment';
+import fetchOneUser from '../methods/fetchOneUser';
+import useChangeRoute from '../methods/useChangeRoute'
+import addComment from '../methods/addComment';
 
 export default function PostPreview(props) {
     const [postDate, setPostDate] = useState(null);
     const [liked, setLiked] = useState(false);
     const [likesAmount, setLikesAmount] = useState(props.post.data.likes);
+    const [commentContent, setCommentContent] = useState("");
+    const [postAuthor, setPostAuthor] = useState(null);
+    const [comments, setComments] = useState(props.comments);
     const uid = localStorage.getItem('uid');
+    const changeRoute = useChangeRoute();
 
+    console.log(comments)
     useEffect(() => {
         const timestamp = props.post.data.timeStamp.toDate().toISOString();
         setPostDate(getDate(timestamp))
@@ -25,6 +34,12 @@ export default function PostPreview(props) {
             }
           }
           checkIfLiked(props.post);
+
+        const getPostAuthor = async () => {
+            const user = await fetchOneUser(props.post.data.author);
+            setPostAuthor(user);
+        }
+        getPostAuthor();
     }, [])
 
     const handleLike = async () => {
@@ -43,6 +58,19 @@ export default function PostPreview(props) {
         }
       }
 
+      const addCommentToPost = async () => {
+        addComment(uid, props.post, commentContent);
+        setCommentContent("");
+      }
+
+    const showComments = props.comments?.sort((a,b) => b.data.timeStamp - a.data.timeStamp).map((comment, i) => {
+        return (
+            <div key={i}>
+                <Comment comment={comment} changeRoute={changeRoute}/>
+            </div>
+        )
+    })
+
   return (
     <div className='postpreview--container'>
         <button className='addpost--button' onClick={props.handleTrigger}>X</button>
@@ -52,17 +80,17 @@ export default function PostPreview(props) {
             </div>
             <div className='postpreview--rightside'>
                 <div className='postpreview--author'>
-                    <img src={logo}></img>
-                    <span className='bold clickable'>{props.post.data.author}</span>
+                    <img src={postAuthor !== null ? postAuthor.data.picture : logo} onClick={() => changeRoute(`/${postAuthor.data.username}`)}></img>
+                    <span className='bold clickable' onClick={() => changeRoute(`/${postAuthor.data.username}`)}>{props.post.data.author}</span>
                 </div>
                 <hr></hr>
                 <div className='postpreview--description'>
-                    <img src={logo}></img>
-                    <span className='bold clickable'>{props.post.data.author}</span>
+                    <img src={postAuthor !== null ? postAuthor.data.picture : logo} onClick={() => changeRoute(`/${postAuthor.data.username}`)}></img>
+                    <span className='bold clickable' onClick={() => changeRoute(`/${postAuthor.data.username}`)}>{props.post.data.author}</span>
                     <span>{props.post.data.description}</span>
                 </div>
                 <div className='postpreview--comments'>
-                    <span>Comments section</span>
+                    {showComments}
                 </div>
                 <hr></hr>
                 <div className='postpreview--stats'>
@@ -83,8 +111,8 @@ export default function PostPreview(props) {
                     <hr></hr>
                     <div className='postpreview--addcomment'>
                         <i className="fa-regular fa-face-smile fa-2x"></i>
-                        <input type="text" placeholder='Dodaj komentarz...'></input>
-                        <button className='bold'>Opublikuj</button>
+                        <input type="text" value={commentContent} placeholder='Dodaj komentarz...' onChange={e => setCommentContent(e.target.value)}></input>
+                        <button onClick={addCommentToPost}>Opublikuj</button>
                     </div>
                 </div>
             </div>

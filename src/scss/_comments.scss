@@ -1,0 +1,47 @@
+.comments--container {
+    width: 500px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.comments--image {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+    }
+}
+
+.comments--content {
+    width: 420px;
+    height: 40px;
+    display: flex;
+    align-items: flex-end;
+
+    span {
+        margin: 0;
+        padding: 0;
+        padding-right: 10px;
+        &:first-child {
+            font-weight: bold;
+        }
+    }
+}
+
+.comments--frame {
+    width: 420px;
+    height: 80px;
+}
+
+.comments--date {
+    width: 420px;
+    height: 40px;
+    font-size: 12px;
+    color: gray;
+}

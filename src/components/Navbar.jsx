@@ -78,7 +78,6 @@ export default function Navbar() {
             <i className="fa-solid fa-arrow-right-from-bracket fa-xl"></i>
             <span className='navbar--link'>Wyloguj</span>
           </Link>
-          
           <div className='mainpage--morecontainer'>
             <div className='mainpage--more'>
               <i className="fa-solid fa-bars fa-xl"></i>
