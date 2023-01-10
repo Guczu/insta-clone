@@ -1,43 +1,29 @@
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
-import React, { useRef, useState } from 'react'
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { auth, db } from '../firebase';
+import React, { useRef, useState, useEffect } from 'react'
+import { db } from '../firebase';
 import LoadingScreen from './LoadingScreen';
 import PostTemplate from './PostTemplate';
 import Stories from './Stories';
 import fetchOneUserById from '../methods/fetchOneUserById'
 
 export default function Posts() {
-
-  const [posts, setPosts] = useState([]);
-  const dataFetchedRef = useRef(false);
   const [isLoading, setIsLoading] = useState(true);
-  const user = useSelector(state => state.user);
-  //const loggedUserFollowers = user.followed;
+  const [showFollowersPosts, setShowFollowersPosts] = useState(null);
   const [loggedUserFollows, setLoggedUserFollows] = useState(null);
   const uid = localStorage.getItem('uid');
 
   useEffect(() => {
-    async function getUser() {
-      const uid = localStorage.getItem('uid');
+    const getUser = async () => {
       const oneUser = await fetchOneUserById(uid);
       setLoggedUserFollows(oneUser.followed);
     }
     getUser();
-  },[]) 
-
-  useEffect(() => {
-    const uid = localStorage.getItem('uid');
-    
-    if (dataFetchedRef.current) return;
-    dataFetchedRef.current = true;
 
     const getPostsData = async () => {
         const loggedUser = await getDoc(doc(db, 'users', uid));
         const user = loggedUser.data().username;
         const followedUsers = [];
-        const unsortedPosts = [];
+        const posts = [];
 
         const followRef = collection(db, "followers");
         const q = query(followRef, where("user_following", "==", user));
@@ -52,35 +38,22 @@ export default function Posts() {
             const postQuery = query(postRef, where("author", "==", followedUser));
             const querySnapshot2 = await getDocs(postQuery);
             querySnapshot2.forEach(async (doc) => {
-              //setPosts(state => [...state, doc.data()]);
-              //unsortedPosts.push(doc.data());
-              unsortedPosts.push({id: doc.id, data: doc.data()});
+              posts.push({id: doc.id, data: doc.data()});
             })
-            const sortedPosts = unsortedPosts.sort((a, b) => {
-              const timeStampA = a.data.timeStamp.seconds;
-              const timeStampB = b.data.timeStamp.seconds;
-              if (timeStampA < timeStampB) {
-                return 1;
-              }
-              if (timeStampA > timeStampB) {
-                return -1;
-              }
-              return 0;
-            });
-        setPosts(sortedPosts);
+
+        setShowFollowersPosts(posts?.sort((a,b) => b.data.timeStamp - a.data.timeStamp).map((post, i) => {
+          return (
+            <div key={i}>
+              <PostTemplate post={post} />
+            </div>
+          )
+        }));
+
         await setIsLoading(false);
         })
     }
     getPostsData();
   },[])
-
-  const showFollowersPosts = posts.map((post, i) => {
-      return (
-        <div key={i}>
-          <PostTemplate post={post} />
-        </div>
-      )
-  })
 
   return (
     <>

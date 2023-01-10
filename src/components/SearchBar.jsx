@@ -1,18 +1,16 @@
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { db } from '../firebase';
 import fetchUsers from '../methods/fetchUsers';
 import useChangeRoute from '../methods/useChangeRoute';
 import UserLabel from './UserLabel';
-import fetchOneUserById from '../methods/fetchOneUserById'
-import getPostLikes from '../methods/getPostLikes';
-import addLikeToPost from '../methods/addLikeToPost';
 
 export default function SearchBar(props) {
     const [userList, setUserList] = useState([]);
     const [searchText, setSearchText] = useState("");
     const [foundUser, setFoundUser] = useState([]);
     const [recentSearches, setRecentSearches] = useState([]);
+    const [showRecentUsers, setShowRecentUsers] = useState(null);
     const changeRoute = useChangeRoute();
 
     useEffect(() => {
@@ -31,51 +29,39 @@ export default function SearchBar(props) {
         
             docSnap.forEach(async (doc) => {
                 if(doc.data().logged_id === uid) {
-                    const response = await fetchOneUserById(doc.data().found_id);
-                    searches.push({id: doc.data().found_id, data: response});
+                    searches.push({id: doc.data().found_id, timeStamp: doc.data().timeStamp});
                 }
             });
-            
             setRecentSearches(searches);
+
+            setShowRecentUsers(searches?.sort((a,b) => b.timeStamp - a.timeStamp).map((user, i) => {
+                return (
+                    <div key={i}>
+                        <UserLabel userData={user} checkProfile={changeRoute} recentUsers={searches}/>
+                    </div>
+                )
+            }))
         }
         getRecentSearches();
     },[])
-    
-    useEffect(() => {
-        const findUser = () => {
-                const findUsers = userList.filter(user => {
-                    if(user.data.username.includes(searchText)) {
-                        return user;
-                    }
-                })
-                setFoundUser(findUsers);
-        }
-        findUser();
-    },[searchText])
 
-
-    const searchUser = async (e) => {
-        await setSearchText(e.target.value);
+    const searchUser = (e) => {
+        setSearchText(e.target.value);
+        const findUsers = userList.filter(user => {
+            if(user.data.username.includes(e.target.value)) {
+                return user;
+            }
+        })
+        setFoundUser(findUsers);
     }
 
-    const showFoundUsers = foundUser.length !== 0 && (foundUser.map((user, i) => {
+    const showFoundUsers = foundUser.map((user, i) => {
         return (
             <div key={i}>
-                <UserLabel userData={user} checkProfile={changeRoute} />
+                <UserLabel userData={user} checkProfile={changeRoute} recentUsers={recentSearches}/>
             </div>
         )
-    }))
-
-    const showRecentUsers = recentSearches !== 0 && (recentSearches.map((user, i) => {
-        return (
-            <div key={i}>
-                <UserLabel userData={user} checkProfile={changeRoute} />
-            </div>
-        )
-    }))
-
-    //addLikeToPost();
-    //getPostLikes();
+    })
 
   return (
     <div className='navbar--searchbar'>
@@ -102,4 +88,3 @@ export default function SearchBar(props) {
       </div>
   )
 }
-//{foundUser.length !== 0 && searchText !== "" && showFoundUsers}
