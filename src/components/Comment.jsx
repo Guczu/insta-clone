@@ -6,7 +6,7 @@ import getDate from '../methods/getDate'
 export default function Comment(props) {
     const [commentAuthor, setCommentAuthor] = useState(null);
     const [commentDate, setCommentDate] = useState("");
-
+    
     useEffect(() => {
         const timestamp = props.comment.data.timeStamp.toDate().toISOString();
         setCommentDate(getDate(timestamp))

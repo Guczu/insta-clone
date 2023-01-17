@@ -9,6 +9,9 @@ import Comment from './Comment';
 import fetchOneUser from '../methods/fetchOneUser';
 import useChangeRoute from '../methods/useChangeRoute'
 import addComment from '../methods/addComment';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { db } from '../firebase';
+import getPostComments from '../methods/getPostComments';
 
 export default function PostPreview(props) {
     const [postDate, setPostDate] = useState(null);
@@ -16,11 +19,42 @@ export default function PostPreview(props) {
     const [likesAmount, setLikesAmount] = useState(props.post.data.likes);
     const [commentContent, setCommentContent] = useState("");
     const [postAuthor, setPostAuthor] = useState(null);
-    const [comments, setComments] = useState(props.comments);
+    const [comments, setComments] = useState();
+    const [showComments, setShowComments] = useState(null);
     const uid = localStorage.getItem('uid');
     const changeRoute = useChangeRoute();
 
-    console.log(comments)
+    useEffect(() => {
+        const getComments = async () => {
+            const comments = await getPostComments(props.post);
+            setComments(comments);
+          }
+          getComments();
+    }, [])
+
+    const refreshComments = () => {
+        const commentRef = collection(db, "posts", props.post.id, "comments");
+        onSnapshot(commentRef,(refSnapshot) => {
+            const commentArray = [];
+            refSnapshot.forEach((doc) => {
+                console.log(doc.data().timeStamp)
+                commentArray.push({id: doc.id, data: doc.data()});
+            });
+            setComments(commentArray);
+        });
+    }
+
+    useEffect(() => {
+        setShowComments(comments?.sort((a,b) => b.data.timeStamp - a.data.timeStamp).map((comment, i) => {
+            return (
+                <div key={i}>
+                    <Comment comment={comment} changeRoute={changeRoute}/>
+                </div>
+            )
+        }))
+        console.log(comments)
+    }, [comments])
+
     useEffect(() => {
         const timestamp = props.post.data.timeStamp.toDate().toISOString();
         setPostDate(getDate(timestamp))
@@ -59,17 +93,10 @@ export default function PostPreview(props) {
       }
 
       const addCommentToPost = async () => {
-        addComment(uid, props.post, commentContent);
+        await addComment(uid, props.post, commentContent);
         setCommentContent("");
+        refreshComments();
       }
-
-    const showComments = props.comments?.sort((a,b) => b.data.timeStamp - a.data.timeStamp).map((comment, i) => {
-        return (
-            <div key={i}>
-                <Comment comment={comment} changeRoute={changeRoute}/>
-            </div>
-        )
-    })
 
   return (
     <div className='postpreview--container'>

@@ -5,7 +5,6 @@ import getDate from '../methods/getDate';
 import addLikeToPost from '../methods/addLikeToPost';
 import removeLikeFromPost from '../methods/removeLikeFromPost';
 import getPostLikes from '../methods/getPostLikes';
-import getPostComments from '../methods/getPostComments';
 import addComment from '../methods/addComment';
 import PostPreview from './PostPreview';
 import fetchOneUser from '../methods/fetchOneUser';
@@ -13,7 +12,7 @@ import fetchOneUser from '../methods/fetchOneUser';
 export default function PostTemplate(props) {
     const [postDate, setPostDate] = useState(null);
     const [liked, setLiked] = useState(false);
-    const [comments, setComments] = useState([]);
+    //const [comments, setComments] = useState([]);
     const [commentContent, setCommentContent] = useState("");
     const [commentsAmount, setCommentsAmount] = useState(props.post.data.comments);
     const [previewTrigger, setPreviewTrigger] = useState(false);
@@ -32,14 +31,10 @@ export default function PostTemplate(props) {
           if(isLiked) {
             setLiked(true);
           }
+          setLikesAmount(props.post.data.likes);
+          setCommentsAmount(props.post.data.comments);
         }
         checkIfLiked(props.post);
-
-        const getComments = async () => {
-          const comments = await getPostComments(props.post);
-          setComments(comments);
-        }
-        getComments();
 
         const getPostAuthor = async () => {
           const user = await fetchOneUser(props.post.data.author);
@@ -49,7 +44,7 @@ export default function PostTemplate(props) {
     }, [props.post])
 
     const addCommentToPost = async () => {
-      addComment(uid, props.post, commentContent);
+      await addComment(uid, props.post, commentContent);
       setCommentsAmount(state => state + 1);
       setCommentContent("");
     }
@@ -81,7 +76,7 @@ export default function PostTemplate(props) {
 
   return (
     <div className='mainpage--post'>
-                {previewTrigger && <PostPreview handleTrigger={handlePreviewTrigger} post={props.post} comments={comments}/>}
+                {previewTrigger && <PostPreview handleTrigger={handlePreviewTrigger} post={props.post}/>}
                 <div className='mainpage--author'>
                     <img src={postAuthor !== null ? postAuthor.data.picture : storyimg}></img>
                     <p onClick={() => {checkProfile(props.post.data.author)}}>{props.post.data.author}</p>
