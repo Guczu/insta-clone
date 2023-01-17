@@ -37,7 +37,6 @@ export default function PostPreview(props) {
         onSnapshot(commentRef,(refSnapshot) => {
             const commentArray = [];
             refSnapshot.forEach((doc) => {
-                console.log(doc.data().timeStamp)
                 commentArray.push({id: doc.id, data: doc.data()});
             });
             setComments(commentArray);
@@ -52,7 +51,6 @@ export default function PostPreview(props) {
                 </div>
             )
         }))
-        console.log(comments)
     }, [comments])
 
     useEffect(() => {

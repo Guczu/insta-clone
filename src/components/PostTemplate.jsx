@@ -12,7 +12,6 @@ import fetchOneUser from '../methods/fetchOneUser';
 export default function PostTemplate(props) {
     const [postDate, setPostDate] = useState(null);
     const [liked, setLiked] = useState(false);
-    //const [comments, setComments] = useState([]);
     const [commentContent, setCommentContent] = useState("");
     const [commentsAmount, setCommentsAmount] = useState(props.post.data.comments);
     const [previewTrigger, setPreviewTrigger] = useState(false);

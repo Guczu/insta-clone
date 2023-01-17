@@ -4,14 +4,15 @@ import logo from '../images/logo.png'
 import React, { useState } from 'react';
 import useChangeRoute from '../methods/useChangeRoute';
 import SearchBar from './SearchBar';
+import Notifications from './Notifications';
 
 export default function Navbar() {
   const user = useSelector(state => state.user);
   const [isSearchBar, setIsSearchBar] = useState(false);
+  const [isNotification, setIsNotification] = useState(false);
   const changeRoute = useChangeRoute();
 
   const handleProfileButton = () => {
-    //navigate(`/${user.username}`, { replace: true });
     changeRoute(`/${user.username}`);
     window.location.reload();
   }
@@ -23,6 +24,10 @@ export default function Navbar() {
 
   const handleSearchBar = () => {
     setIsSearchBar(oldState => !oldState);
+  }
+
+  const handleNotifications = () => {
+    setIsNotification(oldState => !oldState);
   }
 
   return (
@@ -59,7 +64,7 @@ export default function Navbar() {
             <span className='navbar--link'>Wiadomości</span>
           </div>
           
-          <div className='mainpage--link'>
+          <div className='mainpage--link' onClick={handleNotifications}>
             <i className="fa-regular fa-heart fa-xl"></i>
             <span className='navbar--link'>Powiadomienia</span>
           </div>
@@ -86,6 +91,7 @@ export default function Navbar() {
           </div>
       </div>
       {isSearchBar && <SearchBar handleSearchBar= {handleSearchBar} />}
+      {isNotification && <Notifications handleNotifications= {handleNotifications} />}
 
     </div>
   )

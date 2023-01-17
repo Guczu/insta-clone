@@ -1,6 +1,7 @@
 import { nanoid } from "@reduxjs/toolkit";
 import { doc, increment, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import addNotification from "./addNotification";
 
 
 export default function useFollowUser() {
@@ -19,6 +20,7 @@ export default function useFollowUser() {
           await updateDoc(doc(db, "users", uid), {followed: increment(1)});
           await updateDoc(doc(db, "users", usertofollow.id), {following: increment(1)});
           //checkFollow(user.username, id);
+          addNotification(usertofollow, "follow");
     }
 
     return followUser;

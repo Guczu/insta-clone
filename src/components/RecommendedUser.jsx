@@ -2,7 +2,6 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux'
-import profileimg from '../images/storyimg.jpg'
 import useFollowUser from '../methods/useFollowUser';
 
 export default function RecommendedUser(props) {
@@ -28,8 +27,6 @@ export default function RecommendedUser(props) {
     setIsFollowed(true);
   }
 
-
-  // dokonczyc followowanie gdy zrobie osobny js do followowania uzytkownika.
   return (
     <div className='mainpage--recommendeduser'>
         <div className='rightside--image'>
