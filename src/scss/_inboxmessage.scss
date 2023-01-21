@@ -1,0 +1,70 @@
+.inboxmessage--containerleft {
+    width: 600px;
+    min-height: 50px;
+
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 5px;
+}
+
+.inboxmessage--containerright {
+    width: 600px;
+    min-height: 50px;
+
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    flex-direction: row-reverse;
+}
+
+.inboxmessage--contentleft {
+    display: flex;
+    align-items: center;
+    max-width: 350px;
+    min-height: 50px;
+    border: 1px solid $border-color;
+    border-radius: 40px;
+    padding: 10px;
+
+    img {
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+    }
+    
+    p {
+        margin-left: 10px;
+    }
+}
+
+.inboxmessage--contentright {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    max-width: 350px;
+    min-height: 50px;
+    border: 1px solid $border-color;
+    border-radius: 40px;
+    padding: 10px;
+
+    img {
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+    }
+
+    p {
+        margin-right: 10px;
+    }
+}
+
+.inboxmessage--text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 250px;
+    word-wrap: break-word;
+}

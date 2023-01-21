@@ -259,9 +259,6 @@
   margin-bottom: 20px;
   padding: 10px;
 }
-.navbar--searchbar input:focus {
-  outline: none;
-}
 .navbar--searchbar hr {
   width: 400px;
   background-color: #dbdbdb;
