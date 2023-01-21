@@ -16,6 +16,10 @@
 @import './userlabel';
 @import './comments';
 @import './notificationlabel';
+@import './inbox';
+@import './inboxuser';
+@import './inboxchat';
+@import './inboxmessage';
 
 html {
     overflow-y: scroll;

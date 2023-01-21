@@ -1,0 +1,31 @@
+.inbox--container {
+    width: 1000px;
+    height: 95vh;
+    margin-top: 20px;
+    background-color: white;
+    display: flex;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+}
+
+.inbox--leftwrapper {
+    width: 350px;
+    height: 100%;
+    border-right: 1px solid $border-color;
+}
+
+.inbox--rightwrapper {
+    width: 650px;
+    height: 100%;
+}
+
+.inbox--title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid $border-color;
+}

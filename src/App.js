@@ -9,36 +9,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './reducers/userSlice';
 import { useEffect } from 'react';
 import Logout from './components/Logout';
+import Inbox from './components/Inbox';
+import InboxUser from './components/InboxUser';
 
 function App() {
   const dispatch = useDispatch();
-  //console.log(uid);
-
-  /*async function getLoggedUser() {
-    if(uid !== null){
-    const docRef = doc(db, "users", uid);
-    const docSnap = await getDoc(docRef);
-    
-    if (docSnap.exists()) {
-      const user = docSnap.data();
-      dispatch(setUser(
-        {
-        uid: uid,
-        name: user.name,
-        username: user.username,
-        email: user.email
-        }
-      ));
-    } else {
-      console.log("No such document!");
-    }
-    }
-    else {
-      console.log("its null");
-    }
-  }
-  getLoggedUser();*/
-
 
   useEffect(() => {
 
@@ -94,6 +69,8 @@ function App() {
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/logout" element={<Logout />} />
               <Route exact path="/:id" element={<Profile />} />
+              <Route path="/inbox" element={<Inbox />} />
+              <Route path="/inbox/c/:userId" element={<Inbox />} />
         </Routes>
     </div>
   );

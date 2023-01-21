@@ -1,0 +1,22 @@
+.inboxuser--container {
+    width: 350px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+
+    img {
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+        margin-left: -20px;
+        margin-right: 20px;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: $primary-color;
+    }
+}

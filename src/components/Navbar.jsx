@@ -17,6 +17,11 @@ export default function Navbar() {
     window.location.reload();
   }
 
+  const handleInbox = () => {
+    changeRoute('/inbox');
+    window.location.reload();
+  }
+
   const handleHomeButton = () => {
     changeRoute('/');
     window.location.reload();
@@ -59,7 +64,7 @@ export default function Navbar() {
             <span className='navbar--link'>Reels</span>
           </div>
           
-          <div className='mainpage--link'>
+          <div onClick={handleInbox} className='mainpage--link'>
             <i className="fa-regular fa-envelope fa-xl"></i>
             <span className='navbar--link'>Wiadomości</span>
           </div>

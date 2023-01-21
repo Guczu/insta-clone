@@ -1,0 +1,71 @@
+.inboxchat--container {
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.inboxchat--toplabel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid $border-color;
+
+    img {
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        margin-left: -20px;
+        margin-right: 20px;
+    }
+}
+
+.inboxchat--messages {
+    width: 650px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.inboxchat--send {
+    width: 650px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+
+    input {
+        width: 450px;
+        height: 30px;
+        border-radius: 15px;
+        border: 1px solid $border-color;
+        padding: 5px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    button {
+        margin-left: 20px;
+        border-radius: 15px;
+        height: 40px;
+        background-color: transparent;
+        border: 1px solid $border-color;
+        color: gray;
+
+        &:hover {
+            cursor: pointer;
+        }
+    } 
+}
