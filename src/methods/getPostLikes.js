@@ -10,9 +10,6 @@ export default async function getPostLikes(user_id, post) {
         if(doc.id === user_id) {
             isLiked = true;
         }
-        else {
-            isLiked = false;
-        }
     });
     return isLiked;
 }
