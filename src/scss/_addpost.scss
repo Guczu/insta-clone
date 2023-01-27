@@ -5,10 +5,21 @@
     width: 100%;
     height: 100vh;
     background-color: rgba(128, 128, 128, 0.616);
+    z-index: 1;
 
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @include phone {
+        width: 100%;
+    }
+    @include tablet {
+        width: 100%;
+    }
+    @include laptop {
+        width: 100%;
+    }
 }
 
 .addpost--form {
@@ -26,6 +37,24 @@
     hr {
         border: 1px solid $border-color;
         width: 500px;
+        @include phone {
+            width: 80vw;
+        }
+        @include laptop {
+            width: 80vw;
+        }
+        @include tablet {
+            width: 80vw;
+        }
+    }
+    @include phone {
+        width: 80vw;
+    }
+    @include laptop {
+        width: 80vw;
+    }
+    @include tablet {
+        width: 80vw;
     }
 }
 
@@ -127,5 +156,17 @@
         margin: 0;
         padding: 20px;
         margin-top: 20px;
+        &:focus {
+            outline: none;
+        }
+        @include phone {
+            width: 60vw;
+        }
+        @include laptop {
+            width: 60vw;
+        }
+        @include tablet {
+            width: 60vw;
+        }
     }
 }

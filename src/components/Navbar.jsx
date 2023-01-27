@@ -27,6 +27,11 @@ export default function Navbar() {
     window.location.reload();
   }
 
+  const handleLogout = () => {
+    changeRoute('/login');
+    window.location.reload();
+  }
+
   const handleSearchBar = () => {
     setIsSearchBar(oldState => !oldState);
   }
@@ -84,12 +89,12 @@ export default function Navbar() {
             <span className='navbar--link'>Profil</span>
           </div>
         
-          <Link to='/logout' className='mainpage--link'>
+          <div onClick={handleLogout} className='mainpage--link'>
             <i className="fa-solid fa-arrow-right-from-bracket fa-xl"></i>
             <span className='navbar--link'>Wyloguj</span>
-          </Link>
+          </div>
           <div className='mainpage--morecontainer'>
-            <div className='mainpage--more'>
+            <div className='mainpage--link'>
               <i className="fa-solid fa-bars fa-xl"></i>
               <span className='navbar--link'>Więcej</span>
             </div>

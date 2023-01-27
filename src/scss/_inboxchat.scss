@@ -3,6 +3,21 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    @include desktop {
+
+    }
+    @include sm-desktop {
+
+    }
+    @include laptop {
+        height: 85vh;
+    }
+    @include tablet {
+        height: 85vh;
+    }
+    @include phone {
+        height: 90vh;
+    }
 }
 
 .inboxchat--toplabel {
@@ -30,9 +45,30 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
     overflow-y: scroll;
     overflow-x: hidden;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+    @include desktop {
+        width: 400px;
+        height: 81.5vh;
+    }
+    @include sm-desktop {
+        width: 400px;
+        height: 81.5vh;
+    }
+    @include laptop {
+        width: 60vw;
+        height: 73vh;
+    }
+    @include tablet {
+        width: 60vw;
+        height: 74vh;
+    }
+    @include phone {
+        width: 60vw;
+        height: 78vh;
+    }
 }
 
 .inboxchat--send {
@@ -43,6 +79,25 @@
     justify-content: center;
     position: absolute;
     bottom: 0;
+    @include desktop {
+        width: 400px;
+        height: 5vw;
+    }
+    @include sm-desktop {
+        width: 400px;
+        height: 5vw;
+    }
+    @include laptop {
+        width: 60vw;
+        height: 5vh;
+    }
+    @include tablet {
+        width: 60vw;
+        height: 5vh;
+    }
+    @include phone {
+        width: 60vw;
+    }
 
     input {
         width: 450px;
@@ -50,6 +105,19 @@
         border-radius: 15px;
         border: 1px solid $border-color;
         padding: 5px;
+        
+        @include desktop {
+            width: 300px;
+        }
+        @include sm-desktop {
+            width: 300px;
+        }
+        @include laptop {
+            width: 40vw;
+        }
+        @include tablet {
+            width: 40vw;
+        }
 
         &:focus {
             outline: none;

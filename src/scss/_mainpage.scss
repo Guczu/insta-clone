@@ -1,11 +1,28 @@
+@import './media-queries';
+
 .mainpage--container {
     display: flex;
     width: 100%;
+
 }
 
 .mainpage--wrapper {
     width: 1335px;
     display: flex;
+    justify-content: center;
+
+    @include phone {
+        width: 100%;
+    }
+    @include laptop {
+        width: 100%;
+    }
+    @include tablet {
+        width: 100%;
+    }
+    @include sm-desktop {
+        width: 100%;
+    }
 }
 
 .mainpage--content {
@@ -17,4 +34,19 @@
 
 .mainpage--left {
     width: 335px;
+    
+    @include sm-desktop {
+        width: 80px;
+    }
+
+    @include phone {
+        display: none;
+    }
+
+    @include laptop {
+        display: none;
+    }
+    @include tablet {
+        display: none;
+    }
 }

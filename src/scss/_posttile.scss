@@ -1,3 +1,4 @@
+@import './media-queries';
 .posttile--container {
     width: 300px;
     height: 300px;
@@ -5,11 +6,60 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
+    
+    @include phone {
+        width: 28vw;
+        height: 28vw;
+    }
 
+    @include desktop {
+        width: 180px;
+        height: 180px;
+    }
+    @include laptop {
+        width: 28vw;
+        height: 28vw;
+        max-width: 180px;
+        max-height: 180px;
+    }
+    @include tablet {
+        width: 28vw;
+        height: 28vw;
+    }
+    @include sm-desktop {
+        width: 25vw;
+        height: 25vw;
+        max-width: 180px;
+        max-height: 180px;
+    }
     img {
         width: 300px;
         height: 300px;
         object-fit: cover;
+        @include phone {
+            width: 28vw;
+            height: 28vw;
+        }
+        @include desktop {
+            width: 180px;
+            height: 180px;
+        }
+        @include laptop {
+            width: 28vw;
+            height: 28vw;
+            max-width: 180px;
+            max-height: 180px;
+        }
+        @include tablet {
+            width: 28vw;
+            height: 28vw;
+        }
+        @include sm-desktop {
+            width: 25vw;
+            height: 25vw;
+            max-width: 180px;
+            max-height: 180px;
+        }
     }
 
     &:hover {
@@ -29,6 +79,31 @@
     align-items: center;
     display: none;
     background-color: rgba(0, 0, 0, 0.267);
+    z-index:0;
+    @include phone {
+        width: 28vw;
+        height: 28vw;
+    }
+    @include desktop {
+        width: 180px;
+        height: 180px;
+    }
+    @include laptop {
+        width: 28vw;
+        height: 28vw;
+        max-width: 180px;
+        max-height: 180px;
+    }
+    @include tablet {
+        width: 28vw;
+        height: 28vw;
+    }
+    @include sm-desktop {
+        width: 25vw;
+        height: 25vw;
+        max-width: 180px;
+        max-height: 180px;
+    }
 }
 
 .posttile--likes {

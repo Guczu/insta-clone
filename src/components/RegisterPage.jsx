@@ -63,10 +63,8 @@ export default function RegisterPage() {
             <p className='blue clickable'>Dowiedz się więcej</p>
             <p className='gray'>Rejestrując się, akceptujesz <span className='blue clickable'>Regulamin.</span> Informacje o tym, jak zbieramy, wykorzystujemy i udostępniamy Twoje dane, zawierają nasze <span className='blue clickable'>Zasady dotyczące plików cookie.</span> O wykorzystaniu plików cookie i podobnych technologii informują <span className='blue clickable'>Zasady dotyczące plików cookie.</span></p>
             <button onClick={register}>Dalej</button>
-        </div>
 
-        <div className='registerpage--form'>
-          <p className='padding gray'>
+            <p className='padding gray'>
             Masz konto? 
             <span className='blue clickable'>
               <Link to="/login" className='link'>Zaloguj się</Link>

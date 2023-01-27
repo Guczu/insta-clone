@@ -1,8 +1,20 @@
-
+@import './media-queries';
 .mainpage--middle {
     width: 600px;
     display: flex;
     flex-direction: column;
+    @include phone {
+        width: 95vw;
+        margin-bottom: 20vw;
+    }
+    @include laptop {
+        width: 95vw;
+        margin-bottom: 20vw;
+    }
+    @include tablet {
+        width: 95vw;
+        margin-bottom: 20vw;
+    }
 }
 
 .mainpage--stories {
@@ -15,6 +27,18 @@
     margin-top: 20px;
     border-radius: 10px;
     border: 1px solid #dbdbdb;
+    @include phone {
+        width: 95vw;
+        height: auto;
+    }
+    @include laptop {
+        width: 95vw;
+        height: auto;
+    }
+    @include tablet {
+        width: 95vw;
+        height: auto;
+    }
 }
 
 .mainpage--story {
@@ -29,9 +53,18 @@
     img {
         width: 60px;
         padding: 2px;
-        border-radius: 50px;
+        border-radius: 100%;
         background-color: $primary-color;
         border: 2px solid purple;
+        @include phone {
+            width: 8vw;
+        }
+        @include laptop {
+            width: 8vw;
+        }
+        @include tablet {
+            width: 8vw;
+        }
     }
 
     p {

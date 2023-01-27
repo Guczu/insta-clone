@@ -45,16 +45,16 @@ const handleSubmit = async (e) => {
     <div className='editprofile--container'>
         <div className='editprofile--form'>
             <button className='editprofile--close' onClick={props.handleEditTrigger}>X</button>
-            <div className='editpost--title'>
+            <div className='editprofile--title'>
                 <p>Edytuj profil</p>
                 <hr></hr>
             </div>
-            <div className='editpost--upload'>
+            <div className='editprofile--upload'>
                 <p className='bold'>Zmień zdjęcie profilowe</p>
                 <input type="file" id="files" className='hidden' onChange={handleImageChange}></input>
-                {image !== null ? "Przesłano" : <label htmlFor="files" className='editpost--label'>+</label>}
+                {image !== null ? "Przesłano" : <label htmlFor="files" className='editprofile--label'>+</label>}
             </div>
-            <div className='addpost-description'>
+            <div className='editprofile--description'>
                 <p className='bold'>Biografia</p>
                 <textarea onChange={e => setDescription(e.target.value)}></textarea>
             </div>

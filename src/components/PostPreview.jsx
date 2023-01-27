@@ -98,8 +98,8 @@ export default function PostPreview(props) {
 
   return (
     <div className='postpreview--container'>
-        <button className='addpost--button' onClick={props.handleTrigger}>X</button>
         <div className='postpreview--frame'>
+        <button className='addpost--button' onClick={props.handleTrigger}>X</button>
             <div className='postpreview--image'>
                 <img src={props.post.data.imgurl}></img>
             </div>

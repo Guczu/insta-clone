@@ -25,8 +25,10 @@ export default function PostTemplate(props) {
         setPostDate(getDate(timestamp))
 
         const checkIfLiked = async () => {
+          console.log(props.post)
           const post_data = props.post;
           const isLiked = await getPostLikes(uid, post_data);
+          console.log(isLiked)
           if(isLiked) {
             setLiked(true);
           }

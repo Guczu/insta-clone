@@ -1,3 +1,4 @@
+@import './media-queries';
 .inbox--container {
     width: 1000px;
     height: 95vh;
@@ -6,17 +7,72 @@
     display: flex;
     border: 1px solid $border-color;
     border-radius: 5px;
+
+    @include desktop {
+        width: 600px;
+    }
+    @include sm-desktop {
+        width: 600px;
+    }
+    @include laptop {
+        width: 95vw;
+        height: 85vh;
+    }
+    @include tablet {
+        width: 95vw;
+        height: 85vh;
+    }
+    @include phone {
+        width: 95vw;
+        height: 90vh;
+    }
 }
 
 .inbox--leftwrapper {
     width: 350px;
     height: 100%;
     border-right: 1px solid $border-color;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    @include desktop {
+        width: 200px;
+    }
+    @include sm-desktop {
+        width: 200px;
+    }
+    @include laptop {
+        width: 35vw;
+    }
+    @include tablet {
+        width: 35vw;
+    }
+    @include phone {
+        width: 35vw;
+    }
+
 }
 
 .inbox--rightwrapper {
     width: 650px;
     height: 100%;
+
+    @include desktop {
+        width: 400px;
+    }
+    @include sm-desktop {
+        width: 400px;
+    }
+    @include laptop {
+        width: 60vw;
+    }
+    @include tablet {
+        width: 60vw;
+    }
+    @include phone {
+        width: 60vw;
+    }
 }
 
 .inbox--title {
@@ -28,4 +84,5 @@
     font-size: 18px;
     font-weight: bold;
     border-bottom: 1px solid $border-color;
+    width: 100%;
 }

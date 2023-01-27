@@ -1,7 +1,25 @@
+@import './media-queries';
+
 .mainpage--right {
     width: 400px;
     height: 500px;
     margin-top: 20px;
+
+    @include phone {
+        display: none;
+    }
+    @include tablet {
+        display: none;
+    }
+    @include laptop {
+        display: none;
+    }
+    @include sm-desktop {
+        display: none;
+    }
+    @include desktop {
+        display: none;
+    }
 }
 
 .mainpage--info {

@@ -44,7 +44,7 @@ export default function Inbox() {
                     </div>
                     <div className='inbox--rightwrapper'>
                         {actualChat === null ? (
-                            <p>Wybierz chat</p>
+                            <p></p>
                         ) : (
                             <InboxChat />
                         )}

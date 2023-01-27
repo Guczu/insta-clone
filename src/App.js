@@ -8,9 +8,7 @@ import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firesto
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './reducers/userSlice';
 import { useEffect } from 'react';
-import Logout from './components/Logout';
 import Inbox from './components/Inbox';
-import InboxUser from './components/InboxUser';
 
 function App() {
   const dispatch = useDispatch();
@@ -67,7 +65,7 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/register" element={<RegisterPage />} />
-              <Route path="/logout" element={<Logout />} />
+              <Route path="/logout" element={<LoginPage />} />
               <Route exact path="/:id" element={<Profile />} />
               <Route path="/inbox" element={<Inbox />} />
               <Route path="/inbox/c/:userId" element={<Inbox />} />

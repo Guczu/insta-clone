@@ -1,6 +1,7 @@
+@import './media-queries';
 .mainpage--post {
     width: 550px;
-    height: 750px;
+    height: auto;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -8,11 +9,33 @@
     border-radius: 10px;
     border: 1px solid #dbdbdb;
 
+    @include phone {
+        width: 95vw;
+    }
+
+    @include laptop {
+        width: 95vw;
+        height: auto;
+    }
+
+    @include tablet {
+        width: 95vw;
+    }
+
     hr {
         border: 1px solid $primary-color;
         width: 550px;
         margin: 0;
         padding: 0;
+        @include phone {
+            width: 95vw;
+        }
+        @include laptop {
+            width: 95vw;
+        }
+        @include tablet {
+            width: 95vw;
+        }
     }
 }
 
@@ -22,6 +45,24 @@
     width: 500px;
     height: 100px;
     margin-left: 20px;
+    @include phone {
+        width: 90vw;
+        margin: 0;
+        padding-left: 2vw;
+        padding-right: 3vw;
+    }
+    @include laptop {
+        width: 90vw;
+        margin: 0;
+        padding-left: 2vw;
+        padding-right: 3vw;
+    }
+    @include tablet {
+        width: 90vw;
+        margin: 0;
+        padding-left: 2vw;
+        padding-right: 3vw;
+    }
 
     img {
         width: 50px;
@@ -29,7 +70,7 @@
         padding: 2px;
         border-radius: 50px;
         background-color: $primary-color;
-
+        
         &:hover {
             cursor: pointer;
         }
@@ -64,12 +105,19 @@
 .mainpage--image {
     display: flex;
     width: 100%;
-    height: 400px;
-
+    height: auto;
+    @include laptop {
+        height: auto;
+    }
     img {
-        min-height: 100%; 
+        height: auto;
         min-width: 100%; 
         object-fit: cover; 
+        max-height: 700px;
+        @include laptop {
+            height: auto;
+            max-height: 700px;
+        }
     }
 }
 
@@ -80,6 +128,18 @@
     height: 60px;
     margin-left: 10px;
     margin-right: 10px;
+
+    @include phone {
+        width: 90vw;
+    }
+
+    @include laptop {
+        width: 90vw;
+    }
+
+    @include tablet {
+        width: 90vw;
+    }
 
     i {
         margin: 10px;
@@ -105,6 +165,15 @@
     height: 20px;
     margin-left: 20px;
     margin-right: 10px;
+    @include phone {
+        width: 90vw;
+    }
+    @include laptop {
+        width: 90vw;
+    }
+    @include tablet {
+        width: 90vw;
+    }
 }
 
 .mainpage--comments {
@@ -113,6 +182,16 @@
     width: 530px;
     margin-left: 20px;
     margin-right: 10px;
+
+    @include phone {
+        width: 90vw;
+    }
+    @include laptop {
+        width: 90vw;
+    }
+    @include tablet {
+        width: 90vw;
+    }
 
     .bold {
         font-weight: bold;
@@ -138,6 +217,16 @@
     margin-right: 10px;
     color: gray;
 
+    @include phone {
+        width: 90vw;
+    }
+    @include laptop {
+        width: 90vw;
+    }
+    @include tablet {
+        width: 90vw;
+    }
+
     &:hover {
         cursor: pointer;
     }
@@ -152,6 +241,16 @@
     margin-right: 10px;
     font-size: 12px;
     color: gray;
+
+    @include phone {
+        width: 90vw;
+    }
+    @include laptop {
+        width: 90vw;
+    }
+    @include tablet {
+        width: 90vw;
+    }
 }
 
 .mainpage--addcomment {
@@ -161,6 +260,16 @@
     height: 60px;
     border-radius: 10px;
     font-size: 12px;
+
+    @include phone {
+        width: 90vw;
+    }
+    @include laptop {
+        width: 90vw;
+    }
+    @include tablet {
+        width: 90vw;
+    }
 
     i {
         margin-left: 15px;
@@ -177,6 +286,16 @@
         background-color: white;
         border: none;
         height: 25px;
+
+        @include phone {
+            width: 90vw;
+        }
+        @include laptop {
+            width: 90vw;
+        }
+        @include tablet {
+            width: 90vw;
+        }
 
         &:focus {
             outline: 0;

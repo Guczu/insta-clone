@@ -29,8 +29,9 @@ export default function FollowingUsers(props) {
             </div>
 
             <hr></hr>
-
-            {showFollowers}
+            <div className='followedusers--list'>
+              {showFollowers}
+            </div>
 
         </div>
     </div>
