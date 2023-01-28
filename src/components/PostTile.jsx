@@ -3,17 +3,21 @@ import { useState } from 'react';
 import PostPreview from './PostPreview';
 
 export default function PostTile(props) {
-  const [Trigger, setTrigger] = useState(false);
-
-  console.log(props)
+  const [trigger, setTrigger] = useState(false);
 
   const handleTrigger = () => {
+    if(!trigger) {
+      document.querySelector('html').style.overflowY = 'hidden';
+    }
+    else {
+      document.querySelector('html').style.overflowY = 'scroll';
+    }
     setTrigger(state => !state);
   }
 
   return (
     <>
-    {Trigger && <PostPreview handleTrigger={handleTrigger} post={props.post} />}
+    {trigger && <PostPreview handleTrigger={handleTrigger} post={props.post} />}
     <div onClick={handleTrigger} className='posttile--container'>
         <div className='posttile--hovered'>
           <div className='posttile--likes'>

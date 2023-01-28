@@ -2761,6 +2761,7 @@ hr {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   position: relative;
+  z-index: 999;
 }
 @media screen and (min-width: 992px) and (max-width: 1350px) {
   .postpreview--frame {

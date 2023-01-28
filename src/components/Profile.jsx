@@ -88,23 +88,48 @@ export default function Profile() {
         getUserData();
     }, [])
 
+    //add post
     const handleTrigger = () => {
+        if(!trigger) {
+            document.querySelector('html').style.overflowY = 'hidden';
+          }
+          else {
+            document.querySelector('html').style.overflowY = 'scroll';
+          }
         setTrigger(oldState => !oldState);
     }
 
     const handleFollowedTrigger = () => {
+        if(!followedTrigger) {
+            document.querySelector('html').style.overflowY = 'hidden';
+          }
+          else {
+            document.querySelector('html').style.overflowY = 'scroll';
+          }
         setFollowedTrigger(oldState => !oldState);
     }
     
     const handleFollowingTrigger = () => {
+        if(!followingTrigger) {
+            document.querySelector('html').style.overflowY = 'hidden';
+          }
+          else {
+            document.querySelector('html').style.overflowY = 'scroll';
+          }
         setFollowingTrigger(oldState => !oldState);
     }
 
     const handleEditTrigger = () => {
+        if(!editTrigger) {
+            document.querySelector('html').style.overflowY = 'hidden';
+          }
+          else {
+            document.querySelector('html').style.overflowY = 'scroll';
+          }
         setEditTrigger(oldState => !oldState);
     }
 
-    const showPosts = userPosts.map((post, i) => {
+    const showPosts = userPosts?.sort((a,b) => b.data.timeStamp - a.data.timeStamp).map((post, i) => {
         return (
             <PostTile 
                 key={i}
@@ -168,7 +193,7 @@ export default function Profile() {
         setIsFollowed(false);
         updateFollows();
     }
-    
+
   return (
     <>
     {isLoading ? (

@@ -25,10 +25,8 @@ export default function PostTemplate(props) {
         setPostDate(getDate(timestamp))
 
         const checkIfLiked = async () => {
-          console.log(props.post)
           const post_data = props.post;
           const isLiked = await getPostLikes(uid, post_data);
-          console.log(isLiked)
           if(isLiked) {
             setLiked(true);
           }
@@ -72,6 +70,12 @@ export default function PostTemplate(props) {
     }
 
     const handlePreviewTrigger = () => {
+      if(!previewTrigger) {
+        document.querySelector('html').style.overflowY = 'hidden';
+      }
+      else {
+        document.querySelector('html').style.overflowY = 'scroll';
+      }
       setPreviewTrigger(oldState => !oldState);
     }
 
