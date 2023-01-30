@@ -1,4 +1,21 @@
-/*@mixin tablet {
+.light * {
+  background-color: #fafafa !important;
+  color: black !important;
+  border-color: #dbdbdb !important;
+}
+
+.dark * {
+  background-color: #0f0f0f !important;
+  color: #c9c9c9 !important;
+  border-color: #252525 !important;
+}
+.dark * .navbar--image {
+  filter: invert(1);
+}
+
+.darkhover {
+  background-color: #121212 !important;
+} /*@mixin tablet {
     @media screen and (max-width: 868px) {
         @content;
     }
@@ -21,6 +38,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: white !important;
 }
 
 .loginpage--content {
@@ -321,6 +339,7 @@
   display: flex;
   flex-direction: row;
   z-index: 1;
+  border-right: 1px solid #dbdbdb;
 }
 @media screen and (min-width: 768px) and (max-width: 992px) {
   .navbar--container {
@@ -356,7 +375,6 @@
   width: 335px;
   height: 100vh;
   background-color: #ffffff;
-  border-right: 1px solid #dbdbdb;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -444,6 +462,7 @@
   width: 150px;
   height: 55px;
   padding: 20px;
+  background-color: transparent !important;
 }
 .navbar--image:hover {
   cursor: pointer;
@@ -552,7 +571,8 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding: 20px;
+  padding-bottom: 20px;
+  border-right: 1px solid #dbdbdb;
 }
 @media screen and (min-width: 768px) and (max-width: 992px) {
   .mainpage--morecontainer {
@@ -687,7 +707,7 @@
   background-color: #dbdbdb;
 }
 .navbar--searchbar p {
-  width: 400px;
+  width: 360px;
   height: 40px;
   display: flex;
   align-items: flex-start;
@@ -757,6 +777,7 @@
   width: 600px;
   display: flex;
   flex-direction: column;
+  height: auto;
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
   .mainpage--middle {
@@ -821,7 +842,7 @@
   padding: 2px;
   border-radius: 100%;
   background-color: #fafafa;
-  border: 2px solid purple;
+  border: 2px solid purple !important;
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
   .mainpage--story img {
@@ -1230,7 +1251,7 @@
 }
 
 .red--heart {
-  color: red;
+  color: red !important;
 }
 
 /*@mixin tablet {
@@ -1294,7 +1315,7 @@
   border-radius: 50px;
 }
 .mainpage--info button {
-  background-color: #fafafa;
+  background-color: transparent;
   border: none;
   color: #3895f8;
   font-weight: bold;
@@ -1372,7 +1393,7 @@
   border-radius: 50px;
 }
 .mainpage--recommendeduser button {
-  background-color: #fafafa;
+  background-color: transparent;
   border: none;
   font-weight: bold;
   color: #3895f8;
@@ -1721,7 +1742,8 @@ hr {
 .profile--options button {
   width: 120px;
   height: 40px;
-  background-color: #efefef;
+  background-color: #efefef !important;
+  color: black !important;
   border: none;
   border-radius: 5px;
   font-weight: bold;
@@ -1749,7 +1771,7 @@ hr {
 }
 .profile--options button:hover {
   cursor: pointer;
-  background-color: #dbdbdb;
+  background-color: #dbdbdb !important;
 }
 .profile--options i:hover {
   cursor: pointer;
@@ -1974,6 +1996,7 @@ hr {
   align-items: center;
   margin-left: 25px;
   margin-right: 25px;
+  height: 50px;
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
   .profile--navlink {
@@ -2212,7 +2235,7 @@ hr {
 
 .followedbutton {
   background-color: #dbdbdb !important;
-  color: black;
+  color: black !important;
 }
 .followedbutton:hover {
   background-color: #9c9c9c !important;
@@ -2252,6 +2275,7 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: white !important;
 }
 
 .registerpage--register {
@@ -2663,7 +2687,7 @@ hr {
   justify-content: center;
   align-items: center;
   display: none;
-  background-color: rgba(0, 0, 0, 0.267);
+  background-color: rgba(0, 0, 0, 0.616) !important;
   z-index: 0;
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
@@ -2706,15 +2730,17 @@ hr {
   justify-content: center;
   align-items: center;
   padding: 10px;
+  background-color: transparent !important;
 }
 .posttile--likes i {
-  filter: invert(1);
+  color: white !important;
   transform: scaleX(-1);
 }
 .posttile--likes p {
   font-size: 20px;
   padding: 10px;
-  color: white;
+  color: white !important;
+  background-color: transparent !important;
 }
 
 /*@mixin tablet {
@@ -2740,7 +2766,7 @@ hr {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(128, 128, 128, 0.616);
+  background-color: rgba(0, 0, 0, 0.616) !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2761,7 +2787,6 @@ hr {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   position: relative;
-  z-index: 999;
 }
 @media screen and (min-width: 992px) and (max-width: 1350px) {
   .postpreview--frame {
@@ -2815,7 +2840,7 @@ hr {
 .postpreview--image {
   width: 700px;
   min-height: 900px;
-  background-color: black;
+  background-color: black !important;
   display: flex;
   align-items: center;
 }
@@ -2858,6 +2883,7 @@ hr {
   width: 700px;
   min-height: 900px;
   max-height: 900px;
+  background-color: black !important;
   -o-object-fit: contain;
      object-fit: contain;
 }
@@ -3163,7 +3189,7 @@ hr {
 .postpreview--likes {
   display: flex;
   align-items: center;
-  width: 530px;
+  width: 480px;
   height: 20px;
   margin-left: 20px;
   margin-right: 10px;
@@ -3203,7 +3229,7 @@ hr {
 .postpreview--date {
   display: flex;
   align-items: center;
-  width: 530px;
+  width: 480px;
   height: 40px;
   margin-left: 20px;
   margin-right: 10px;
@@ -3309,7 +3335,7 @@ hr {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(128, 128, 128, 0.616);
+  background-color: rgba(0, 0, 0, 0.616) !important;
   z-index: 1;
   display: flex;
   justify-content: center;
@@ -3391,11 +3417,16 @@ hr {
   position: absolute;
   left: 0;
   top: 0;
-  background-color: white;
+  z-index: 999;
+  background-color: white !important;
 }
 
+.loadingscreen--image {
+  background-color: white !important;
+}
 .loadingscreen--image img {
   width: 100px;
+  background-color: white !important;
   -webkit-animation-name: animation;
           animation-name: animation;
   -webkit-animation-duration: 2s;
@@ -3846,7 +3877,6 @@ hr {
   background-color: white;
   display: flex;
   border: 1px solid #dbdbdb;
-  border-radius: 5px;
 }
 @media screen and (min-width: 992px) and (max-width: 1350px) {
   .inbox--container {
@@ -3879,7 +3909,7 @@ hr {
 
 .inbox--leftwrapper {
   width: 350px;
-  height: 100%;
+  height: 95vh;
   border-right: 1px solid #dbdbdb;
   display: flex;
   align-items: center;
@@ -3914,6 +3944,7 @@ hr {
 .inbox--rightwrapper {
   width: 650px;
   height: 100%;
+  border-right: 1px solid gray;
 }
 @media screen and (min-width: 992px) and (max-width: 1350px) {
   .inbox--rightwrapper {
@@ -3945,7 +3976,7 @@ hr {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60px;
+  height: 5vh;
   margin: 0;
   font-size: 18px;
   font-weight: bold;
@@ -4031,18 +4062,23 @@ hr {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60px;
+  height: 5vh;
   margin: 0;
   font-size: 18px;
   font-weight: bold;
   border-bottom: 1px solid #dbdbdb;
 }
 .inboxchat--toplabel img {
-  width: 40px;
-  height: 40px;
+  width: 2vw;
+  height: 2vw;
+  max-width: 80px;
+  max-height: 80px;
   border-radius: 100%;
   margin-left: -20px;
   margin-right: 20px;
+}
+.inboxchat--toplabel p {
+  font-size: 1vw;
 }
 
 .inboxchat--messages {
@@ -4089,11 +4125,10 @@ hr {
 
 .inboxchat--send {
   width: 650px;
-  height: 50px;
+  height: 10vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
   bottom: 0;
 }
 @media screen and (min-width: 992px) and (max-width: 1350px) {
@@ -4387,7 +4422,7 @@ html {
 }
 
 body {
-  background: #fafafa;
+  background: #0f0f0f;
   color: black;
   width: 100%;
   margin: 0;

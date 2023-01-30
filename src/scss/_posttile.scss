@@ -78,7 +78,7 @@
     justify-content: center;
     align-items: center;
     display: none;
-    background-color: rgba(0, 0, 0, 0.267);
+    background-color: rgba(0, 0, 0, 0.616) !important;
     z-index:0;
     @include phone {
         width: 28vw;
@@ -111,15 +111,17 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
+    background-color: transparent !important;
 
     i {
-        filter: invert(1);
+        color: white !important;
         transform: scaleX(-1);
     }
 
     p {
         font-size: 20px;
         padding: 10px;
-        color: white;
+        color: white !important;
+        background-color: transparent !important;
     }
 }

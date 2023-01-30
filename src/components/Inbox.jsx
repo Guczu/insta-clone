@@ -4,11 +4,13 @@ import Navbar from './Navbar'
 import fetchInboxChats from '../methods/fetchInboxChats'
 import InboxChat from './InboxChat';
 import useChangeRoute from '../methods/useChangeRoute';
+import { useSelector } from 'react-redux';
 
 export default function Inbox() {
     const [inboxChats, setInboxChats] = useState(null);
     const [showInboxChats, setShowInboxChats] = useState(null);
     const [actualChat, setActualChat] = useState(null);
+    const darkmode = useSelector(state => state.theme.theme);
     const changeRoute = useChangeRoute();
 
     useEffect(() => {
@@ -32,7 +34,7 @@ export default function Inbox() {
     }
 
   return (
-    <div className='mainpage--container'>
+    <div className={`mainpage--container ${darkmode}`}>
         <Navbar />
         <div className='mainpage--content'>
             <div className='mainpage--wrapper'>

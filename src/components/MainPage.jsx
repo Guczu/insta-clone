@@ -8,17 +8,17 @@ import { useEffect } from 'react';
 
 export default function MainPage() {
   const navigate = useNavigate();
+  const darkmode = useSelector(state => state.theme.theme);
 
   useEffect(() => {
     const uid = localStorage.getItem('uid');
-
     if(uid === null) {
       navigate('/login');
     }
   },[])
 
   return (
-    <div className='mainpage--container'>
+    <div className={`mainpage--container ${darkmode}`}>
       <Navbar />
       <div className='mainpage--content'>
         <div className='mainpage--wrapper'>

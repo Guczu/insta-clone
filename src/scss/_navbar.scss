@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: row;
     z-index: 1;
+    border-right: 1px solid #dbdbdb;
 
     @include sm-desktop {
         width: 80px;
@@ -36,7 +37,6 @@
     width: 335px;
     height: 100vh;
     background-color: #ffffff;
-    border-right: 1px solid #dbdbdb;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -115,6 +115,7 @@
     width: 150px;
     height: 55px;
     padding: 20px;
+    background-color: transparent !important;
     &:hover {
         cursor: pointer;
     }
@@ -220,7 +221,8 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    padding: 20px;
+    padding-bottom: 20px;
+    border-right: 1px solid #dbdbdb;
     
     @include sm-desktop {
         width: 80px;
@@ -343,7 +345,7 @@
     }
 
     p {
-        width: 400px;
+        width: 360px;
         height: 40px;
         display: flex;
         align-items: flex-start;

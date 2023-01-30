@@ -21,6 +21,7 @@ import EditProfile from './EditProfile';
 export default function Profile() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const darkmode = useSelector(state => state.theme.theme);
     const {id} = useParams();
 
     const user = useSelector(state => state.user);
@@ -199,7 +200,7 @@ export default function Profile() {
     {isLoading ? (
         <LoadingScreen />
     ) : (
-    <div className='mainpage--container'>
+    <div className={`mainpage--container ${darkmode}`}>
         <Navbar />
         {trigger && <AddPost handleTrigger={handleTrigger}/>}
         {followedTrigger && <FollowedUsers handleFollowedTrigger={handleFollowedTrigger} followedList={followedList} />}
@@ -263,7 +264,7 @@ export default function Profile() {
                     </div>
                 </div>
                 <div className='profile--posts'>
-                    { userData.data.posts < 1 ? (
+                    { userData.data.posts < 1 && id === user.username ? (
                     <>
                         <div className='profile--img'>
                             <i className="fa-solid fa-camera fa-4x clickable" onClick={handleTrigger}></i>

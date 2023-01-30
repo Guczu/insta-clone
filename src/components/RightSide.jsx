@@ -10,24 +10,13 @@ export default function RightSide() {
   const [users, setUsers] = useState([]);
   const dataFetchedRef = useRef(false);
   const user = useSelector(state => state.user);
+  const darkmode = useSelector(state => state.theme.theme);
   const changeRoute = useChangeRoute();
 
   useEffect(() => {
     if (dataFetchedRef.current) return;
       dataFetchedRef.current = true;
-    /*
-    const getUsers = async () => {
-      const loggedUser = await getDoc(doc(db, 'users', uid));
-      const username = loggedUser.data().username;
-      const ref = collection(db, "users");
-      const docSnap = await getDocs(ref);
-  
-      docSnap.forEach((doc) => {
-        if(doc.data().username !== username) {
-          setUsers(state => [...state, doc.data()]);
-        }
-      });
-    }*/
+
     async function fetchData() {
       const users = await fetchUsers();
       setUsers(users);
@@ -44,7 +33,7 @@ export default function RightSide() {
   })
 
   return (
-    <div className='mainpage--right'>
+    <div className={`mainpage--right ${darkmode}`}>
             <div className='mainpage--info'>
               <img src={user.picture}></img>
               <div className='mainpage--names'>

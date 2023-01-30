@@ -7,12 +7,15 @@
     position: absolute;
     left: 0;
     top: 0;
-    background-color: white;
+    z-index: 999;
+    background-color: white !important;
 }
 
 .loadingscreen--image {
+    background-color: white !important;
     img {
         width: 100px;
+        background-color: white !important;
         animation-name: animation;
         animation-duration: 2s;
         animation-iteration-count: infinite;

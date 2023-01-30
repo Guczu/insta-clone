@@ -1,15 +1,17 @@
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import logo from '../images/logo.png'
 import React, { useState } from 'react';
 import useChangeRoute from '../methods/useChangeRoute';
 import SearchBar from './SearchBar';
 import Notifications from './Notifications';
+import { setTheme } from '../reducers/themeSlice';
 
 export default function Navbar() {
   const user = useSelector(state => state.user);
   const [isSearchBar, setIsSearchBar] = useState(false);
   const [isNotification, setIsNotification] = useState(false);
+  const darkmode = useSelector(state => state.theme.theme);
+  const dispatch = useDispatch();
   const changeRoute = useChangeRoute();
 
   const handleProfileButton = () => {
@@ -40,11 +42,24 @@ export default function Navbar() {
     setIsNotification(oldState => !oldState);
   }
 
+  const handleTheme = () => {
+    if(darkmode === "light") {
+      dispatch(setTheme("dark"));
+      localStorage.setItem('darkmode', 'dark');
+      document.querySelector('body').style.backgroundColor = '#0f0f0f';
+    }
+    else {
+      dispatch(setTheme("light"));
+      localStorage.setItem('darkmode', 'light');
+      document.querySelector('body').style.backgroundColor = '#fafafa';
+    }
+  }
+
   return (
-    <div className='navbar--container'>
+    <div className={`navbar--container ${darkmode}`}>
       <div className='mainpage--navbar'>
           <div className='mainpage--logo'>
-            <div onClick={handleHomeButton}>
+            <div className="navbar--logoimg" onClick={handleHomeButton}>
               <img src={logo} className='navbar--image'></img>
             </div>
           </div>
@@ -93,10 +108,11 @@ export default function Navbar() {
             <i className="fa-solid fa-arrow-right-from-bracket fa-xl"></i>
             <span className='navbar--link'>Wyloguj</span>
           </div>
+
           <div className='mainpage--morecontainer'>
-            <div className='mainpage--link'>
-              <i className="fa-solid fa-bars fa-xl"></i>
-              <span className='navbar--link'>Więcej</span>
+            <div onClick={handleTheme} className='mainpage--link'>
+              <i className="fa-solid fa-moon fa-xl"></i>
+              <span className='navbar--link'>Dark mode</span>
             </div>
           </div>
       </div>

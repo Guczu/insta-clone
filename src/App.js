@@ -9,9 +9,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './reducers/userSlice';
 import { useEffect } from 'react';
 import Inbox from './components/Inbox';
+import { setTheme } from './reducers/themeSlice';
 
 function App() {
   const dispatch = useDispatch();
+  const darkmode = localStorage.getItem('darkmode');
 
   useEffect(() => {
 
@@ -54,9 +56,22 @@ function App() {
         }
     }
     getUserData();
+
+    const handleTheme = async () => {
+      console.log("e")
+      console.log(darkmode)
+      if(darkmode === "light") {
+        document.querySelector('body').style.backgroundColor = '#fafafa';
+        await dispatch(setTheme("light"))
+      }
+      else {
+        document.querySelector('body').style.backgroundColor = '#0f0f0f';
+        await dispatch(setTheme("dark"))
+      }
+    }
+    handleTheme();
+
   }, []);
-  const user = useSelector(state => state.user);
-  //console.log(user);
 
   return (
     <div className="app-container">

@@ -230,7 +230,8 @@ hr {
     button {
         width: 120px;
         height: 40px;
-        background-color: #efefef;
+        background-color: #efefef !important;
+        color: black !important;
         border: none;
         border-radius: 5px;
         font-weight: bold;
@@ -255,7 +256,7 @@ hr {
 
         &:hover {
             cursor: pointer;
-            background-color: #dbdbdb;
+            background-color: #dbdbdb !important;
         }
     }
 
@@ -445,6 +446,8 @@ hr {
     align-items: center;
     margin-left: 25px;
     margin-right: 25px;
+    height: 50px;
+
     @include phone {
         margin: 0;
     }
@@ -639,7 +642,7 @@ hr {
 
 .followedbutton {
     background-color: $border-color !important;
-    color: black;
+    color: black !important;
 
     &:hover {
         background-color: $border-hover-color !important;
