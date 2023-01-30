@@ -131,6 +131,7 @@
     border-radius: 30px;
     transition: .2s;
     color: white;
+    background-color: transparent !important;
 
     @include sm-desktop {
         width: 25%;
@@ -176,6 +177,7 @@
         margin-right: 10px;
         transition: .1s;
         color: black;
+        background-color: transparent !important;
 
         @include sm-desktop {
             margin: 0;
