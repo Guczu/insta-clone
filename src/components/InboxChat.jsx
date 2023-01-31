@@ -34,6 +34,7 @@ export default function InboxChat() {
                     </div>
                 )
             }))
+
         });
 
     return () => unsubscribe();
@@ -68,6 +69,7 @@ export default function InboxChat() {
     }, [showMessages])
 
     const sendMess = async () => {
+        document.querySelector('.inputContent').value = "";
         await sendMessage(userId, content);
     }
 
@@ -82,7 +84,7 @@ export default function InboxChat() {
                     <div ref={messagesEndRef}></div>
                 </div>
                 <div className='inboxchat--send'>
-                    <input type="text" onChange={(e) => setContent(e.target.value)}></input>
+                    <input type="text" className="inputContent" onChange={(e) => setContent(e.target.value)}></input>
                     <button onClick={sendMess}>Send Message</button>
                 </div>
         </div>
