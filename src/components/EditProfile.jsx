@@ -42,8 +42,8 @@ const handleSubmit = async (e) => {
   };
 
   return (
-    <div className='editprofile--container'>
-        <div className='editprofile--form'>
+    <div className='editprofile--container' onClick={props.handleEditTrigger}>
+        <div className='editprofile--form' onClick={(e) => { e.stopPropagation(); return false; }}>
             <button className='editprofile--close' onClick={props.handleEditTrigger}>X</button>
             <div className='editprofile--title'>
                 <p>Edytuj profil</p>

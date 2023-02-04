@@ -4419,7 +4419,7 @@ hr {
 }
 
 html {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 body {
@@ -4427,6 +4427,7 @@ body {
   color: black;
   width: 100%;
   margin: 0;
+  overflow-y: hidden;
 }
 
 .app-container {

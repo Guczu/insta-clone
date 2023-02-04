@@ -3,8 +3,6 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import sendMessage from '../methods/sendMessage';
 import fetchOneUser from '../methods/fetchOneUser';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { db } from '../firebase';
 
 export default function SendMessage(props) {
 const {id} = useParams();

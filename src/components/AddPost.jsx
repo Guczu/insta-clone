@@ -59,9 +59,9 @@ export default function AddPost(props) {
       };
 
   return (
-    <div className='addpost--container'>
-        <div className='addpost--form'>
-            <button className='addpost--button' onClick={props.handleTrigger}>X</button>
+    <div className='addpost--container' onClick={props.handleAddPost}>
+        <div className='addpost--form' onClick={(e) => { e.stopPropagation(); return false; }}>
+            <button className='addpost--button' onClick={props.handleAddPost}>X</button>
             <div className='addpost--title'>
                 <p>Utwórz nowy post</p>
                 <hr></hr>
@@ -73,7 +73,7 @@ export default function AddPost(props) {
             <div className='addpost--upload'>
                 <input type="file" id="files" className='hidden' onChange={handleImageChange}></input>
                 {image !== null ? <img src={url}></img> : <label htmlFor="files" className='addpost--label'>+</label>}
-                <button onClick={handleSubmit}>Dodaj post</button>
+                {image !== null && <button onClick={handleSubmit}>Dodaj post</button>}
             </div>
         </div>
     </div>

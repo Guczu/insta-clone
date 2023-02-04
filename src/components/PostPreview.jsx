@@ -97,8 +97,8 @@ export default function PostPreview(props) {
       }
 
   return (
-    <div className='postpreview--container'>
-        <div className='postpreview--frame'>
+    <div className='postpreview--container' onClick={props.handleTrigger}>
+        <div className='postpreview--frame' onClick={(e) => { e.stopPropagation(); return false; }}>
         <button className='addpost--button' onClick={props.handleTrigger}>X</button>
             <div className='postpreview--image'>
                 <img src={props.post.data.imgurl}></img>

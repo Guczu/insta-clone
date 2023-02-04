@@ -58,8 +58,6 @@ function App() {
     getUserData();
 
     const handleTheme = async () => {
-      console.log("e")
-      console.log(darkmode)
       if(darkmode === "light") {
         document.querySelector('body').style.backgroundColor = '#fafafa';
         await dispatch(setTheme("light"))

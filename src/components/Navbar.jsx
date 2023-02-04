@@ -5,11 +5,13 @@ import useChangeRoute from '../methods/useChangeRoute';
 import SearchBar from './SearchBar';
 import Notifications from './Notifications';
 import { setTheme } from '../reducers/themeSlice';
+import AddPost from './AddPost';
 
 export default function Navbar() {
   const user = useSelector(state => state.user);
   const [isSearchBar, setIsSearchBar] = useState(false);
   const [isNotification, setIsNotification] = useState(false);
+  const [isAddPost, setIsAddPost] = useState(false);
   const darkmode = useSelector(state => state.theme.theme);
   const dispatch = useDispatch();
   const changeRoute = useChangeRoute();
@@ -40,6 +42,10 @@ export default function Navbar() {
 
   const handleNotifications = () => {
     setIsNotification(oldState => !oldState);
+  }
+
+  const handleAddPost = () => {
+    setIsAddPost(oldState => !oldState);
   }
 
   const handleTheme = () => {
@@ -94,7 +100,7 @@ export default function Navbar() {
             <span className='navbar--link'>Powiadomienia</span>
           </div>
           
-          <div className='mainpage--link'>
+          <div className='mainpage--link' onClick={handleAddPost}>
             <i className="fa-regular fa-square-plus fa-xl"></i>
             <span className='navbar--link'>Utwórz</span>
           </div>
@@ -118,7 +124,7 @@ export default function Navbar() {
       </div>
       {isSearchBar && <SearchBar handleSearchBar= {handleSearchBar} />}
       {isNotification && <Notifications handleNotifications= {handleNotifications} />}
-
+      {isAddPost && <AddPost handleAddPost={handleAddPost} />}
     </div>
   )
 }

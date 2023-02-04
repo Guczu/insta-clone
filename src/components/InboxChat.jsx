@@ -15,6 +15,7 @@ export default function InboxChat() {
     const [messages, setMessages] = useState(null);
     const [showMessages, setShowMessages] = useState(null);
     const [content, setContent] = useState("");
+    const [loading, setLoading] = useState(true);
     const messagesEndRef = useRef(null);
 
     useEffect(() => {
@@ -34,9 +35,7 @@ export default function InboxChat() {
                     </div>
                 )
             }))
-
         });
-
     return () => unsubscribe();
     }, [])
 
@@ -58,6 +57,7 @@ export default function InboxChat() {
                     </div>
                 )
             }))
+            setLoading(false);
         }
         getMessages();
     }, [])
@@ -80,7 +80,11 @@ export default function InboxChat() {
                     <p>{user !== null && user.username}</p>
                 </div>
                 <div className='inboxchat--messages'>
-                    {showMessages !== null && showMessages}
+                    {loading ? (
+                        <p>Ładowanie...</p>
+                    ):(
+                        showMessages !== null && showMessages
+                    )}
                     <div ref={messagesEndRef}></div>
                 </div>
                 <div className='inboxchat--send'>

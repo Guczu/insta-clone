@@ -17,7 +17,6 @@ export default function Inbox() {
         const getChats = async () => {
             const inboxChats = await fetchInboxChats();
             setInboxChats(inboxChats);
-            console.log(inboxChats);
             setShowInboxChats(inboxChats?.sort((a,b) => b.data.timeStamp - a.data.timeStamp).map((chat, i) => {
                 return (
                     <div key={i}>

@@ -16,7 +16,7 @@ export default function Comment(props) {
             setCommentAuthor(user);
         }
         getAuthor();
-    },[])
+    },[props])
 
   return (
     <div className='comments--container'>

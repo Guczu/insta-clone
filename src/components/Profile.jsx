@@ -27,7 +27,7 @@ export default function Profile() {
 
     const user = useSelector(state => state.user);
     const dataFetchedRef = useRef(false);
-    const [trigger, setTrigger] = useState(false);
+    const [isAddPost, setIsAddPost] = useState(false);
     const [editTrigger, setEditTrigger] = useState(false);
     const [userData, setUserData] = useState(null);
     const [userPosts, setUserPosts] = useState([]);
@@ -92,14 +92,14 @@ export default function Profile() {
     }, [])
 
     //add post
-    const handleTrigger = () => {
-        if(!trigger) {
+    const handleAddPost = () => {
+        if(!isAddPost) {
             document.querySelector('html').style.overflowY = 'hidden';
           }
           else {
             document.querySelector('html').style.overflowY = 'scroll';
           }
-        setTrigger(oldState => !oldState);
+        setIsAddPost(oldState => !oldState);
     }
 
     const handleFollowedTrigger = () => {
@@ -214,7 +214,7 @@ export default function Profile() {
     ) : (
     <div className={`mainpage--container ${darkmode}`}>
         <Navbar />
-        {trigger && <AddPost handleTrigger={handleTrigger}/>}
+        {isAddPost && <AddPost handleAddPost={handleAddPost}/>}
         {followedTrigger && <FollowedUsers handleFollowedTrigger={handleFollowedTrigger} followedList={followedList} />}
         {followingTrigger && <FollowingUsers handleFollowingTrigger={handleFollowingTrigger} followingList={followingList} />}
         {editTrigger && <EditProfile handleEditTrigger={handleEditTrigger} />}
@@ -235,7 +235,7 @@ export default function Profile() {
                             {id === user.username ? (
                                 <>
                                     <button onClick={handleEditTrigger}>Edytuj profil</button>
-                                    <button onClick={handleTrigger}>Dodaj post</button>
+                                    <button onClick={handleAddPost}>Dodaj post</button>
                                     <i className="fa-solid fa-gear fa-xl"></i>
                                 </>
                             ) : (
@@ -281,12 +281,12 @@ export default function Profile() {
                     { userData.data.posts < 1 && id === user.username ? (
                     <>
                         <div className='profile--img'>
-                            <i className="fa-solid fa-camera fa-4x clickable" onClick={handleTrigger}></i>
+                            <i className="fa-solid fa-camera fa-4x clickable" onClick={handleAddPost}></i>
                         </div>
                         <div className='profile--poststext'>
                             <p className='title'>Udostępnij zdjęcia</p>
                             <p className='sizeup'>Gdy udostępnisz zdjęcia, pojawiają się one na Twoim profilu.</p>
-                            <p className='clickable blue' onClick={handleTrigger}>Udostępnij swoje pierwsze zdjęcie</p>
+                            <p className='clickable blue' onClick={handleAddPost}>Udostępnij swoje pierwsze zdjęcie</p>
                         </div>
                     </>
                         ) : (

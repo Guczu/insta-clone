@@ -21,8 +21,8 @@ export default function FollowingUsers(props) {
   }
 
   return (
-    <div className='followedusers--container'>
-        <div className='followedusers--frame'>
+    <div className='followedusers--container' onClick={props.handleFollowingTrigger}>
+        <div className='followedusers--frame' onClick={(e) => { e.stopPropagation(); return false; }}>
           <button className='followedusers--close' onClick={props.handleFollowingTrigger}>X</button>
             <div className='followedusers--title'>
               <p>Obserwujący:</p>
