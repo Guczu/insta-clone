@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import AddPost from './AddPost';
-import { collection, deleteDoc, doc, getDocs, increment, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, increment, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import PostTile from './PostTile';
 import { useRef } from 'react';
@@ -17,6 +17,7 @@ import FollowingUsers from './FollowingUsers';
 import { setFollowed, setFollowing } from '../reducers/userSlice';
 import LoadingScreen from './LoadingScreen';
 import EditProfile from './EditProfile';
+import SendMessage from './SendMessage';
 
 export default function Profile() {
     const navigate = useNavigate();
@@ -35,6 +36,7 @@ export default function Profile() {
     const [followData, setFollowData] = useState(null);
     const [followedTrigger, setFollowedTrigger] = useState(false);
     const [followingTrigger, setFollowingTrigger] = useState(false);
+    const [messageTrigger, setMessageTrigger] = useState(false);
     const [followedList, setFollowedList] = useState([]);
     const [followingList, setFollowingList] = useState([]);
 
@@ -130,6 +132,16 @@ export default function Profile() {
         setEditTrigger(oldState => !oldState);
     }
 
+    const handleMessageTrigger = () => {
+        if(!messageTrigger) {
+            document.querySelector('html').style.overflowY = 'hidden';
+          }
+          else {
+            document.querySelector('html').style.overflowY = 'scroll';
+          }
+        setMessageTrigger(oldState => !oldState);
+    }
+
     const showPosts = userPosts?.sort((a,b) => b.data.timeStamp - a.data.timeStamp).map((post, i) => {
         return (
             <PostTile 
@@ -206,6 +218,7 @@ export default function Profile() {
         {followedTrigger && <FollowedUsers handleFollowedTrigger={handleFollowedTrigger} followedList={followedList} />}
         {followingTrigger && <FollowingUsers handleFollowingTrigger={handleFollowingTrigger} followingList={followingList} />}
         {editTrigger && <EditProfile handleEditTrigger={handleEditTrigger} />}
+        {messageTrigger && <SendMessage handleMessageTrigger={handleMessageTrigger} />}
 
         <div className='mainpage--content'>
         <div className='mainpage--wrapper'>
@@ -233,6 +246,7 @@ export default function Profile() {
                                     : (
                                         <button className='followedbutton' onClick={() => {unfollowUser(user.username, id)}}>Obserwujesz</button>
                                     )}  
+                                    <button onClick={handleMessageTrigger}>Wyślij wiadomość</button>
                                     <i className="fa-solid fa-ellipsis fa-xl"></i>
                                 </>
                             )

@@ -1741,7 +1741,7 @@ hr {
   }
 }
 .profile--options button {
-  width: 120px;
+  width: auto;
   height: 40px;
   background-color: #efefef !important;
   color: black !important;
