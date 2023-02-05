@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import profileimg from '../images/storyimg.jpg'
 import RecommendedUser from './RecommendedUser';
 import useChangeRoute from '../methods/useChangeRoute';
 import fetchUsers from '../methods/fetchUsers';

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
-import logo from '../images/storyimg.jpg'
 import getDate from '../methods/getDate';
 import getPostLikes from '../methods/getPostLikes';
 import addLikeToPost from '../methods/addLikeToPost';
@@ -23,6 +22,7 @@ export default function PostPreview(props) {
     const [showComments, setShowComments] = useState(null);
     const uid = localStorage.getItem('uid');
     const changeRoute = useChangeRoute();
+    const avatar = "https://firebasestorage.googleapis.com/v0/b/instaclone-cb003.appspot.com/o/profile-pictures%2Fdefault.jpg?alt=media&token=37a6fba9-330d-43f7-852a-e3ac79b41556";
 
     useEffect(() => {
         const getComments = async () => {
@@ -105,12 +105,12 @@ export default function PostPreview(props) {
             </div>
             <div className='postpreview--rightside'>
                 <div className='postpreview--author'>
-                    <img src={postAuthor !== null ? postAuthor.data.picture : logo} onClick={() => changeRoute(`/${postAuthor.data.username}`)}></img>
+                    <img src={postAuthor !== null ? postAuthor.data.picture : avatar} onClick={() => changeRoute(`/${postAuthor.data.username}`)}></img>
                     <span className='bold clickable' onClick={() => changeRoute(`/${postAuthor.data.username}`)}>{props.post.data.author}</span>
                 </div>
                 <hr></hr>
                 <div className='postpreview--description'>
-                    <img src={postAuthor !== null ? postAuthor.data.picture : logo} onClick={() => changeRoute(`/${postAuthor.data.username}`)}></img>
+                    <img src={postAuthor !== null ? postAuthor.data.picture : avatar} onClick={() => changeRoute(`/${postAuthor.data.username}`)}></img>
                     <span className='bold clickable' onClick={() => changeRoute(`/${postAuthor.data.username}`)}>{props.post.data.author}</span>
                     <span>{props.post.data.description}</span>
                 </div>

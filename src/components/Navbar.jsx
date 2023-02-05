@@ -32,6 +32,7 @@ export default function Navbar() {
   }
 
   const handleLogout = () => {
+    localStorage.removeItem('uid');
     changeRoute('/login');
     window.location.reload();
   }

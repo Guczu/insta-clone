@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { storage, ref, uploadBytes, getDownloadURL, db } from '../firebase';
 import { nanoid } from '@reduxjs/toolkit';
 import { doc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import logo from '../images/logo.png'
 import { Link, useNavigate } from 'react-router-dom';
 import { auth, createUserWithEmailAndPassword, db } from '../firebase';
-import { doc, deleteDoc, addDoc, collection, getDocs, updateDoc, setDoc, serverTimestamp } from 'firebase/firestore'
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
 
 export default function RegisterPage() {
 

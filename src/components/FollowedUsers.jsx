@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import fetchProfilePicture from '../methods/fetchProfilePicture';
 
 export default function FollowedUsers(props) {
   const navigate = useNavigate();
   
   const showFollowers = props.followedList.map((follower, i) => {
-
     return (
       <div key={i} className='followedusers--tile'>
         <img src={follower.data.picture}></img>

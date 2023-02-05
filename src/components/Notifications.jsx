@@ -1,7 +1,6 @@
 import { collection, onSnapshot } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { db } from '../firebase';
-import fetchNotifications from '../methods/fetchNotifications';
 import NotificationLabel from './NotificationLabel';
 
 export default function Notifications(props) {

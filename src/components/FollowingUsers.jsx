@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import fetchProfilePicture from '../methods/fetchProfilePicture';
 
 export default function FollowingUsers(props) {
   const navigate = useNavigate();

@@ -5,18 +5,19 @@ import Profile from './components/Profile';
 import RegisterPage from './components/RegisterPage';
 import { db } from './firebase'
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setUser } from './reducers/userSlice';
 import { useEffect } from 'react';
 import Inbox from './components/Inbox';
 import { setTheme } from './reducers/themeSlice';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const dispatch = useDispatch();
   const darkmode = localStorage.getItem('darkmode');
 
   useEffect(() => {
-
+    document.querySelector('html').style.backgroundColor = 'white';
     const getUserData = async () => {
       const uid = localStorage.getItem('uid');
       if(uid !== null){
@@ -51,19 +52,16 @@ function App() {
           console.log("No such document!");
         }
         }
-        else {
-          console.log("its null");
-        }
     }
     getUserData();
 
     const handleTheme = async () => {
       if(darkmode === "light") {
-        document.querySelector('body').style.backgroundColor = '#fafafa';
+        document.querySelector('html').style.backgroundColor = '#fafafa';
         await dispatch(setTheme("light"))
       }
       else {
-        document.querySelector('body').style.backgroundColor = '#0f0f0f';
+        document.querySelector('html').style.backgroundColor = '#0f0f0f';
         await dispatch(setTheme("dark"))
       }
     }
@@ -74,14 +72,14 @@ function App() {
   return (
     <div className="app-container">
         <Routes>
-              <Route path="/" element={<MainPage />} />
+              <Route path="/" element={<PrivateRoute><MainPage /></PrivateRoute>} />
               <Route path="/login" element={<LoginPage />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/logout" element={<LoginPage />} />
-              <Route exact path="/:id" element={<Profile />} />
-              <Route path="/inbox" element={<Inbox />} />
-              <Route path="/inbox/c/:userId" element={<Inbox />} />
+              <Route exact path="/:id" element={<PrivateRoute><Profile /></PrivateRoute>} />
+              <Route path="/inbox" element={<PrivateRoute><Inbox /></PrivateRoute>} />
+              <Route path="/inbox/c/:userId" element={<PrivateRoute><Inbox /></PrivateRoute>} />
         </Routes>
     </div>
   );

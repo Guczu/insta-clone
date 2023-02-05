@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import image from '../images/storyimg.jpg'
 import fetchOneUserById from '../methods/fetchOneUserById'
 import getDate from '../methods/getDate'
 
 export default function Comment(props) {
     const [commentAuthor, setCommentAuthor] = useState(null);
     const [commentDate, setCommentDate] = useState("");
+    const avatar = "https://firebasestorage.googleapis.com/v0/b/instaclone-cb003.appspot.com/o/profile-pictures%2Fdefault.jpg?alt=media&token=37a6fba9-330d-43f7-852a-e3ac79b41556";
     
     useEffect(() => {
         const timestamp = props.comment.data.timeStamp.toDate().toISOString();
@@ -21,7 +21,7 @@ export default function Comment(props) {
   return (
     <div className='comments--container'>
         <div className='comments--image'>
-            <img src={commentAuthor !== null ? commentAuthor.picture : image} className="clickable" onClick={() => props.changeRoute(`/${props.comment.data.username}`)}></img>
+            <img src={commentAuthor !== null ? commentAuthor.picture : avatar} className="clickable" onClick={() => props.changeRoute(`/${props.comment.data.username}`)}></img>
         </div>
         <div className='comments--frame'>
             <div className='comments--content'>

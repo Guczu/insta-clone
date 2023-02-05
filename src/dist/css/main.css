@@ -34,7 +34,7 @@
 }*/
 .loginpage--container {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2272,7 +2272,7 @@ hr {
 }*/
 .registerpage--container {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2284,7 +2284,7 @@ hr {
   justify-content: center;
   align-items: center;
   width: 450px;
-  height: 800px;
+  height: auto;
   flex-direction: column;
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
@@ -2766,7 +2766,7 @@ hr {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.616) !important;
   display: flex;
   justify-content: center;
@@ -3221,8 +3221,8 @@ hr {
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
   .postpreview--likes {
-    width: 90vw;
-    margin-left: 20px;
+    width: 87vw;
+    margin-left: 3vw;
     margin-right: 0;
   }
 }
@@ -3263,8 +3263,8 @@ hr {
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
   .postpreview--date {
-    width: 90vw;
-    margin-left: 20px;
+    width: 87vw;
+    margin-left: 3vw;
     margin-right: 0;
   }
 }
@@ -3873,7 +3873,7 @@ hr {
 }*/
 .inbox--container {
   width: 1000px;
-  height: 95vh;
+  min-height: 90vh;
   margin-top: 20px;
   background-color: white;
   display: flex;
@@ -3892,26 +3892,23 @@ hr {
 @media screen and (min-width: 576px) and (max-width: 768px) {
   .inbox--container {
     width: 95vw;
-    height: 85vh;
   }
 }
 @media screen and (min-width: 480px) and (max-width: 576px) {
   .inbox--container {
     width: 95vw;
-    height: 85vh;
   }
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
   .inbox--container {
     width: 95vw;
-    height: 90vh;
   }
 }
 
 .inbox--leftwrapper {
   width: 350px;
-  height: 95vh;
   border-right: 1px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -3944,7 +3941,6 @@ hr {
 
 .inbox--rightwrapper {
   width: 650px;
-  height: 100%;
   border-right: 1px solid gray;
 }
 @media screen and (min-width: 992px) and (max-width: 1350px) {
@@ -3969,7 +3965,9 @@ hr {
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
   .inbox--rightwrapper {
-    width: 60vw;
+    width: 55vw;
+    border: none;
+    border-bottom: 1px solid gray;
   }
 }
 
@@ -3978,11 +3976,32 @@ hr {
   align-items: center;
   justify-content: center;
   height: 5vh;
+  min-height: 50px;
   margin: 0;
-  font-size: 18px;
+  font-size: 1vw;
   font-weight: bold;
   border-bottom: 1px solid #dbdbdb;
   width: 100%;
+}
+@media screen and (min-width: 992px) and (max-width: 1350px) {
+  .inbox--title {
+    font-size: 1.5vw;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .inbox--title {
+    font-size: 2.5vw;
+  }
+}
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  .inbox--title {
+    font-size: 3vw;
+  }
+}
+@media screen and (min-width: 480px) and (max-width: 576px) {
+  .inbox--title {
+    font-size: 3vw;
+  }
 }
 
 .inboxuser--container {
@@ -4038,19 +4057,20 @@ hr {
 }
 
 .inboxchat--container {
-  height: 95vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   position: relative;
+  background-color: transparent !important;
 }
 @media screen and (min-width: 576px) and (max-width: 768px) {
   .inboxchat--container {
-    height: 85vh;
+    height: 90vh;
   }
 }
 @media screen and (min-width: 480px) and (max-width: 576px) {
   .inboxchat--container {
-    height: 85vh;
+    height: 90vh;
   }
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
@@ -4064,6 +4084,7 @@ hr {
   align-items: center;
   justify-content: center;
   height: 5vh;
+  min-height: 50px;
   margin: 0;
   font-size: 18px;
   font-weight: bold;
@@ -4078,13 +4099,62 @@ hr {
   margin-left: -20px;
   margin-right: 20px;
 }
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  .inboxchat--toplabel img {
+    width: 4vw;
+    height: 4vw;
+  }
+}
+@media screen and (min-width: 480px) and (max-width: 576px) {
+  .inboxchat--toplabel img {
+    width: 4vw;
+    height: 4vw;
+  }
+}
+@media screen and (min-width: 0px) and (max-width: 480px) {
+  .inboxchat--toplabel img {
+    width: 5vw;
+    height: 5vw;
+  }
+}
 .inboxchat--toplabel p {
   font-size: 1vw;
+}
+@media screen and (min-width: 992px) and (max-width: 1350px) {
+  .inboxchat--toplabel p {
+    font-size: 1.5vw;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .inboxchat--toplabel p {
+    font-size: 2vw;
+  }
+}
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  .inboxchat--toplabel p {
+    font-size: 3vw;
+  }
+}
+@media screen and (min-width: 480px) and (max-width: 576px) {
+  .inboxchat--toplabel p {
+    font-size: 3vw;
+  }
+}
+@media screen and (min-width: 0px) and (max-width: 480px) {
+  .inboxchat--toplabel p {
+    font-size: 4vw;
+  }
+}
+@media screen and (min-width: 0px) and (max-width: 480px) {
+  .inboxchat--toplabel {
+    width: 60vw;
+    border-right: 1px solid gray;
+  }
 }
 
 .inboxchat--messages {
   width: 650px;
-  height: 80vh;
+  height: 75vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -4096,31 +4166,31 @@ hr {
 @media screen and (min-width: 992px) and (max-width: 1350px) {
   .inboxchat--messages {
     width: 400px;
-    height: 81.5vh;
+    height: 75vh;
   }
 }
 @media screen and (min-width: 768px) and (max-width: 992px) {
   .inboxchat--messages {
     width: 400px;
-    height: 81.5vh;
+    height: 75vh;
   }
 }
 @media screen and (min-width: 576px) and (max-width: 768px) {
   .inboxchat--messages {
     width: 60vw;
-    height: 73vh;
+    height: 75vh;
   }
 }
 @media screen and (min-width: 480px) and (max-width: 576px) {
   .inboxchat--messages {
     width: 60vw;
-    height: 74vh;
+    height: 75vh;
   }
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
   .inboxchat--messages {
-    width: 60vw;
-    height: 78vh;
+    width: 55vw;
+    height: 75vh;
   }
 }
 
@@ -4131,17 +4201,19 @@ hr {
   align-items: center;
   justify-content: center;
   bottom: 0;
+  background-color: transparent !important;
 }
 @media screen and (min-width: 992px) and (max-width: 1350px) {
   .inboxchat--send {
     width: 400px;
-    height: 5vw;
+    height: 10vh;
   }
 }
 @media screen and (min-width: 768px) and (max-width: 992px) {
   .inboxchat--send {
     width: 400px;
-    height: 5vw;
+    height: 5vh;
+    justify-content: flex-end;
   }
 }
 @media screen and (min-width: 576px) and (max-width: 768px) {
@@ -4159,6 +4231,7 @@ hr {
 @media screen and (min-width: 0px) and (max-width: 480px) {
   .inboxchat--send {
     width: 60vw;
+    height: 10vh;
   }
 }
 .inboxchat--send input {
@@ -4170,12 +4243,12 @@ hr {
 }
 @media screen and (min-width: 992px) and (max-width: 1350px) {
   .inboxchat--send input {
-    width: 300px;
+    width: 250px;
   }
 }
 @media screen and (min-width: 768px) and (max-width: 992px) {
   .inboxchat--send input {
-    width: 300px;
+    width: 250px;
   }
 }
 @media screen and (min-width: 576px) and (max-width: 768px) {

@@ -4,12 +4,14 @@ import Navbar from './Navbar'
 import fetchInboxChats from '../methods/fetchInboxChats'
 import InboxChat from './InboxChat';
 import useChangeRoute from '../methods/useChangeRoute';
+import LoadingScreen from '../components/LoadingScreen';
 import { useSelector } from 'react-redux';
 
 export default function Inbox() {
     const [inboxChats, setInboxChats] = useState(null);
     const [showInboxChats, setShowInboxChats] = useState(null);
     const [actualChat, setActualChat] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
     const darkmode = useSelector(state => state.theme.theme);
     const changeRoute = useChangeRoute();
 
@@ -24,6 +26,7 @@ export default function Inbox() {
                     </div>
                   )
             }))
+            setIsLoading(false);
         }
         getChats();
     }, [])
@@ -34,7 +37,11 @@ export default function Inbox() {
     }
 
   return (
-    <div className={`mainpage--container ${darkmode}`}>
+    <>
+    {isLoading ? (
+        <LoadingScreen />
+    ) : (
+        <div className={`mainpage--container ${darkmode}`}>
         <Navbar />
         <div className='mainpage--content'>
             <div className='mainpage--wrapper'>
@@ -55,5 +62,7 @@ export default function Inbox() {
             </div>
         </div>
     </div>
+    )}
+    </>
   )
 }

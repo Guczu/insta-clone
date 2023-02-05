@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
 import Navbar from './Navbar'
-import avatar from '../images/storyimg.jpg'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import AddPost from './AddPost';
-import { addDoc, collection, deleteDoc, doc, getDocs, increment, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, increment, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import PostTile from './PostTile';
 import { useRef } from 'react';
@@ -45,9 +44,9 @@ export default function Profile() {
         dataFetchedRef.current = true;
         const uid = localStorage.getItem('uid');
 
-        if(uid === null) {
+        /*if(uid === null) {
             navigate('/login');
-        }
+        }*/
 
         const getUserData = async () => {
             await setIsLoading(true);

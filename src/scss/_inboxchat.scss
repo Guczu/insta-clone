@@ -1,8 +1,10 @@
 .inboxchat--container {
-    height: 95vh;
+    height: 90vh;
     display: flex;
     flex-direction: column;
     position: relative;
+    background-color: transparent !important;
+    // \/
     @include desktop {
 
     }
@@ -10,14 +12,15 @@
 
     }
     @include laptop {
-        height: 85vh;
+        height: 90vh;
     }
     @include tablet {
-        height: 85vh;
+        height: 90vh;
     }
     @include phone {
         height: 90vh;
     }
+    // do usuniecia /\
 }
 
 .inboxchat--toplabel {
@@ -25,6 +28,7 @@
     align-items: center;
     justify-content: center;
     height: 5vh;
+    min-height: 50px;
     margin: 0;
     font-size: 18px;
     font-weight: bold;
@@ -38,16 +42,47 @@
         border-radius: 100%;
         margin-left: -20px;
         margin-right: 20px;
+        @include laptop {
+            width: 4vw;
+            height: 4vw;
+        }
+        @include tablet {
+            width: 4vw;
+            height: 4vw;
+        }
+        @include phone {
+            width: 5vw;
+            height: 5vw;
+        }
     }
 
     p {
         font-size: 1vw;
+        @include desktop {
+            font-size: 1.5vw;
+        }
+        @include sm-desktop {
+            font-size: 2vw;
+        }
+        @include laptop {
+            font-size: 3vw;
+        }
+        @include tablet {
+            font-size: 3vw;
+        }
+        @include phone {
+            font-size: 4vw;
+        }
+    }
+    @include phone {
+        width: 60vw;
+        border-right: 1px solid gray;
     }
 }
 
 .inboxchat--messages {
     width: 650px;
-    height: 80vh;
+    height: 75vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,23 +92,23 @@
     scrollbar-width: none;  /* Firefox */
     @include desktop {
         width: 400px;
-        height: 81.5vh;
+        height: 75vh;
     }
     @include sm-desktop {
         width: 400px;
-        height: 81.5vh;
+        height: 75vh;
     }
     @include laptop {
         width: 60vw;
-        height: 73vh;
+        height: 75vh;
     }
     @include tablet {
         width: 60vw;
-        height: 74vh;
+        height: 75vh;
     }
     @include phone {
-        width: 60vw;
-        height: 78vh;
+        width: 55vw;
+        height: 75vh;
     }
 }
 
@@ -84,13 +119,15 @@
     align-items: center;
     justify-content: center;
     bottom: 0;
+    background-color: transparent !important;
     @include desktop {
         width: 400px;
-        height: 5vw;
+        height: 10vh;
     }
     @include sm-desktop {
         width: 400px;
-        height: 5vw;
+        height: 5vh;
+        justify-content: flex-end;
     }
     @include laptop {
         width: 60vw;
@@ -102,6 +139,7 @@
     }
     @include phone {
         width: 60vw;
+        height: 10vh;
     }
 
     input {
@@ -112,10 +150,10 @@
         padding: 5px;
         
         @include desktop {
-            width: 300px;
+            width: 250px;
         }
         @include sm-desktop {
-            width: 300px;
+            width: 250px;
         }
         @include laptop {
             width: 40vw;

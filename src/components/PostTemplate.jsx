@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import storyimg from '../images/storyimg.jpg'
 import getDate from '../methods/getDate';
 import addLikeToPost from '../methods/addLikeToPost';
 import removeLikeFromPost from '../methods/removeLikeFromPost';
@@ -18,6 +17,7 @@ export default function PostTemplate(props) {
     const [postAuthor, setPostAuthor] = useState(null);
     const [likesAmount, setLikesAmount] = useState(props.post.data.likes);
     const uid = localStorage.getItem('uid');
+    const avatar = "https://firebasestorage.googleapis.com/v0/b/instaclone-cb003.appspot.com/o/profile-pictures%2Fdefault.jpg?alt=media&token=37a6fba9-330d-43f7-852a-e3ac79b41556";
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -83,7 +83,7 @@ export default function PostTemplate(props) {
     <div className='mainpage--post'>
                 {previewTrigger && <PostPreview handleTrigger={handlePreviewTrigger} post={props.post}/>}
                 <div className='mainpage--author'>
-                    <img src={postAuthor !== null ? postAuthor.data.picture : storyimg}></img>
+                    <img src={postAuthor !== null ? postAuthor.data.picture : avatar}></img>
                     <p onClick={() => {checkProfile(props.post.data.author)}}>{props.post.data.author}</p>
                     <i className="fa-solid fa-ellipsis fa-xl"></i>
                 </div>

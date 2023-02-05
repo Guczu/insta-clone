@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import fetchInboxMessages from '../methods/fetchInboxMessages';
 import fetchOneUserById from '../methods/fetchOneUserById';
-import avatar from '../images/storyimg.jpg'
 import { db } from '../firebase';
 import { collection, onSnapshot } from 'firebase/firestore';
 import InboxMessage from './InboxMessage';
@@ -10,6 +9,7 @@ import sendMessage from '../methods/sendMessage';
 
 export default function InboxChat() {
     const { userId } = useParams();
+    const location = useLocation();
     const uid = localStorage.getItem('uid');
     const [user, setUser] = useState(null);
     const [messages, setMessages] = useState(null);
@@ -17,6 +17,7 @@ export default function InboxChat() {
     const [content, setContent] = useState("");
     const [loading, setLoading] = useState(true);
     const messagesEndRef = useRef(null);
+    const avatar = "https://firebasestorage.googleapis.com/v0/b/instaclone-cb003.appspot.com/o/profile-pictures%2Fdefault.jpg?alt=media&token=37a6fba9-330d-43f7-852a-e3ac79b41556";
 
     useEffect(() => {
         const messagesRef = collection(db, "users", uid, "inbox", userId, "messages");
@@ -37,7 +38,7 @@ export default function InboxChat() {
             }))
         });
     return () => unsubscribe();
-    }, [])
+    }, [location])
 
     useEffect(() => {
         const getUser = async () => {
@@ -60,7 +61,7 @@ export default function InboxChat() {
             setLoading(false);
         }
         getMessages();
-    }, [])
+    }, [location])
 
     useEffect(() => {
         requestAnimationFrame(() => {

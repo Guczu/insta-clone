@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Navbar from './Navbar';
 import Posts from './Posts';
@@ -10,12 +10,12 @@ export default function MainPage() {
   const navigate = useNavigate();
   const darkmode = useSelector(state => state.theme.theme);
 
-  useEffect(() => {
+  /*useEffect(() => {
     const uid = localStorage.getItem('uid');
     if(uid === null) {
       navigate('/login');
     }
-  },[])
+  },[])*/
 
   return (
     <div className={`mainpage--container ${darkmode}`}>
