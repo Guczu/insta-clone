@@ -8,8 +8,10 @@ export default function Comment(props) {
     const avatar = "https://firebasestorage.googleapis.com/v0/b/instaclone-cb003.appspot.com/o/profile-pictures%2Fdefault.jpg?alt=media&token=37a6fba9-330d-43f7-852a-e3ac79b41556";
     
     useEffect(() => {
-        const timestamp = props.comment.data.timeStamp.toDate().toISOString();
-        setCommentDate(getDate(timestamp))
+        if(props.comment.data.timeStamp) {
+            const timestamp = props.comment.data.timeStamp.toDate().toISOString();
+            setCommentDate(getDate(timestamp))
+        }
 
         const getAuthor = async () => {
             const user = await fetchOneUserById(props.comment.data.id);

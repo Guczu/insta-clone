@@ -10,7 +10,6 @@ import useChangeRoute from '../methods/useChangeRoute'
 import addComment from '../methods/addComment';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
-import getPostComments from '../methods/getPostComments';
 
 export default function PostPreview(props) {
     const [postDate, setPostDate] = useState(null);
@@ -19,39 +18,24 @@ export default function PostPreview(props) {
     const [commentContent, setCommentContent] = useState("");
     const [postAuthor, setPostAuthor] = useState(null);
     const [comments, setComments] = useState();
-    const [showComments, setShowComments] = useState(null);
+    //const [showComments, setShowComments] = useState(null);
     const uid = localStorage.getItem('uid');
     const changeRoute = useChangeRoute();
     const avatar = "https://firebasestorage.googleapis.com/v0/b/instaclone-cb003.appspot.com/o/profile-pictures%2Fdefault.jpg?alt=media&token=37a6fba9-330d-43f7-852a-e3ac79b41556";
 
     useEffect(() => {
-        const getComments = async () => {
-            const comments = await getPostComments(props.post);
-            setComments(comments);
-          }
-          getComments();
-    }, [])
-
-    const refreshComments = () => {
         const commentRef = collection(db, "posts", props.post.id, "comments");
-        onSnapshot(commentRef,(refSnapshot) => {
-            const commentArray = [];
-            refSnapshot.forEach((doc) => {
-                commentArray.push({id: doc.id, data: doc.data()});
-            });
-            setComments(commentArray);
-        });
-    }
+        const unsubscribe = onSnapshot(commentRef,(refSnapshot) => {
 
-    useEffect(() => {
-        setShowComments(comments?.sort((a,b) => b.data.timeStamp - a.data.timeStamp).map((comment, i) => {
-            return (
-                <div key={i}>
-                    <Comment comment={comment} changeRoute={changeRoute}/>
-                </div>
-            )
-        }))
-    }, [comments])
+            const commentsArray = [];
+            refSnapshot.forEach((doc) => {
+                commentsArray.push({id: doc.id, data: doc.data()});
+            });
+
+            setComments(commentsArray.sort((a,b) => b.data.timeStamp - a.data.timeStamp));
+        });
+    return () => unsubscribe();
+    }, [])
 
     useEffect(() => {
         const timestamp = props.post.data.timeStamp.toDate().toISOString();
@@ -72,7 +56,7 @@ export default function PostPreview(props) {
             setPostAuthor(user);
         }
         getPostAuthor();
-    }, [])
+    }, [props])
 
     const handleLike = async () => {
         const logged_user = uid;
@@ -90,11 +74,18 @@ export default function PostPreview(props) {
         }
       }
 
-      const addCommentToPost = async () => {
-        await addComment(uid, props.post, commentContent);
+    const addCommentToPost = async () => {
         setCommentContent("");
-        refreshComments();
-      }
+        await addComment(uid, props.post, commentContent);
+    }
+
+    const showComments = comments?.sort((a,b) => b.data.timeStamp - a.data.timeStamp).map((comment, i) => {
+        return (
+            <div key={i}>
+                <Comment comment={comment} changeRoute={changeRoute}/>
+            </div>
+        )
+    })
 
   return (
     <div className='postpreview--container' onClick={props.handleTrigger}>
