@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import fetchInboxMessages from '../methods/fetchInboxMessages';
 import fetchOneUserById from '../methods/fetchOneUserById';
 import { db } from '../firebase';
 import { collection, onSnapshot } from 'firebase/firestore';
@@ -12,10 +11,8 @@ export default function InboxChat() {
     const location = useLocation();
     const uid = localStorage.getItem('uid');
     const [user, setUser] = useState(null);
-    const [messages, setMessages] = useState(null);
-    const [showMessages, setShowMessages] = useState(null);
+    const [messages, setMessages] = useState([]);
     const [content, setContent] = useState("");
-    const [loading, setLoading] = useState(true);
     const messagesEndRef = useRef(null);
     const avatar = "https://firebasestorage.googleapis.com/v0/b/instaclone-cb003.appspot.com/o/profile-pictures%2Fdefault.jpg?alt=media&token=37a6fba9-330d-43f7-852a-e3ac79b41556";
 
@@ -27,15 +24,8 @@ export default function InboxChat() {
             refSnapshot.forEach((doc) => {
                 messageArray.push({id: doc.id, data: doc.data()});
             });
-            setMessages(messageArray);
 
-            setShowMessages(messageArray?.sort((a,b) => a.data.timeStamp - b.data.timeStamp).map((message, i) => {
-                return(
-                    <div key={i}>
-                        <InboxMessage message={message} />
-                    </div>
-                )
-            }))
+            setMessages(messageArray.sort((a,b) => a.data.timeStamp - b.data.timeStamp));
         });
     return () => unsubscribe();
     }, [location])
@@ -46,33 +36,27 @@ export default function InboxChat() {
             setUser(user);
         }
         getUser();
-
-        const getMessages = async () => {
-            const messages = await fetchInboxMessages(userId);
-            setMessages(messages);
-
-            setShowMessages(messages?.sort((a,b) => a.data.timeStamp - b.data.timeStamp).map((message, i) => {
-                return (
-                    <div key={i}>
-                        <InboxMessage message={message} />
-                    </div>
-                )
-            }))
-            setLoading(false);
-        }
-        getMessages();
     }, [location])
 
     useEffect(() => {
+        const chat = document.querySelector('.inboxchat--messages')
+        chat.scrollTop = chat.scrollHeight;
         requestAnimationFrame(() => {
             messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
           });
-    }, [showMessages])
+    }, [messages])
 
     const sendMess = async () => {
         document.querySelector('.inputContent').value = "";
         await sendMessage(userId, content);
     }
+
+    const showMessages = messages.map((message, i) => {
+        return(
+            <div key={i}>
+                <InboxMessage message={message} />
+            </div>
+        )})
 
     return (
         <div className='inboxchat--container'>
@@ -81,11 +65,7 @@ export default function InboxChat() {
                     <p>{user !== null && user.username}</p>
                 </div>
                 <div className='inboxchat--messages'>
-                    {loading ? (
-                        <p>Ładowanie...</p>
-                    ):(
-                        showMessages !== null && showMessages
-                    )}
+                    {showMessages}
                     <div ref={messagesEndRef}></div>
                 </div>
                 <div className='inboxchat--send'>

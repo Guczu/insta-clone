@@ -3908,7 +3908,6 @@ hr {
 .inbox--leftwrapper {
   width: 350px;
   border-right: 1px solid #dbdbdb;
-  border-bottom: 1px solid #dbdbdb;
   display: flex;
   align-items: center;
   flex-direction: column;
