@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import fetchOneUserById from '../methods/fetchOneUserById';
 import { db } from '../firebase';
 import { collection, onSnapshot } from 'firebase/firestore';
+import fetchOneUserById from '../methods/fetchOneUserById';
 import InboxMessage from './InboxMessage';
 import sendMessage from '../methods/sendMessage';
 
@@ -18,8 +18,14 @@ export default function InboxChat() {
 
     useEffect(() => {
         const messagesRef = collection(db, "users", uid, "inbox", userId, "messages");
-        const unsubscribe = onSnapshot(messagesRef,(refSnapshot) => {
 
+        const getUser = async () => {
+            const user = await fetchOneUserById(userId);
+            setUser(user);
+        }
+        getUser();
+
+        const unsubscribe = onSnapshot(messagesRef,(refSnapshot) => {
             const messageArray = [];
             refSnapshot.forEach((doc) => {
                 messageArray.push({id: doc.id, data: doc.data()});
@@ -31,19 +37,11 @@ export default function InboxChat() {
     }, [location])
 
     useEffect(() => {
-        const getUser = async () => {
-            const user = await fetchOneUserById(userId);
-            setUser(user);
-        }
-        getUser();
-    }, [location])
-
-    useEffect(() => {
-        const chat = document.querySelector('.inboxchat--messages')
+        const chat = document.querySelector('.inboxchat--messages');
         chat.scrollTop = chat.scrollHeight;
         requestAnimationFrame(() => {
             messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-          });
+        });
     }, [messages])
 
     const sendMess = async () => {
@@ -56,7 +54,8 @@ export default function InboxChat() {
             <div key={i}>
                 <InboxMessage message={message} />
             </div>
-        )})
+        )
+    })
 
     return (
         <div className='inboxchat--container'>

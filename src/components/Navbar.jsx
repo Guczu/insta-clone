@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux'
 import logo from '../images/logo.png'
 import React, { useState } from 'react';
-import useChangeRoute from '../methods/useChangeRoute';
 import SearchBar from './SearchBar';
 import Notifications from './Notifications';
 import { setTheme } from '../reducers/themeSlice';
 import AddPost from './AddPost';
+import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
   const user = useSelector(state => state.user);
@@ -14,26 +14,26 @@ export default function Navbar() {
   const [isAddPost, setIsAddPost] = useState(false);
   const darkmode = useSelector(state => state.theme.theme);
   const dispatch = useDispatch();
-  const changeRoute = useChangeRoute();
+  const navigate = useNavigate();
 
   const handleProfileButton = () => {
-    changeRoute(`/${user.username}`);
+    navigate(`/${user.username}`);
     window.location.reload();
   }
 
   const handleInbox = () => {
-    changeRoute('/inbox');
+    navigate('/inbox');
     window.location.reload();
   }
 
   const handleHomeButton = () => {
-    changeRoute('/');
+    navigate('/');
     window.location.reload();
   }
 
   const handleLogout = () => {
     localStorage.removeItem('uid');
-    changeRoute('/login');
+    navigate('/login');
     window.location.reload();
   }
 
@@ -123,8 +123,8 @@ export default function Navbar() {
             </div>
           </div>
       </div>
-      {isSearchBar && <SearchBar handleSearchBar= {handleSearchBar} />}
-      {isNotification && <Notifications handleNotifications= {handleNotifications} />}
+      {isSearchBar && <SearchBar handleSearchBar={handleSearchBar} />}
+      {isNotification && <Notifications handleNotifications={handleNotifications} />}
       {isAddPost && <AddPost handleAddPost={handleAddPost} />}
     </div>
   )

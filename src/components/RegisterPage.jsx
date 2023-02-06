@@ -5,7 +5,6 @@ import { auth, createUserWithEmailAndPassword, db } from '../firebase';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
 
 export default function RegisterPage() {
-
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -46,25 +45,23 @@ export default function RegisterPage() {
     navigate("/login");
   };
 
-  console.log(userData);
-
   return (
     <div className='registerpage--container'>
       <div className='registerpage--register'>
         <div className='registerpage--form'>
-            <img src={logo}></img>
-            <p className='bold gray'>Zarejestruj się, aby przeglądać zdjęcia i filmy znajomych.</p>
-            <hr></hr>
-            <input type="text" placeholder='Adres email' name="email" onChange={handleInput}></input>
-            <input type="text" placeholder='Imię i nazwisko' name="name" onChange={handleInput}></input>
-            <input type="text" placeholder='Nazwa użytkownika' name="username" onChange={handleInput}></input>
-            <input type="password" placeholder='Hasło' name="password" onChange={handleInput}></input>
-            <p className='gray'>Osoby korzystające z naszej usługi mogły przesłać Twoje informacje kontaktowe do Instagramu.</p>
-            <p className='blue clickable'>Dowiedz się więcej</p>
-            <p className='gray'>Rejestrując się, akceptujesz <span className='blue clickable'>Regulamin.</span> Informacje o tym, jak zbieramy, wykorzystujemy i udostępniamy Twoje dane, zawierają nasze <span className='blue clickable'>Zasady dotyczące plików cookie.</span> O wykorzystaniu plików cookie i podobnych technologii informują <span className='blue clickable'>Zasady dotyczące plików cookie.</span></p>
-            <button onClick={register}>Dalej</button>
+          <img src={logo}></img>
+          <p className='bold gray'>Zarejestruj się, aby przeglądać zdjęcia i filmy znajomych.</p>
+          <hr></hr>
+          <input type="text" placeholder='Adres email' name="email" onChange={handleInput}></input>
+          <input type="text" placeholder='Imię i nazwisko' name="name" onChange={handleInput}></input>
+          <input type="text" placeholder='Nazwa użytkownika' name="username" onChange={handleInput}></input>
+          <input type="password" placeholder='Hasło' name="password" onChange={handleInput}></input>
+          <p className='gray'>Osoby korzystające z naszej usługi mogły przesłać Twoje informacje kontaktowe do Instagramu.</p>
+          <p className='blue clickable'>Dowiedz się więcej</p>
+          <p className='gray'>Rejestrując się, akceptujesz <span className='blue clickable'>Regulamin.</span> Informacje o tym, jak zbieramy, wykorzystujemy i udostępniamy Twoje dane, zawierają nasze <span className='blue clickable'>Zasady dotyczące plików cookie.</span> O wykorzystaniu plików cookie i podobnych technologii informują <span className='blue clickable'>Zasady dotyczące plików cookie.</span></p>
+          <button onClick={register}>Dalej</button>
 
-            <p className='padding gray'>
+          <p className='padding gray'>
             Masz konto? 
             <span className='blue clickable'>
               <Link to="/login" className='link'>Zaloguj się</Link>

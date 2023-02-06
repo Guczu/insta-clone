@@ -4,42 +4,44 @@ import { useSelector } from 'react-redux';
 import { db, getDownloadURL, ref, storage, uploadBytes } from '../firebase';
 
 export default function EditProfile(props) {
-  const [image, setImage] = useState(null);
-  const [description, setDescription] = useState("");
-  const [url, setUrl] = useState(null);
-  const user = useSelector(state => state.user);
-  const [showButton, setShowButton] = useState(true);
+    const [image, setImage] = useState(null);
+    const [description, setDescription] = useState("");
+    const [url, setUrl] = useState(null);
+    const user = useSelector(state => state.user);
+    const [showButton, setShowButton] = useState(true);
 
-  const handleImageChange = (e) => {
-    setShowButton(false);
-    if(e.target.files[0]) {
-        setImage(e.target.files[0]);
-    }
+    const handleImageChange = (e) => {
+        const imageRef = ref(storage, `/profile-pictures/${user.username}`);
+        
+        setShowButton(false);
+        if(e.target.files[0]) {
+            setImage(e.target.files[0]);
+        }
 
-    const imageRef = ref(storage, `/profile-pictures/${user.username}`);
-    uploadBytes(imageRef, e.target.files[0]).then(() => {
-        getDownloadURL(imageRef).then((url) => {
-            setUrl(url);
+        uploadBytes(imageRef, e.target.files[0]).then(() => {
+            getDownloadURL(imageRef).then((url) => {
+                setUrl(url);
+            }).catch(error => {
+                console.log(error.message);
+            })
         }).catch(error => {
             console.log(error.message);
         })
-    }).catch(error => {
-        console.log(error.message);
-    })
-    setShowButton(true);
-};
+        setShowButton(true);
+    };
 
-const handleSubmit = async (e) => {
-    e.preventDefault();
-    const uid = localStorage.getItem('uid');
-    if(url !== null) {
-      await updateDoc(doc(db, "users", uid), {picture: url});
-    }
-    if(description !== "") {
-      await updateDoc(doc(db, "users", uid), {bio: description});
-    }
-    window.location.reload();
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const uid = localStorage.getItem('uid');
+
+        if(url !== null) {
+            await updateDoc(doc(db, "users", uid), {picture: url});
+        }
+        if(description !== "") {
+            await updateDoc(doc(db, "users", uid), {bio: description});
+        }
+        window.location.reload();
+    };
 
   return (
     <div className='editprofile--container' onClick={props.handleEditTrigger}>

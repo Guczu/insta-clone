@@ -5,26 +5,25 @@ import sendMessage from '../methods/sendMessage';
 import fetchOneUser from '../methods/fetchOneUser';
 
 export default function SendMessage(props) {
-const {id} = useParams();
-const navigate = useNavigate();
-const [message, setMessage] = useState("");
-const [userData, setUserData] = useState(null);
-const user = useSelector(state => state.user);
+    const {id} = useParams();
+    const navigate = useNavigate();
+    const [message, setMessage] = useState("");
+    const [userData, setUserData] = useState(null);
 
-useEffect(() => {
-    const getUserData = async () => {
-        if(id !== null){
-          const user = await fetchOneUser(id);
-          setUserData(user);
+    useEffect(() => {
+        const getUserData = async () => {
+            if(id !== null){
+                const user = await fetchOneUser(id);
+                setUserData(user);
+            }
         }
-    }
-    getUserData();
-}, [])
+        getUserData();
+    }, [])
 
-const send = async () => {
-    await sendMessage(userData.id, message);
-    navigate(`/inbox/c/${userData.id}`);
-}
+    const send = async () => {
+        await sendMessage(userData.id, message);
+        navigate(`/inbox/c/${userData.id}`);
+    }
 
   return (
     <div className='editprofile--container'>

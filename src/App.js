@@ -74,7 +74,6 @@ function App() {
         <Routes>
               <Route path="/" element={<PrivateRoute><MainPage /></PrivateRoute>} />
               <Route path="/login" element={<LoginPage />} />
-              <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/logout" element={<LoginPage />} />
               <Route exact path="/:id" element={<PrivateRoute><Profile /></PrivateRoute>} />

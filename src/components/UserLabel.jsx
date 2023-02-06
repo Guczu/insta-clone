@@ -1,11 +1,13 @@
 import { nanoid } from '@reduxjs/toolkit';
 import { collection, doc, getDocs, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { db } from '../firebase';
 import fetchOneUserById from '../methods/fetchOneUserById';
 
 export default function UserLabel(props) {
     const [user, setUser] = useState(null);
+    const navigate = useNavigate();
     const uid = localStorage.getItem('uid');
 
     useEffect(() => {
@@ -51,7 +53,7 @@ export default function UserLabel(props) {
             });
         }
 
-        props.checkProfile(`/${user.username}`);
+        navigate(`/${user.username}`);
         window.location.reload();
     }
 
@@ -60,11 +62,11 @@ export default function UserLabel(props) {
         {user !== null && (
             <div className='userlabel--user'>
                 <div className='userlabel--image'>
-                <img src={user.picture} className="clickable" onClick={() => {props.checkProfile(`/${user.username}`)}}></img>
+                <img src={user.picture} className="clickable"></img>
                 </div>
                 <div className='userlabel--names'>
                     <div className='userlabel--username'>
-                        <p className='bold' onClick={() => {props.checkProfile(`/${user.username}`)}}>{user.username}</p>
+                        <p className='bold'>{user.username}</p>
                     </div>
                     <div className='userlabel--fullname'>
                         <p>{user.name}</p>

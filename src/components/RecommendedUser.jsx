@@ -1,6 +1,4 @@
-import React from 'react'
-import { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import useFollowUser from '../methods/useFollowUser';
 
@@ -20,7 +18,7 @@ export default function RecommendedUser(props) {
       }
     }
     checkFollow();
-  },[])
+  },[props])
 
   const checkIfFollowed = (loggeduser, usertofollow) => {
     followUser(loggeduser, usertofollow);

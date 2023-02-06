@@ -18,7 +18,6 @@ export default function PostPreview(props) {
     const [commentContent, setCommentContent] = useState("");
     const [postAuthor, setPostAuthor] = useState(null);
     const [comments, setComments] = useState();
-    //const [showComments, setShowComments] = useState(null);
     const uid = localStorage.getItem('uid');
     const changeRoute = useChangeRoute();
     const avatar = "https://firebasestorage.googleapis.com/v0/b/instaclone-cb003.appspot.com/o/profile-pictures%2Fdefault.jpg?alt=media&token=37a6fba9-330d-43f7-852a-e3ac79b41556";
@@ -26,7 +25,6 @@ export default function PostPreview(props) {
     useEffect(() => {
         const commentRef = collection(db, "posts", props.post.id, "comments");
         const unsubscribe = onSnapshot(commentRef,(refSnapshot) => {
-
             const commentsArray = [];
             refSnapshot.forEach((doc) => {
                 commentsArray.push({id: doc.id, data: doc.data()});
@@ -38,8 +36,10 @@ export default function PostPreview(props) {
     }, [])
 
     useEffect(() => {
-        const timestamp = props.post.data.timeStamp.toDate().toISOString();
-        setPostDate(getDate(timestamp))
+        if(props.post.data.timeStamp) {
+            const timestamp = props.post.data.timeStamp.toDate().toISOString();
+            setPostDate(getDate(timestamp));
+        }
 
         const checkIfLiked = async () => {
             const user_id = localStorage.getItem('uid');
@@ -48,8 +48,8 @@ export default function PostPreview(props) {
             if(isLiked) {
               setLiked(true);
             }
-          }
-          checkIfLiked(props.post);
+        }
+        checkIfLiked(props.post);
 
         const getPostAuthor = async () => {
             const user = await fetchOneUser(props.post.data.author);
@@ -72,11 +72,13 @@ export default function PostPreview(props) {
           setLiked(state => !state);
           setLikesAmount(state => state - 1);
         }
-      }
+    }
 
     const addCommentToPost = async () => {
         setCommentContent("");
-        await addComment(uid, props.post, commentContent);
+        if(commentContent !== "") {
+            await addComment(uid, props.post, commentContent);
+        }
     }
 
     const showComments = comments?.sort((a,b) => b.data.timeStamp - a.data.timeStamp).map((comment, i) => {

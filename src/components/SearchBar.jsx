@@ -2,7 +2,6 @@ import { collection, getDocs } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { db } from '../firebase';
 import fetchUsers from '../methods/fetchUsers';
-import useChangeRoute from '../methods/useChangeRoute';
 import UserLabel from './UserLabel';
 
 export default function SearchBar(props) {
@@ -10,8 +9,6 @@ export default function SearchBar(props) {
     const [searchText, setSearchText] = useState("");
     const [foundUser, setFoundUser] = useState([]);
     const [recentSearches, setRecentSearches] = useState([]);
-    const [showRecentUsers, setShowRecentUsers] = useState(null);
-    const changeRoute = useChangeRoute();
 
     useEffect(() => {
         const getUsers = async () => {
@@ -22,7 +19,6 @@ export default function SearchBar(props) {
 
         const getRecentSearches = async () => {
             const searches = [];
-
             const uid = localStorage.getItem('uid');
             const searchRef = collection(db, "search-history");
             const docSnap = await getDocs(searchRef);
@@ -33,14 +29,6 @@ export default function SearchBar(props) {
                 }
             });
             setRecentSearches(searches);
-
-            setShowRecentUsers(searches?.sort((a,b) => b.timeStamp - a.timeStamp).map((user, i) => {
-                return (
-                    <div key={i}>
-                        <UserLabel userData={user} checkProfile={changeRoute} recentUsers={searches}/>
-                    </div>
-                )
-            }))
         }
         getRecentSearches();
     },[])
@@ -55,10 +43,18 @@ export default function SearchBar(props) {
         setFoundUser(findUsers);
     }
 
+    const showRecentUsers = recentSearches?.sort((a,b) => b.timeStamp - a.timeStamp).map((user, i) => {
+        return (
+            <div key={i}>
+                <UserLabel userData={user} recentUsers={recentSearches}/>
+            </div>
+        )
+    })
+
     const showFoundUsers = foundUser.map((user, i) => {
         return (
             <div key={i}>
-                <UserLabel userData={user} checkProfile={changeRoute} recentUsers={recentSearches}/>
+                <UserLabel userData={user} recentUsers={recentSearches}/>
             </div>
         )
     })
@@ -85,6 +81,6 @@ export default function SearchBar(props) {
                 </div>
             )}
         </div>
-      </div>
+    </div>
   )
 }

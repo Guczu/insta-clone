@@ -2,22 +2,21 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
 export default function FollowingUsers(props) {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const showFollowers = props.followingList.map((follower, i) => {
+    const showFollowers = props.followingList.map((follower, i) => {
+      return (
+        <div key={i} className='followedusers--tile'>
+          <img src={follower.data.picture}></img>
+          <p onClick={() => {checkProfile(follower.data.username)}} className='clickable'>{follower.data.username}</p>
+        </div>
+      )
+    });
 
-    return (
-      <div key={i} className='followedusers--tile'>
-        <img src={follower.data.picture}></img>
-        <p onClick={() => {checkProfile(follower.data.username)}} className='clickable'>{follower.data.username}</p>
-      </div>
-    )
-  });
-
-  const checkProfile = (user) => {
-    navigate(`/${user}`, { replace: true });
-    window.location.reload();
-  }
+    const checkProfile = (user) => {
+      navigate(`/${user}`, { replace: true });
+      window.location.reload();
+    }
 
   return (
     <div className='followedusers--container' onClick={props.handleFollowingTrigger}>
@@ -26,12 +25,10 @@ export default function FollowingUsers(props) {
             <div className='followedusers--title'>
               <p>Obserwujący:</p>
             </div>
-
             <hr></hr>
             <div className='followedusers--list'>
               {showFollowers}
             </div>
-
         </div>
     </div>
   )

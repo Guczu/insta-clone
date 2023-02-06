@@ -49,7 +49,7 @@ export default function Posts() {
           )
         }));
 
-        await setIsLoading(false);
+        setIsLoading(false);
         })
     }
     getPostsData();

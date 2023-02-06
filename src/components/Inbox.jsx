@@ -3,29 +3,21 @@ import InboxUser from './InboxUser'
 import Navbar from './Navbar'
 import fetchInboxChats from '../methods/fetchInboxChats'
 import InboxChat from './InboxChat';
-import useChangeRoute from '../methods/useChangeRoute';
 import LoadingScreen from '../components/LoadingScreen';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export default function Inbox() {
     const [inboxChats, setInboxChats] = useState(null);
-    const [showInboxChats, setShowInboxChats] = useState(null);
     const [actualChat, setActualChat] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const darkmode = useSelector(state => state.theme.theme);
-    const changeRoute = useChangeRoute();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getChats = async () => {
             const inboxChats = await fetchInboxChats();
             setInboxChats(inboxChats);
-            setShowInboxChats(inboxChats?.sort((a,b) => b.data.timeStamp - a.data.timeStamp).map((chat, i) => {
-                return (
-                    <div key={i}>
-                      <InboxUser id={chat.id} handleInboxChat={handleInboxChat}/>
-                    </div>
-                  )
-            }))
             setIsLoading(false);
         }
         getChats();
@@ -33,8 +25,16 @@ export default function Inbox() {
 
     const handleInboxChat = (id) => {
         setActualChat(id);
-        changeRoute(`/inbox/c/${id}`);
+        navigate(`/inbox/c/${id}`);
     }
+
+    const showInboxChats = inboxChats?.sort((a,b) => b.data.timeStamp - a.data.timeStamp).map((chat, i) => {
+        return (
+            <div key={i}>
+              <InboxUser id={chat.id} handleInboxChat={handleInboxChat}/>
+            </div>
+        )
+    })
 
   return (
     <>

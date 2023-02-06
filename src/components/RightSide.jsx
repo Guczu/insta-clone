@@ -5,7 +5,6 @@ import useChangeRoute from '../methods/useChangeRoute';
 import fetchUsers from '../methods/fetchUsers';
 
 export default function RightSide() {
-
   const [users, setUsers] = useState([]);
   const dataFetchedRef = useRef(false);
   const user = useSelector(state => state.user);
@@ -25,34 +24,33 @@ export default function RightSide() {
 
   const showUsers = users.map((user,i) => {
     return(
-    <div key={i}>
-      <RecommendedUser userData={user} checkProfile={changeRoute}/>
-    </div>
+      <div key={i}>
+        <RecommendedUser userData={user} checkProfile={changeRoute}/>
+      </div>
     )
   })
 
   return (
     <div className={`mainpage--right ${darkmode}`}>
-            <div className='mainpage--info'>
-              <img src={user.picture}></img>
-              <div className='mainpage--names'>
-                <p className='bold' onClick={() => changeRoute(`/${user.username}`)}>{user.username}</p>
-                <p className='gray'>{user.name}</p>
-              </div>
-              <button className='clickable'>Przełącz</button>
-            </div>
+      <div className='mainpage--info'>
+        <img src={user.picture}></img>
+        <div className='mainpage--names'>
+          <p className='bold' onClick={() => changeRoute(`/${user.username}`)}>{user.username}</p>
+          <p className='gray'>{user.name}</p>
+        </div>
+        <button className='clickable'>Przełącz</button>
+      </div>
 
-            <div className='mainpage--recommendedinfo'>
-              <p className='gray bold'>Propozycje dla Ciebie</p>
-              <p className='bold clickable'>Zobacz wszystkich</p>
-            </div>
+      <div className='mainpage--recommendedinfo'>
+        <p className='gray bold'>Propozycje dla Ciebie</p>
+        <p className='bold clickable'>Zobacz wszystkich</p>
+      </div>
 
-            {showUsers}
-            
-            <div className='mainpage--recommendedfooter'>
-              <p className='gray'>&copy; 2022 INSTAGRAM FROM X</p>
-            </div>
-
-          </div>
+      {showUsers}
+      
+      <div className='mainpage--recommendedfooter'>
+        <p className='gray'>&copy; 2022 INSTAGRAM FROM X</p>
+      </div>
+    </div>
   )
 }

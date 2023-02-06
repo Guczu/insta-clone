@@ -5,7 +5,6 @@ import NotificationLabel from './NotificationLabel';
 
 export default function Notifications(props) {
   const [notifications, setNotifications] = useState(null);
-  const [showNotifications, setShowNotifications] = useState(null);
 
   useEffect(() => {
     const refreshNotifications = () => {
@@ -22,21 +21,17 @@ export default function Notifications(props) {
     refreshNotifications();
   }, [])
 
-  useEffect(() => {
-    setShowNotifications(notifications?.sort((a,b) => b.data.timeStamp - a.data.timeStamp).map((notification, i) => {
-      return (
-        <div key={i}>
-          <NotificationLabel notification={notification} />
-        </div>
-      )
-    }))
-  },[notifications])
+  const showNotifications = notifications?.sort((a,b) => b.data.timeStamp - a.data.timeStamp).map((notification, i) => {
+    return (
+      <div key={i}>
+        <NotificationLabel notification={notification} />
+      </div>
+    )
+  })
 
   return (
     <div className='navbar--searchbar'>
-        <div className='navbar--searchbar--close' onClick={props.handleNotifications}>
-          X
-        </div>
+        <div className='navbar--searchbar--close' onClick={props.handleNotifications}>X</div>
         <p>Powiadomienia</p>
         <hr />
         <p>Ostatnie</p>

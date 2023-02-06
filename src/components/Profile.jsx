@@ -44,10 +44,6 @@ export default function Profile() {
         dataFetchedRef.current = true;
         const uid = localStorage.getItem('uid');
 
-        /*if(uid === null) {
-            navigate('/login');
-        }*/
-
         const getUserData = async () => {
             await setIsLoading(true);
 
@@ -90,7 +86,6 @@ export default function Profile() {
         getUserData();
     }, [])
 
-    //add post
     const handleAddPost = () => {
         if(!isAddPost) {
             document.querySelector('html').style.overflowY = 'hidden';

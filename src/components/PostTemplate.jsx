@@ -21,25 +21,25 @@ export default function PostTemplate(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const timestamp = props.post.data.timeStamp.toDate().toISOString();
-        setPostDate(getDate(timestamp))
+      const timestamp = props.post.data.timeStamp.toDate().toISOString();
+      setPostDate(getDate(timestamp))
 
-        const checkIfLiked = async () => {
-          const post_data = props.post;
-          const isLiked = await getPostLikes(uid, post_data);
-          if(isLiked) {
-            setLiked(true);
-          }
-          setLikesAmount(props.post.data.likes);
-          setCommentsAmount(props.post.data.comments);
+      const checkIfLiked = async () => {
+        const post_data = props.post;
+        const isLiked = await getPostLikes(uid, post_data);
+        if(isLiked) {
+          setLiked(true);
         }
-        checkIfLiked(props.post);
+        setLikesAmount(props.post.data.likes);
+        setCommentsAmount(props.post.data.comments);
+      }
+      checkIfLiked(props.post);
 
-        const getPostAuthor = async () => {
-          const user = await fetchOneUser(props.post.data.author);
-          setPostAuthor(user);
-        }
-        getPostAuthor();
+      const getPostAuthor = async () => {
+        const user = await fetchOneUser(props.post.data.author);
+        setPostAuthor(user);
+      }
+      getPostAuthor();
     }, [props.post])
 
     const addCommentToPost = async () => {
@@ -81,48 +81,48 @@ export default function PostTemplate(props) {
 
   return (
     <div className='mainpage--post'>
-                {previewTrigger && <PostPreview handleTrigger={handlePreviewTrigger} post={props.post}/>}
-                <div className='mainpage--author'>
-                    <img src={postAuthor !== null ? postAuthor.data.picture : avatar}></img>
-                    <p onClick={() => {checkProfile(props.post.data.author)}}>{props.post.data.author}</p>
-                    <i className="fa-solid fa-ellipsis fa-xl"></i>
-                </div>
+      {previewTrigger && <PostPreview handleTrigger={handlePreviewTrigger} post={props.post}/>}
+      <div className='mainpage--author'>
+          <img src={postAuthor !== null ? postAuthor.data.picture : avatar}></img>
+          <p onClick={() => {checkProfile(props.post.data.author)}}>{props.post.data.author}</p>
+          <i className="fa-solid fa-ellipsis fa-xl"></i>
+      </div>
 
-                <div className='mainpage--image'>
-                    <img src={props.post.data.imgurl}></img>
-                </div>
+      <div className='mainpage--image'>
+          <img src={props.post.data.imgurl}></img>
+      </div>
 
-                <div className='mainpage--options'>
-                  <i className={!liked ? "fa-regular fa-heart fa-xl" : "fa-solid fa-heart fa-xl red--heart"} onClick={handleLike}></i>
-                  <i className="fa-regular fa-comment fa-xl"></i>
-                  <i className="fa-regular fa-paper-plane fa-xl"></i>
-                  <div className="mainpage--bookmark">
-                    <i className="fa-regular fa-bookmark fa-xl"></i>
-                  </div>
-                </div>
+      <div className='mainpage--options'>
+        <i className={!liked ? "fa-regular fa-heart fa-xl" : "fa-solid fa-heart fa-xl red--heart"} onClick={handleLike}></i>
+        <i className="fa-regular fa-comment fa-xl"></i>
+        <i className="fa-regular fa-paper-plane fa-xl"></i>
+        <div className="mainpage--bookmark">
+          <i className="fa-regular fa-bookmark fa-xl"></i>
+        </div>
+      </div>
 
-                <div className='mainpage--likes'>
-                  <p>Liczba polubień: {likesAmount}</p>
-                </div>
+      <div className='mainpage--likes'>
+        <p>Liczba polubień: {likesAmount}</p>
+      </div>
 
-                <div className='mainpage--comments'>
-                  <p className='bold'>{props.post.data.author}</p>
-                  <p>{props.post.data.description}</p>
-                </div>
+      <div className='mainpage--comments'>
+        <p className='bold'>{props.post.data.author}</p>
+        <p>{props.post.data.description}</p>
+      </div>
 
-                <div className='mainpage--morecomments'>
-                  <span onClick={handlePreviewTrigger}>Zobacz wszystkie komentarze: {commentsAmount}</span>
-                </div>
+      <div className='mainpage--morecomments'>
+        <span onClick={handlePreviewTrigger}>Zobacz wszystkie komentarze: {commentsAmount}</span>
+      </div>
 
-                <div className='mainpage--date'>
-                  <span>{postDate}</span>
-                </div>
-                <hr></hr>
-                <div className='mainpage--addcomment'>
-                  <i className="fa-regular fa-face-smile fa-2x"></i>
-                  <input type="text" value={commentContent} placeholder='Dodaj komentarz...' onChange={e => setCommentContent(e.target.value)}></input>
-                  <button onClick={addCommentToPost}>Opublikuj</button>
-                </div>
-            </div>
+      <div className='mainpage--date'>
+        <span>{postDate}</span>
+      </div>
+      <hr></hr>
+      <div className='mainpage--addcomment'>
+        <i className="fa-regular fa-face-smile fa-2x"></i>
+        <input type="text" value={commentContent} placeholder='Dodaj komentarz...' onChange={e => setCommentContent(e.target.value)}></input>
+        <button onClick={addCommentToPost}>Opublikuj</button>
+      </div>
+    </div>
   )
 }
