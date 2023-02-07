@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import useFollowUser from '../methods/useFollowUser';
+import followUser from '../methods/followUser';
 
 export default function RecommendedUser(props) {
   const user = useSelector(state => state.user);
-  const followUser = useFollowUser();
   const [isFollowed, setIsFollowed] = useState(false);
 
   useEffect(() => {
@@ -20,8 +19,8 @@ export default function RecommendedUser(props) {
     checkFollow();
   },[props])
 
-  const checkIfFollowed = (loggeduser, usertofollow) => {
-    followUser(loggeduser, usertofollow);
+  const checkIfFollowed = () => {
+    followUser(props.userData.id, user.username, props.userData.data.username);
     setIsFollowed(true);
   }
 
@@ -38,7 +37,7 @@ export default function RecommendedUser(props) {
           {isFollowed ? (
             <button className='gray unclickable'>Obserwujesz</button>
           ) : (
-            <button onClick={() => {checkIfFollowed(user, props.userData)}}>Obserwuj</button>
+            <button onClick={checkIfFollowed}>Obserwuj</button>
           )}
         </div>
     </div>

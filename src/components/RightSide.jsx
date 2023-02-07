@@ -1,15 +1,15 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import RecommendedUser from './RecommendedUser';
-import useChangeRoute from '../methods/useChangeRoute';
 import fetchUsers from '../methods/fetchUsers';
+import { useNavigate } from 'react-router-dom';
 
 export default function RightSide() {
   const [users, setUsers] = useState([]);
   const dataFetchedRef = useRef(false);
   const user = useSelector(state => state.user);
   const darkmode = useSelector(state => state.theme.theme);
-  const changeRoute = useChangeRoute();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (dataFetchedRef.current) return;
@@ -25,7 +25,7 @@ export default function RightSide() {
   const showUsers = users.map((user,i) => {
     return(
       <div key={i}>
-        <RecommendedUser userData={user} checkProfile={changeRoute}/>
+        <RecommendedUser userData={user} checkProfile={navigate}/>
       </div>
     )
   })
@@ -35,7 +35,7 @@ export default function RightSide() {
       <div className='mainpage--info'>
         <img src={user.picture}></img>
         <div className='mainpage--names'>
-          <p className='bold' onClick={() => changeRoute(`/${user.username}`)}>{user.username}</p>
+          <p className='bold' onClick={() => navigate(`/${user.username}`)}>{user.username}</p>
           <p className='gray'>{user.name}</p>
         </div>
         <button className='clickable'>Przełącz</button>

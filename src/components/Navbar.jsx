@@ -16,6 +16,15 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const handleScrollbar = (trigger) => {
+    if(!trigger) {
+      document.querySelector('html').style.overflowY = 'hidden';
+    }
+    else {
+      document.querySelector('html').style.overflowY = 'scroll';
+    }
+  }
+
   const handleProfileButton = () => {
     navigate(`/${user.username}`);
     window.location.reload();
@@ -46,6 +55,7 @@ export default function Navbar() {
   }
 
   const handleAddPost = () => {
+    handleScrollbar(isAddPost);
     setIsAddPost(oldState => !oldState);
   }
 

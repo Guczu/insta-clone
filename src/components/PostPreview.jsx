@@ -6,10 +6,10 @@ import addLikeToPost from '../methods/addLikeToPost';
 import removeLikeFromPost from '../methods/removeLikeFromPost';
 import Comment from './Comment';
 import fetchOneUser from '../methods/fetchOneUser';
-import useChangeRoute from '../methods/useChangeRoute'
 import addComment from '../methods/addComment';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
 export default function PostPreview(props) {
     const [postDate, setPostDate] = useState(null);
@@ -19,7 +19,7 @@ export default function PostPreview(props) {
     const [postAuthor, setPostAuthor] = useState(null);
     const [comments, setComments] = useState();
     const uid = localStorage.getItem('uid');
-    const changeRoute = useChangeRoute();
+    const navigate = useNavigate();
     const avatar = "https://firebasestorage.googleapis.com/v0/b/instaclone-cb003.appspot.com/o/profile-pictures%2Fdefault.jpg?alt=media&token=37a6fba9-330d-43f7-852a-e3ac79b41556";
 
     useEffect(() => {
@@ -84,7 +84,7 @@ export default function PostPreview(props) {
     const showComments = comments?.sort((a,b) => b.data.timeStamp - a.data.timeStamp).map((comment, i) => {
         return (
             <div key={i}>
-                <Comment comment={comment} changeRoute={changeRoute}/>
+                <Comment comment={comment} />
             </div>
         )
     })
@@ -98,13 +98,13 @@ export default function PostPreview(props) {
             </div>
             <div className='postpreview--rightside'>
                 <div className='postpreview--author'>
-                    <img src={postAuthor !== null ? postAuthor.data.picture : avatar} onClick={() => changeRoute(`/${postAuthor.data.username}`)}></img>
-                    <span className='bold clickable' onClick={() => changeRoute(`/${postAuthor.data.username}`)}>{props.post.data.author}</span>
+                    <img src={postAuthor !== null ? postAuthor.data.picture : avatar} onClick={() => navigate(`/${postAuthor.data.username}`)}></img>
+                    <span className='bold clickable' onClick={() => navigate(`/${postAuthor.data.username}`)}>{props.post.data.author}</span>
                 </div>
                 <hr></hr>
                 <div className='postpreview--description'>
-                    <img src={postAuthor !== null ? postAuthor.data.picture : avatar} onClick={() => changeRoute(`/${postAuthor.data.username}`)}></img>
-                    <span className='bold clickable' onClick={() => changeRoute(`/${postAuthor.data.username}`)}>{props.post.data.author}</span>
+                    <img src={postAuthor !== null ? postAuthor.data.picture : avatar} onClick={() => navigate(`/${postAuthor.data.username}`)}></img>
+                    <span className='bold clickable' onClick={() => navigate(`/${postAuthor.data.username}`)}>{props.post.data.author}</span>
                     <span>{props.post.data.description}</span>
                 </div>
                 <div className='postpreview--comments'>

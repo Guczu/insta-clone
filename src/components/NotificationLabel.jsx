@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import fetchOneUserById from '../methods/fetchOneUserById';
-import useChangeRoute from '../methods/useChangeRoute';
 import getDate from '../methods/getDate';
+import { useNavigate } from 'react-router-dom';
 
 export default function NotificationLabel(props) {
-    const changeRoute = useChangeRoute();
+    const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [notificationDate, setNotificationDate] = useState(null);
 
@@ -21,8 +21,13 @@ export default function NotificationLabel(props) {
         getUser();
     },[props])
 
+    const handleRoute = (route) => {
+        navigate(route);
+        window.location.reload();
+    }
+
   return (
-    <div className='notificationlabel--container' onClick={() => {changeRoute(`/${user.username}`)}}>
+    <div className='notificationlabel--container' onClick={() => {handleRoute(`/${user.username}`)}}>
         <div className='notificationlabel--user'>
             <div className='notificationlabel--image'>
                 {user !== null && (

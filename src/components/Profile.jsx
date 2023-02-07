@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Navbar from './Navbar'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import AddPost from './AddPost';
@@ -8,7 +8,6 @@ import { collection, deleteDoc, doc, getDocs, increment, query, serverTimestamp,
 import { db } from '../firebase';
 import PostTile from './PostTile';
 import { useRef } from 'react';
-import { nanoid } from '@reduxjs/toolkit';
 import fetchOneUser from '../methods/fetchOneUser';
 import fetchUserPosts from '../methods/fetchUserPosts';
 import FollowedUsers from './FollowedUsers';
@@ -17,9 +16,10 @@ import { setFollowed, setFollowing } from '../reducers/userSlice';
 import LoadingScreen from './LoadingScreen';
 import EditProfile from './EditProfile';
 import SendMessage from './SendMessage';
+import unfollowUser from '../methods/unfollowUser';
+import followUser from '../methods/followUser';
 
 export default function Profile() {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const darkmode = useSelector(state => state.theme.theme);
     const {id} = useParams();
@@ -42,7 +42,6 @@ export default function Profile() {
     useEffect(() => {
         if (dataFetchedRef.current) return;
         dataFetchedRef.current = true;
-        const uid = localStorage.getItem('uid');
 
         const getUserData = async () => {
             await setIsLoading(true);
@@ -61,24 +60,24 @@ export default function Profile() {
         //zmienic nazwy funkcji z followed na following i drugą też bo sie to nie pokrywa
         const getFollowedUsers = async () => {
             const followRef = collection(db, "followers");
-              const q = query(followRef, where("user_following", "==", id));
-              const querySnapshot = await getDocs(q);
-    
-              querySnapshot.forEach(async (doc) => {
-                const userData = await fetchOneUser(doc.data().user_followed);
-                setFollowedList(state => [...state, userData]);
-              })
+            const q = query(followRef, where("user_following", "==", id));
+            const querySnapshot = await getDocs(q);
+  
+            querySnapshot.forEach(async (doc) => {
+              const userData = await fetchOneUser(doc.data().user_followed);
+              setFollowedList(state => [...state, userData]);
+            })
         }
 
         const getFollowingUsers = async () => {
             const followRef = collection(db, "followers");
-              const q = query(followRef, where("user_followed", "==", id));
-              const querySnapshot = await getDocs(q);
-    
-              querySnapshot.forEach(async (doc) => {
-                const userData = await fetchOneUser(doc.data().user_following);
-                setFollowingList(state => [...state, userData]);
-              })
+            const q = query(followRef, where("user_followed", "==", id));
+            const querySnapshot = await getDocs(q);
+  
+            querySnapshot.forEach(async (doc) => {
+              const userData = await fetchOneUser(doc.data().user_following);
+              setFollowingList(state => [...state, userData]);
+            })
         }
 
         getFollowingUsers();
@@ -86,53 +85,37 @@ export default function Profile() {
         getUserData();
     }, [])
 
+    const handleScrollbar = (trigger) => {
+        if(!trigger) {
+          document.querySelector('html').style.overflowY = 'hidden';
+        }
+        else {
+          document.querySelector('html').style.overflowY = 'scroll';
+        }
+    }
+
     const handleAddPost = () => {
-        if(!isAddPost) {
-            document.querySelector('html').style.overflowY = 'hidden';
-          }
-          else {
-            document.querySelector('html').style.overflowY = 'scroll';
-          }
+        handleScrollbar(isAddPost);
         setIsAddPost(oldState => !oldState);
     }
 
     const handleFollowedTrigger = () => {
-        if(!followedTrigger) {
-            document.querySelector('html').style.overflowY = 'hidden';
-          }
-          else {
-            document.querySelector('html').style.overflowY = 'scroll';
-          }
+        handleScrollbar(followedTrigger);
         setFollowedTrigger(oldState => !oldState);
     }
     
     const handleFollowingTrigger = () => {
-        if(!followingTrigger) {
-            document.querySelector('html').style.overflowY = 'hidden';
-          }
-          else {
-            document.querySelector('html').style.overflowY = 'scroll';
-          }
+        handleScrollbar(followingTrigger);
         setFollowingTrigger(oldState => !oldState);
     }
 
     const handleEditTrigger = () => {
-        if(!editTrigger) {
-            document.querySelector('html').style.overflowY = 'hidden';
-          }
-          else {
-            document.querySelector('html').style.overflowY = 'scroll';
-          }
+        handleScrollbar(editTrigger);
         setEditTrigger(oldState => !oldState);
     }
 
     const handleMessageTrigger = () => {
-        if(!messageTrigger) {
-            document.querySelector('html').style.overflowY = 'hidden';
-          }
-          else {
-            document.querySelector('html').style.overflowY = 'scroll';
-          }
+        handleScrollbar(messageTrigger);
         setMessageTrigger(oldState => !oldState);
     }
 
@@ -145,27 +128,16 @@ export default function Profile() {
         )
     })
 
-    const followUser = async () => {
-        try {
-          await setDoc(doc(db, "followers", nanoid()), {
-            user_following: user.username,
-            user_followed: id,
-            timeStamp: serverTimestamp(),
-          });
-        }
-        catch(err) {
-          console.log(err);
-        }
-        const loggeduser = localStorage.getItem('uid');
-        const following_user = userData.id;
-        await updateDoc(doc(db, "users", loggeduser), {followed: increment(1)});
-        await updateDoc(doc(db, "users", following_user), {following: increment(1)});
+    const follow = async () => {
+        await followUser(userData.id, user.username, id);
+        dispatch(setFollowed(user.followed+1));
+        dispatch(setFollowing(user.following+1));
         checkFollow(user.username, id);
-      };
+    };
 
-      useEffect(() => {
-        checkFollow(user.username, id);
-      },[user])
+    useEffect(() => {
+      checkFollow(user.username, id);
+    },[user])
 
 
     const checkFollow = async (user_following, user_followed) => {
@@ -190,13 +162,10 @@ export default function Profile() {
         });
     }
 
-    const unfollowUser = async (user_following, user_followed) => {
-        await deleteDoc(doc(db, "followers", followData.id));
-        const loggeduser = localStorage.getItem('uid');
-        const following_user = userData.id;
-        await updateDoc(doc(db, "users", loggeduser), {followed: increment(-1)});
+    const unfollow = async () => {
+        await unfollowUser(userData.id, followData.id);
         dispatch(setFollowed(user.followed-1));
-        await updateDoc(doc(db, "users", following_user), {following: increment(-1)});
+        dispatch(setFollowing(user.following-1));
         setIsFollowed(false);
         updateFollows();
     }
@@ -235,10 +204,10 @@ export default function Profile() {
                             ) : (
                                 <>
                                     {!isFollowed ? (
-                                        <button className='followbutton' onClick={() => {followUser(user.username, id)}}>Obserwuj</button>
+                                        <button className='followbutton' onClick={follow}>Obserwuj</button>
                                     )
                                     : (
-                                        <button className='followedbutton' onClick={() => {unfollowUser(user.username, id)}}>Obserwujesz</button>
+                                        <button className='followedbutton' onClick={unfollow}>Obserwujesz</button>
                                     )}  
                                     <button onClick={handleMessageTrigger}>Wyślij wiadomość</button>
                                     <i className="fa-solid fa-ellipsis fa-xl"></i>
