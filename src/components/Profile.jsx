@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react'
 import Navbar from './Navbar'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import AddPost from './AddPost';
-import { collection, deleteDoc, doc, getDocs, increment, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import PostTile from './PostTile';
-import { useRef } from 'react';
 import fetchOneUser from '../methods/fetchOneUser';
 import fetchUserPosts from '../methods/fetchUserPosts';
 import FollowedUsers from './FollowedUsers';
@@ -23,9 +22,9 @@ export default function Profile() {
     const dispatch = useDispatch();
     const darkmode = useSelector(state => state.theme.theme);
     const {id} = useParams();
+    const location = useLocation();
 
     const user = useSelector(state => state.user);
-    const dataFetchedRef = useRef(false);
     const [isAddPost, setIsAddPost] = useState(false);
     const [editTrigger, setEditTrigger] = useState(false);
     const [userData, setUserData] = useState(null);
@@ -40,11 +39,8 @@ export default function Profile() {
     const [followingList, setFollowingList] = useState([]);
 
     useEffect(() => {
-        if (dataFetchedRef.current) return;
-        dataFetchedRef.current = true;
-
         const getUserData = async () => {
-            await setIsLoading(true);
+            setIsLoading(true);
 
             if(id !== null){
               const posts = await fetchUserPosts(id);
@@ -54,36 +50,41 @@ export default function Profile() {
               setUserData(user);
             }
 
-            await setIsLoading(false);
+            setIsLoading(false);
         }
 
-        //zmienic nazwy funkcji z followed na following i drugą też bo sie to nie pokrywa
         const getFollowedUsers = async () => {
             const followRef = collection(db, "followers");
             const q = query(followRef, where("user_following", "==", id));
             const querySnapshot = await getDocs(q);
-  
-            querySnapshot.forEach(async (doc) => {
-              const userData = await fetchOneUser(doc.data().user_followed);
-              setFollowedList(state => [...state, userData]);
-            })
+            const followedArray = [];
+
+                querySnapshot.forEach(async (doc) => {
+                    const userData = await fetchOneUser(doc.data().user_followed);
+                    followedArray.push(userData);
+                })
+                console.log(followedArray)
+                setFollowedList(followedArray);
         }
 
         const getFollowingUsers = async () => {
             const followRef = collection(db, "followers");
             const q = query(followRef, where("user_followed", "==", id));
             const querySnapshot = await getDocs(q);
+            const followingArray = [];
   
             querySnapshot.forEach(async (doc) => {
               const userData = await fetchOneUser(doc.data().user_following);
-              setFollowingList(state => [...state, userData]);
+              followingArray.push(userData);
             })
+            setFollowingList(followingArray);
         }
+        getUserData();
 
         getFollowingUsers();
         getFollowedUsers();
-        getUserData();
-    }, [])
+
+    }, [location])
 
     const handleScrollbar = (trigger) => {
         if(!trigger) {
