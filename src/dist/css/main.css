@@ -3428,30 +3428,9 @@ hr {
 .loadingscreen--image img {
   width: 100px;
   background-color: white !important;
-  -webkit-animation-name: animation;
-          animation-name: animation;
-  -webkit-animation-duration: 2s;
-          animation-duration: 2s;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-}
-
-@-webkit-keyframes animation {
-  0% {
-    transform: rotate(0);
-  }
-  25% {
-    transform: rotate(-25deg);
-  }
-  50% {
-    transform: rotate(0);
-  }
-  75% {
-    transform: rotate(25deg);
-  }
-  100% {
-    transform: rotate(0);
-  }
+  animation-name: animation;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
 }
 
 @keyframes animation {
@@ -3520,7 +3499,7 @@ hr {
   position: relative;
   padding: 32px;
   width: 100%;
-  min-height: 600px;
+  height: auto;
   max-width: 640px;
   background-color: white;
   border-radius: 10px;

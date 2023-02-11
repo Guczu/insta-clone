@@ -10,6 +10,7 @@ export default function RegisterPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [userData, setUserData] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleInput = (e) => {
@@ -21,6 +22,10 @@ export default function RegisterPage() {
 
   const register = async (e) => {
     e.preventDefault();
+    if(userData.name === undefined || userData.name.length < 5 || userData.username === undefined || userData.username.length < 3 ) {
+      setErrorMessage("Nazwa użytkownika lub imię i nazwisko jest za krótkie");
+      return;
+    }
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -37,12 +42,24 @@ export default function RegisterPage() {
         bio: "Biografia",
         timeStamp: serverTimestamp()
       });
+      navigate("/login");
     }
     catch(err) {
-      console.log(err);
+      console.log(err.code);
+      switch(err.code) {
+        case "auth/email-already-in-use":
+          setErrorMessage("Email jest już w użyciu");
+        break;
+        case "auth/invalid-email":
+          setErrorMessage("Email jest nieprawidłowy");
+        break;
+        case "auth/weak-password":
+          setErrorMessage("Hasło jest za słabe");
+        break;
+        default:
+          setErrorMessage("Błąd podczas rejestracji");
+      }
     }
-
-    navigate("/login");
   };
 
   return (
@@ -56,6 +73,9 @@ export default function RegisterPage() {
           <input type="text" placeholder='Imię i nazwisko' name="name" onChange={handleInput}></input>
           <input type="text" placeholder='Nazwa użytkownika' name="username" onChange={handleInput}></input>
           <input type="password" placeholder='Hasło' name="password" onChange={handleInput}></input>
+          
+          <p>{errorMessage}</p>
+          
           <p className='gray'>Osoby korzystające z naszej usługi mogły przesłać Twoje informacje kontaktowe do Instagramu.</p>
           <p className='blue clickable'>Dowiedz się więcej</p>
           <p className='gray'>Rejestrując się, akceptujesz <span className='blue clickable'>Regulamin.</span> Informacje o tym, jak zbieramy, wykorzystujemy i udostępniamy Twoje dane, zawierają nasze <span className='blue clickable'>Zasady dotyczące plików cookie.</span> O wykorzystaniu plików cookie i podobnych technologii informują <span className='blue clickable'>Zasady dotyczące plików cookie.</span></p>

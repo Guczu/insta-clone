@@ -58,11 +58,11 @@ function App() {
     const handleTheme = async () => {
       if(darkmode === "light") {
         document.querySelector('html').style.backgroundColor = '#fafafa';
-        await dispatch(setTheme("light"))
+        dispatch(setTheme("light"))
       }
       else {
         document.querySelector('html').style.backgroundColor = '#0f0f0f';
-        await dispatch(setTheme("dark"))
+        dispatch(setTheme("dark"))
       }
     }
     handleTheme();

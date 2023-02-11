@@ -12,6 +12,7 @@ import { doc, getDoc } from 'firebase/firestore';
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -51,9 +52,16 @@ export default function LoginPage() {
         });
       }
       catch(err) {
-        console.log(err);
+        //console.log(err);
+        setErrorMessage("Podano błędny email lub hasło");
       }
     };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      login(event);
+    }
+  };
 
   return (
     <div className='loginpage--container'>
@@ -64,9 +72,10 @@ export default function LoginPage() {
         <div className='loginpage--login'>
           <div className='loginpage--form'>
             <img src={logo}></img>
-            <input type="text" placeholder='Adres email' onChange={e => setEmail(e.target.value)}></input>
-            <input type="password" placeholder='Hasło' onChange={e => setPassword(e.target.value)}></input>
+            <input type="text" onKeyDown={handleKeyPress} placeholder='Adres email' onChange={e => setEmail(e.target.value)}></input>
+            <input type="password" onKeyDown={handleKeyPress} placeholder='Hasło' onChange={e => setPassword(e.target.value)}></input>
             <button onClick={login}>Zaloguj się</button>
+            <p>{errorMessage}</p>
             <hr></hr>
             <a href="#">Zaloguj się przez Facebooka</a>
             <a href="#">Nie pamiętasz hasła?</a>

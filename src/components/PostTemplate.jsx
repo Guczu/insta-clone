@@ -83,7 +83,7 @@ export default function PostTemplate(props) {
     <div className='mainpage--post'>
       {previewTrigger && <PostPreview handleTrigger={handlePreviewTrigger} post={props.post}/>}
       <div className='mainpage--author'>
-          <img src={postAuthor !== null ? postAuthor.data.picture : avatar}></img>
+          <img src={postAuthor !== null ? postAuthor.data.picture : avatar} onClick={() => {checkProfile(props.post.data.author)}}></img>
           <p onClick={() => {checkProfile(props.post.data.author)}}>{props.post.data.author}</p>
           <i className="fa-solid fa-ellipsis fa-xl"></i>
       </div>

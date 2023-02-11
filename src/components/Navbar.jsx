@@ -63,12 +63,12 @@ export default function Navbar() {
     if(darkmode === "light") {
       dispatch(setTheme("dark"));
       localStorage.setItem('darkmode', 'dark');
-      document.querySelector('body').style.backgroundColor = '#0f0f0f';
+      document.querySelector('html').style.backgroundColor = '#0f0f0f';
     }
     else {
       dispatch(setTheme("light"));
       localStorage.setItem('darkmode', 'light');
-      document.querySelector('body').style.backgroundColor = '#fafafa';
+      document.querySelector('html').style.backgroundColor = '#fafafa';
     }
   }
 

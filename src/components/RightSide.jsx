@@ -5,7 +5,7 @@ import fetchUsers from '../methods/fetchUsers';
 import { useNavigate } from 'react-router-dom';
 
 export default function RightSide() {
-  const [users, setUsers] = useState([]);
+  const [showUsers, setShowUsers] = useState(null);
   const dataFetchedRef = useRef(false);
   const user = useSelector(state => state.user);
   const darkmode = useSelector(state => state.theme.theme);
@@ -17,18 +17,16 @@ export default function RightSide() {
 
     async function fetchData() {
       const users = await fetchUsers();
-      setUsers(users);
+      setShowUsers(users.sort((a,b) => 0.5 - Math.random()).slice(0,4).map((user,i) => {
+          return(
+            <div key={i}>
+              <RecommendedUser userData={user} checkProfile={navigate}/>
+            </div>
+          )
+      }))
     }
     fetchData();
-  },[])
-
-  const showUsers = users.map((user,i) => {
-    return(
-      <div key={i}>
-        <RecommendedUser userData={user} checkProfile={navigate}/>
-      </div>
-    )
-  })
+  },[user])
 
   return (
     <div className={`mainpage--right ${darkmode}`}>
@@ -46,7 +44,7 @@ export default function RightSide() {
         <p className='bold clickable'>Zobacz wszystkich</p>
       </div>
 
-      {showUsers}
+      {showUsers !== null && showUsers}
       
       <div className='mainpage--recommendedfooter'>
         <p className='gray'>&copy; 2022 INSTAGRAM FROM X</p>
