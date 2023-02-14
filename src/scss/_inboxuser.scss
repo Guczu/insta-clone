@@ -8,16 +8,16 @@
     color: black;
 
     @include desktop {
-        width: 200px;
+        width: 195px;
     }
     @include sm-desktop {
-        width: 200px;
+        width: 195px;
     }
     @include laptop {
-        width: 200px;
+        width: 195px;
     }
     @include tablet {
-        width: 200px;
+        width: 195px;
     }
     @include phone {
         width: 35vw;

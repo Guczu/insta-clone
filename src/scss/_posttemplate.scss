@@ -45,6 +45,7 @@
     width: 500px;
     height: 100px;
     margin-left: 20px;
+    background-color: transparent !important;
     @include phone {
         width: 90vw;
         margin: 0;
@@ -260,9 +261,11 @@
     height: 60px;
     border-radius: 10px;
     font-size: 12px;
+    background-color: transparent !important;
 
     @include phone {
         width: 90vw;
+        justify-content: center;
     }
     @include laptop {
         width: 90vw;
@@ -288,7 +291,7 @@
         height: 25px;
 
         @include phone {
-            width: 90vw;
+            width: 50vw;
         }
         @include laptop {
             width: 90vw;

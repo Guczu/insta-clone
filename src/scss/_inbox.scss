@@ -96,4 +96,7 @@
     @include tablet {
         font-size: 3vw;
     }
+    @include phone {
+        font-size: 3vw;
+    }
 }

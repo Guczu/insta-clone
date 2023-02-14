@@ -957,6 +957,7 @@
   width: 500px;
   height: 100px;
   margin-left: 20px;
+  background-color: transparent !important;
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
   .mainpage--author {
@@ -1194,10 +1195,12 @@
   height: 60px;
   border-radius: 10px;
   font-size: 12px;
+  background-color: transparent !important;
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
   .mainpage--addcomment {
     width: 90vw;
+    justify-content: center;
   }
 }
 @media screen and (min-width: 576px) and (max-width: 768px) {
@@ -1226,7 +1229,7 @@
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
   .mainpage--addcomment input {
-    width: 90vw;
+    width: 50vw;
   }
 }
 @media screen and (min-width: 576px) and (max-width: 768px) {
@@ -1500,7 +1503,7 @@
 
 hr {
   margin: 0;
-  border: 1px solid #dbdbdb;
+  border: 1px solid #dbdbdb !important;
   margin-top: 10px;
 }
 @media screen and (min-width: 992px) and (max-width: 1350px) {
@@ -1521,6 +1524,11 @@ hr {
 @media screen and (min-width: 576px) and (max-width: 768px) {
   hr {
     width: 400px;
+  }
+}
+@media screen and (min-width: 0px) and (max-width: 480px) {
+  hr {
+    display: 80vw;
   }
 }
 
@@ -1680,6 +1688,9 @@ hr {
     width: 90vw;
     justify-content: center;
     height: auto;
+  }
+  .profile--options p {
+    font-size: 5vw !important;
   }
 }
 @media screen and (min-width: 992px) and (max-width: 1350px) {
@@ -3981,6 +3992,11 @@ hr {
     font-size: 3vw;
   }
 }
+@media screen and (min-width: 0px) and (max-width: 480px) {
+  .inbox--title {
+    font-size: 3vw;
+  }
+}
 
 .inboxuser--container {
   width: 350px;
@@ -3993,22 +4009,22 @@ hr {
 }
 @media screen and (min-width: 992px) and (max-width: 1350px) {
   .inboxuser--container {
-    width: 200px;
+    width: 195px;
   }
 }
 @media screen and (min-width: 768px) and (max-width: 992px) {
   .inboxuser--container {
-    width: 200px;
+    width: 195px;
   }
 }
 @media screen and (min-width: 576px) and (max-width: 768px) {
   .inboxuser--container {
-    width: 200px;
+    width: 195px;
   }
 }
 @media screen and (min-width: 480px) and (max-width: 576px) {
   .inboxuser--container {
-    width: 200px;
+    width: 195px;
   }
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {

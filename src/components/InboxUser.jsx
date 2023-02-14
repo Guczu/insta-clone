@@ -14,11 +14,11 @@ export default function InboxUser(props) {
     }, [])
 
   return (
-        <div>
+        <>
             <div className='inboxuser--container' onClick={() => props.handleInboxChat(props.id)}>
                 <img src={user !== null ? user.picture : avatar}></img>
                 <p>{user !== null && user.username}</p>
             </div>
-        </div>
+        </>
   )
 }

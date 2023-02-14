@@ -42,7 +42,7 @@
 
 hr {
     margin: 0;
-    border: 1px solid #dbdbdb;
+    border: 1px solid #dbdbdb !important;
     margin-top: 10px;
     @include desktop {
         width: 400px;
@@ -58,6 +58,9 @@ hr {
 
     @include laptop {
         width: 400px;
+    }
+    @include phone {
+        display: 80vw;
     }
 }
 
@@ -180,6 +183,10 @@ hr {
         width: 90vw;
         justify-content: center;
         height: auto;
+        
+        p {
+            font-size: 5vw !important;
+        }
     }
     @include desktop {
         width: 550px;
