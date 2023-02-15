@@ -48,6 +48,7 @@ function App() {
             picture: user.picture
             }
           ));
+          dispatch(setTheme(user.theme));
         } else {
           console.log("No such document!");
         }
@@ -67,7 +68,7 @@ function App() {
     }
     handleTheme();
 
-  }, []);
+  }, [darkmode]);
 
   return (
     <div className="app-container">

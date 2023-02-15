@@ -8,6 +8,7 @@ import { auth, signInWithEmailAndPassword } from '../firebase';
 import { useState } from 'react';
 import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import { setTheme } from '../reducers/themeSlice';
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
@@ -41,8 +42,10 @@ export default function LoginPage() {
                 email: user.email,
                 posts: user.posts,
                 picture: user.picture,
-                bio: user.bio
+                bio: user.bio,
                 }));
+                dispatch(setTheme(user.theme))
+                localStorage.setItem('darkmode', user.theme);
             } else {
               console.log("No such document!");
             }

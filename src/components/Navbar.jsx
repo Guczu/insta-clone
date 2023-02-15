@@ -6,6 +6,8 @@ import Notifications from './Notifications';
 import { setTheme } from '../reducers/themeSlice';
 import AddPost from './AddPost';
 import { useNavigate } from 'react-router-dom';
+import { doc, setDoc, updateDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 export default function Navbar() {
   const user = useSelector(state => state.user);
@@ -59,16 +61,23 @@ export default function Navbar() {
     setIsAddPost(oldState => !oldState);
   }
 
-  const handleTheme = () => {
+  const changeThemeDB = async (theme) => {
+    const uid = localStorage.getItem('uid');
+    await updateDoc(doc(db, "users", uid), {theme:theme});
+  }
+
+  const handleTheme = async () => {
     if(darkmode === "light") {
       dispatch(setTheme("dark"));
       localStorage.setItem('darkmode', 'dark');
       document.querySelector('html').style.backgroundColor = '#0f0f0f';
+      await changeThemeDB("dark");
     }
     else {
       dispatch(setTheme("light"));
       localStorage.setItem('darkmode', 'light');
       document.querySelector('html').style.backgroundColor = '#fafafa';
+      await changeThemeDB("light");
     }
   }
 
