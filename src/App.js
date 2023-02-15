@@ -14,8 +14,17 @@ import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const dispatch = useDispatch();
+  const darkmode = localStorage.getItem('darkmode');
 
   useEffect(() => {
+    if(darkmode === "light") {
+      document.querySelector('html').style.backgroundColor = '#fafafa';
+      dispatch(setTheme("light"))
+    }
+    else if(darkmode === "dark") {
+      document.querySelector('html').style.backgroundColor = '#0f0f0f';
+      dispatch(setTheme("dark"))
+    }
     const getUserData = async () => {
       const uid = localStorage.getItem('uid');
       if(uid !== null){
@@ -46,14 +55,13 @@ function App() {
             picture: user.picture
             }
           ));
-
         } else {
           console.log("No such document!");
         }
         }
     }
     getUserData();
-  }, []);
+  }, [darkmode]);
 
   return (
     <div className="app-container">
