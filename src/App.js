@@ -7,17 +7,15 @@ import { db } from './firebase'
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore'
 import { useDispatch } from 'react-redux';
 import { setUser } from './reducers/userSlice';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Inbox from './components/Inbox';
 import { setTheme } from './reducers/themeSlice';
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const dispatch = useDispatch();
-  const darkmode = localStorage.getItem('darkmode');
 
   useEffect(() => {
-    document.querySelector('html').style.backgroundColor = 'white';
     const getUserData = async () => {
       const uid = localStorage.getItem('uid');
       if(uid !== null){
@@ -48,27 +46,14 @@ function App() {
             picture: user.picture
             }
           ));
-          dispatch(setTheme(user.theme));
+
         } else {
           console.log("No such document!");
         }
         }
     }
     getUserData();
-
-    const handleTheme = async () => {
-      if(darkmode === "light") {
-        document.querySelector('html').style.backgroundColor = '#fafafa';
-        dispatch(setTheme("light"))
-      }
-      else {
-        document.querySelector('html').style.backgroundColor = '#0f0f0f';
-        dispatch(setTheme("dark"))
-      }
-    }
-    handleTheme();
-
-  }, [darkmode]);
+  }, []);
 
   return (
     <div className="app-container">

@@ -44,6 +44,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem('uid');
+    localStorage.removeItem('darkmode');
     navigate('/login');
     window.location.reload();
   }

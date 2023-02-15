@@ -46,6 +46,16 @@ export default function LoginPage() {
                 }));
                 dispatch(setTheme(user.theme))
                 localStorage.setItem('darkmode', user.theme);
+
+                if(user.theme === "light") {
+                  document.querySelector('html').style.backgroundColor = '#fafafa';
+                  dispatch(setTheme("light"))
+                }
+                else if(user.theme === "dark") {
+                  document.querySelector('html').style.backgroundColor = '#0f0f0f';
+                  dispatch(setTheme("dark"))
+                }
+                
             } else {
               console.log("No such document!");
             }
