@@ -45,7 +45,8 @@
     width: 500px;
     height: 100px;
     margin-left: 20px;
-    background-color: transparent !important;
+    background-color: transparent;
+
     @include phone {
         width: 90vw;
         margin: 0;
@@ -88,17 +89,18 @@
         }
     }
 
-    p {
+    a {
         margin: 0;
         padding: 0;
         margin-left: 15px;
         font-size: 16px;
         font-weight: bold;
         font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        color: black;
         
         &:hover {
             cursor: pointer;
-            color: gray;
+            color: $border-hover-color;
         }
     }
 }
@@ -228,8 +230,15 @@
         width: 90vw;
     }
 
-    &:hover {
-        cursor: pointer;
+    button {
+        border: none;
+        padding: 0;
+        background-color: $primary-color;
+
+        &:hover {
+            cursor: pointer;
+            color: $border-hover-color;
+        }
     }
 }
 
@@ -261,7 +270,7 @@
     height: 60px;
     border-radius: 10px;
     font-size: 12px;
-    background-color: transparent !important;
+    background-color: transparent;
 
     @include phone {
         width: 90vw;
@@ -318,5 +327,5 @@
 }
 
 .red--heart {
-    color: red !important;
+    color: red;
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import followUser from '../methods/followUser';
+import { Link } from 'react-router-dom';
 
 export default function RecommendedUser(props) {
   const user = useSelector(state => state.user);
@@ -27,10 +28,10 @@ export default function RecommendedUser(props) {
   return (
     <div className='mainpage--recommendeduser'>
         <div className='rightside--image'>
-          <img src={props.userData.data.picture} className="clickable" onClick={() => {props.checkProfile(`/${props.userData.data.username}`)}}></img>
+          <img src={props.userData.data.picture} className="clickable" alt='zdjęcie profilowe' onClick={() => {props.checkProfile(`/${props.userData.data.username}`)}} />
         </div>
         <div className='rightside--names'>
-            <p className='bold' onClick={() => {props.checkProfile(`/${props.userData.data.username}`)}}>{props.userData.data.username}</p>
+            <Link to={`/${props.userData.data.username}`}>{props.userData.data.username}</Link>
             <span className='gray'>Użytkownik Instagrama</span>
         </div>
         <div className='rightside--button'>

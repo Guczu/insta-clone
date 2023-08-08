@@ -4,14 +4,12 @@ import Navbar from './Navbar'
 import fetchInboxChats from '../methods/fetchInboxChats'
 import InboxChat from './InboxChat';
 import LoadingScreen from '../components/LoadingScreen';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 export default function Inbox() {
     const [inboxChats, setInboxChats] = useState(null);
     const [actualChat, setActualChat] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const darkmode = useSelector(state => state.theme.theme);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -41,7 +39,7 @@ export default function Inbox() {
     {isLoading ? (
         <LoadingScreen />
     ) : (
-        <div className={`mainpage--container ${darkmode}`}>
+        <div className='mainpage--container'>
         <Navbar />
         <div className='mainpage--content'>
             <div className='mainpage--wrapper'>
@@ -52,16 +50,12 @@ export default function Inbox() {
                         {showInboxChats}
                     </div>
                     <div className='inbox--rightwrapper'>
-                        {actualChat === null ? (
-                            <p></p>
-                        ) : (
-                            <InboxChat />
-                        )}
+                        {actualChat && <InboxChat />}
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        </div>
     )}
     </>
   )

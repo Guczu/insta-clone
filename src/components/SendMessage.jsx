@@ -28,13 +28,19 @@ export default function SendMessage(props) {
   return (
     <div className='editprofile--container'>
         <div className='editprofile--form'>
-            <button className='editprofile--close' onClick={props.handleMessageTrigger}>X</button>
+            <button className='editprofile--close' onClick={props.handleMessageTrigger}>
+                <span className='sr-only'>Zamknij okno</span>
+                <span aria-hidden='true'>X</span>
+            </button>
             <div className='editprofile--title'>
                 <p>Wyślij wiadomość</p>
-                <hr></hr>
+                <hr/>
             </div>
             <div className='editprofile--description'>
-                <textarea onChange={e => setMessage(e.target.value)}></textarea>
+                <label htmlFor='sendmessage'>
+                    <span className='sr-only'>Wpisz wiadomość</span>
+                </label>
+                <textarea id='sendmessage' onChange={e => setMessage(e.target.value)}></textarea>
             </div>
             <button className='editprofile--button' onClick={send}>Wyślij</button>
         </div>

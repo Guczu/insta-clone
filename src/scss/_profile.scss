@@ -42,7 +42,7 @@
 
 hr {
     margin: 0;
-    border: 1px solid #dbdbdb !important;
+    border: 1px solid #dbdbdb;
     margin-top: 10px;
     @include desktop {
         width: 400px;
@@ -185,7 +185,7 @@ hr {
         height: auto;
         
         p {
-            font-size: 5vw !important;
+            font-size: 5vw;
         }
     }
     @include desktop {
@@ -237,8 +237,8 @@ hr {
     button {
         width: auto;
         height: 40px;
-        background-color: #efefef !important;
-        color: black !important;
+        background-color: #efefef;
+        color: black;
         border: none;
         border-radius: 5px;
         font-weight: bold;
@@ -263,7 +263,7 @@ hr {
 
         &:hover {
             cursor: pointer;
-            background-color: #dbdbdb !important;
+            background-color: #dbdbdb;
         }
     }
 
@@ -281,6 +281,15 @@ hr {
     width: 630px;
     height: 70px;
     padding-left: 70px;
+    
+    button {
+        border: none;
+        background-color: $primary-color;
+
+        &:hover {
+            color: $border-hover-color;
+        }
+    }
 
     @include phone {
         width: 90vw;
@@ -583,6 +592,11 @@ hr {
     align-items: center;
     flex-direction: column;
 
+    button {
+        border: none;
+        background-color: $primary-color;
+    }
+
     @include tablet {
         width: 400px;
     }
@@ -648,11 +662,11 @@ hr {
 }
 
 .followedbutton {
-    background-color: $border-color !important;
-    color: black !important;
+    background-color: $border-color;
+    color: black;
 
     &:hover {
-        background-color: $border-hover-color !important;
+        background-color: $border-hover-color;
     }
 }
 

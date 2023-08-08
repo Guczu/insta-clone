@@ -9,19 +9,19 @@ import fetchOneUser from '../methods/fetchOneUser';
 import addComment from '../methods/addComment';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import {default_avatar_url} from '../constants';
 
 export default function PostPreview(props) {
     const [postDate, setPostDate] = useState(null);
     const [liked, setLiked] = useState(false);
     const [likesAmount, setLikesAmount] = useState(props.post.data.likes);
     const [commentContent, setCommentContent] = useState("");
-    const [postAuthor, setPostAuthor] = useState(null);
+    const [postAuthor, setPostAuthor] = useState({data: {username: "User"}});
     const [comments, setComments] = useState();
     const uid = localStorage.getItem('uid');
     const navigate = useNavigate();
-    const avatar = "https://firebasestorage.googleapis.com/v0/b/instaclone-cb003.appspot.com/o/profile-pictures%2Fdefault.jpg?alt=media&token=37a6fba9-330d-43f7-852a-e3ac79b41556";
-
+    
     useEffect(() => {
         const commentRef = collection(db, "posts", props.post.id, "comments");
         const unsubscribe = onSnapshot(commentRef,(refSnapshot) => {
@@ -90,34 +90,37 @@ export default function PostPreview(props) {
     })
 
   return (
-    <div className='postpreview--container' onClick={props.handleTrigger}>
-        <div className='postpreview--frame' onClick={(e) => { e.stopPropagation(); return false; }}>
-        <button className='addpost--button' onClick={props.handleTrigger}>X</button>
+    <div className='postpreview--container'>
+        <div className='postpreview--frame'>
+        <button className='addpost--button' onClick={props.handleTrigger}>
+            <span className='sr-only'>Zamknij okno</span>
+            <span aria-hidden='true'>X</span>
+        </button>
             <div className='postpreview--image'>
-                <img src={props.post.data.imgurl}></img>
+                <img src={props.post.data.imgurl} alt='zdjęcie posta' />
             </div>
             <div className='postpreview--rightside'>
                 <div className='postpreview--author'>
-                    <img src={postAuthor !== null ? postAuthor.data.picture : avatar} onClick={() => navigate(`/${postAuthor.data.username}`)}></img>
-                    <span className='bold clickable' onClick={() => navigate(`/${postAuthor.data.username}`)}>{props.post.data.author}</span>
+                    <img src={postAuthor ? postAuthor.data.picture : default_avatar_url} alt='zdjęcie profilowe' onClick={() => navigate(`/${postAuthor.data.username}`)} />
+                    <Link to={`/${postAuthor.data.username}`}>{props.post.data.author}</Link>
                 </div>
-                <hr></hr>
+                <hr/>
                 <div className='postpreview--description'>
-                    <img src={postAuthor !== null ? postAuthor.data.picture : avatar} onClick={() => navigate(`/${postAuthor.data.username}`)}></img>
-                    <span className='bold clickable' onClick={() => navigate(`/${postAuthor.data.username}`)}>{props.post.data.author}</span>
+                    <img src={postAuthor ? postAuthor.data.picture : default_avatar_url} alt='zdjęcie profilowe' onClick={() => navigate(`/${postAuthor.data.username}`)} />
+                    <Link to={`/${postAuthor.data.username}`}>{props.post.data.author}</Link>
                     <span>{props.post.data.description}</span>
                 </div>
                 <div className='postpreview--comments'>
                     {showComments}
                 </div>
-                <hr></hr>
+                <hr/>
                 <div className='postpreview--stats'>
                     <div className='postpreview--options'>
-                        <i className={!liked ? "fa-regular fa-heart fa-xl" : "fa-solid fa-heart fa-xl red--heart"} onClick={handleLike}></i>
-                        <i className="fa-regular fa-comment fa-xl"></i>
-                        <i className="fa-regular fa-paper-plane fa-xl"></i>
-                        <div className="postpreview--bookmark">
-                            <i className="fa-regular fa-bookmark fa-xl"></i>
+                        <i className={!liked ? 'fa-regular fa-heart fa-xl' : 'fa-solid fa-heart fa-xl red--heart'} onClick={handleLike} />
+                        <i className='fa-regular fa-comment fa-xl' />
+                        <i className='fa-regular fa-paper-plane fa-xl' />
+                        <div className='postpreview--bookmark'>
+                            <i className='fa-regular fa-bookmark fa-xl' />
                         </div>
                     </div>
                     <div className='postpreview--likes'>
@@ -126,10 +129,13 @@ export default function PostPreview(props) {
                     <div className='postpreview--date'>
                         <span>{postDate}</span>
                     </div>
-                    <hr></hr>
+                    <hr/>
                     <div className='postpreview--addcomment'>
-                        <i className="fa-regular fa-face-smile fa-2x"></i>
-                        <input type="text" value={commentContent} placeholder='Dodaj komentarz...' onChange={e => setCommentContent(e.target.value)}></input>
+                        <i className='fa-regular fa-face-smile fa-2x'></i>
+                        <label htmlFor='commentPreview'>
+                            <span className='sr-only'>Dodaj komentarz</span>
+                        </label>
+                        <input type='text' value={commentContent} placeholder='Dodaj komentarz...' id='commentPreview' onChange={e => setCommentContent(e.target.value)} />
                         <button onClick={addCommentToPost}>Opublikuj</button>
                     </div>
                 </div>

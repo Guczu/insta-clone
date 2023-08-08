@@ -23,25 +23,24 @@ export default function NotificationLabel(props) {
 
     const handleRoute = (route) => {
         navigate(route);
-        window.location.reload();
     }
 
   return (
-    <div className='notificationlabel--container' onClick={() => {handleRoute(`/${user.username}`)}}>
+    <button className='notificationlabel--container' onClick={() => {handleRoute(`/${user.username}`)}}>
         <div className='notificationlabel--user'>
             <div className='notificationlabel--image'>
-                {user !== null && (
-                    <img src={user.picture}></img>
+                {user && (
+                    <img src={user.picture} alt='zdjęcie profilowe' />
                 )}
             </div>
             <div className='notificationlabel--names'>
                 <div className='notificationlabel--username'>
-                    <span className="bold">{props.notification.data.username + " "}</span>
+                    <span className='bold'>{props.notification.data.username + " "}</span>
                     <span>zaczął/zaczęła Cię obserwować.</span>
                     <span className='notificationlabel--date'>{notificationDate}</span>
                 </div>
             </div>
         </div>
-    </div>
+    </button>
   )
 }

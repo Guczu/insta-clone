@@ -8,14 +8,14 @@
     left: 0;
     top: 0;
     z-index: 999;
-    background-color: white !important;
+    background-color: white;
 }
 
 .loadingscreen--image {
-    background-color: white !important;
+    background-color: white;
     img {
         width: 100px;
-        background-color: white !important;
+        background-color: white;
         animation-name: animation;
         animation-duration: 2s;
         animation-iteration-count: infinite;

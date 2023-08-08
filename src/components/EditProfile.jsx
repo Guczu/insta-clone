@@ -2,6 +2,7 @@ import { doc, updateDoc } from 'firebase/firestore';
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { db, getDownloadURL, ref, storage, uploadBytes } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
 export default function EditProfile(props) {
     const [image, setImage] = useState(null);
@@ -9,6 +10,7 @@ export default function EditProfile(props) {
     const [url, setUrl] = useState(null);
     const user = useSelector(state => state.user);
     const [showButton, setShowButton] = useState(true);
+    const navigate = useNavigate();
 
     const handleImageChange = (e) => {
         const imageRef = ref(storage, `/profile-pictures/${user.username}`);
@@ -40,27 +42,30 @@ export default function EditProfile(props) {
         if(description !== "") {
             await updateDoc(doc(db, "users", uid), {bio: description});
         }
-        window.location.reload();
+        navigate(0);
     };
 
   return (
-    <div className='editprofile--container' onClick={props.handleEditTrigger}>
-        <div className='editprofile--form' onClick={(e) => { e.stopPropagation(); return false; }}>
-            <button className='editprofile--close' onClick={props.handleEditTrigger}>X</button>
+    <div className='editprofile--container'>
+        <div className='editprofile--form'>
+            <button className='editprofile--close' onClick={props.handleEditTrigger}>
+                <span className='sr-only'>Zamknij okno</span>
+                <span aria-hidden='true'>X</span>
+            </button>
             <div className='editprofile--title'>
                 <p>Edytuj profil</p>
-                <hr></hr>
+                <hr/>
             </div>
             <div className='editprofile--upload'>
                 <p className='bold'>Zmień zdjęcie profilowe</p>
-                <input type="file" id="files" className='hidden' onChange={handleImageChange}></input>
-                {image !== null ? "Przesłano" : <label htmlFor="files" className='editprofile--label'>+</label>}
+                <input type='file' id='files' className='hidden' onChange={handleImageChange} />
+                {image ? 'Przesłano' : <label htmlFor='files' className='editprofile--label'>+</label>}
             </div>
             <div className='editprofile--description'>
-                <p className='bold'>Biografia</p>
-                <textarea onChange={e => setDescription(e.target.value)}></textarea>
+                <label className='bold' htmlFor='biography'>Biografia</label>
+                <textarea id='biography' onChange={e => setDescription(e.target.value)}></textarea>
             </div>
-            {showButton ? <button className='editprofile--button' onClick={handleSubmit}>Zapisz</button>: <p>Ładowanie...</p>}
+            {showButton ? <button className='editprofile--button' onClick={handleSubmit}>Zapisz</button> : <p>Ładowanie...</p>}
         </div>
     </div>
   )

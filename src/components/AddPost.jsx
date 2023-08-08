@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { storage, ref, uploadBytes, getDownloadURL, db } from '../firebase';
 import { nanoid } from '@reduxjs/toolkit';
 import { doc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddPost(props) {
     const [image, setImage] = useState(null);
@@ -10,6 +11,7 @@ export default function AddPost(props) {
     const [description, setDescription] = useState("");
     const user = useSelector(state => state.user);
     const [postId, setPostId] = useState(nanoid());
+    const navigate = useNavigate();
     
     const handleImageChange = (e) => {
         const imageRef = ref(storage, `/posts/${postId}`);
@@ -48,25 +50,28 @@ export default function AddPost(props) {
         }
 
         await updateDoc(doc(db, "users", user.uid), {posts: user.posts+1})
-        window.location.reload();
+        navigate(0);
     };
 
   return (
-    <div className='addpost--container' onClick={props.handleAddPost}>
-        <div className='addpost--form' onClick={(e) => { e.stopPropagation(); return false; }}>
-            <button className='addpost--button' onClick={props.handleAddPost}>X</button>
+    <div className='addpost--container'>
+        <div className='addpost--form'>
+            <button className='addpost--button' onClick={props.handleAddPost}>
+                <span className='sr-only'>Zamknij okno</span>
+                <span aria-hidden='true'>X</span>
+            </button>
             <div className='addpost--title'>
                 <p>Utwórz nowy post</p>
-                <hr></hr>
+                <hr/>
             </div>
             <div className='addpost-description'>
-                <p className='bold'>Opis</p>
-                <textarea onChange={e => setDescription(e.target.value)}></textarea>
+                <label htmlFor='description' className='bold'>Opis</label>
+                <textarea id='description' onChange={e => setDescription(e.target.value)}></textarea>
             </div>
             <div className='addpost--upload'>
-                <input type="file" id="files" className='hidden' onChange={handleImageChange}></input>
-                {image !== null ? <img src={url}></img> : <label htmlFor="files" className='addpost--label'>+</label>}
-                {image !== null && <button onClick={handleSubmit}>Dodaj post</button>}
+                <input type='file' id='files' className='hidden' onChange={handleImageChange} />
+                {image ? <img src={url} alt='zdjęcie' /> : <label htmlFor='files' className='addpost--label'>+</label>}
+                {image && <button onClick={handleSubmit}>Dodaj post</button>}
             </div>
         </div>
     </div>

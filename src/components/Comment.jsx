@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import fetchOneUserById from '../methods/fetchOneUserById'
-import getDate from '../methods/getDate'
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import fetchOneUserById from '../methods/fetchOneUserById';
+import getDate from '../methods/getDate';
+import {default_avatar_url} from '../constants';
 
 export default function Comment(props) {
     const [commentAuthor, setCommentAuthor] = useState(null);
     const [commentDate, setCommentDate] = useState("");
     const navigate = useNavigate();
-    const avatar = "https://firebasestorage.googleapis.com/v0/b/instaclone-cb003.appspot.com/o/profile-pictures%2Fdefault.jpg?alt=media&token=37a6fba9-330d-43f7-852a-e3ac79b41556";
     
     useEffect(() => {
         if(props.comment.data.timeStamp) {
@@ -24,17 +24,16 @@ export default function Comment(props) {
 
     const handleRoute = (route) => {
         navigate(route);
-        window.location.reload();
     }
 
   return (
     <div className='comments--container'>
         <div className='comments--image'>
-            <img src={commentAuthor !== null ? commentAuthor.picture : avatar} className="clickable" onClick={() => handleRoute(`/${props.comment.data.username}`)}></img>
+            <img src={commentAuthor ? commentAuthor.picture : default_avatar_url} className="clickable" alt='zdjęcie profilowe' onClick={() => handleRoute(`/${props.comment.data.username}`)} />
         </div>
         <div className='comments--frame'>
             <div className='comments--content'>
-                <span className='clickable' onClick={() => handleRoute(`/${props.comment.data.username}`)}>{props.comment.data.username}</span>
+                <Link to={`/${props.comment.data.username}`}>{props.comment.data.username}</Link>
                 <span>{props.comment.data.content}</span>
             </div>
             <div className='comments--date'>

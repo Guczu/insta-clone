@@ -61,12 +61,16 @@ export default function SearchBar(props) {
 
   return (
     <div className='navbar--searchbar'>
-        <div className='navbar--searchbar--close' onClick={props.handleSearchBar}>
-          X
-        </div>
+        <button className='navbar--searchbar--close' onClick={props.handleSearchBar}>
+          <span className='sr-only'>Zamknij okno</span>
+          <span aria-hidden='true'>X</span>
+        </button>
         <p>Szukaj</p>
-        <input type="text" placeholder='Szukaj' onKeyUp={(e) => searchUser(e)}></input>
-        <hr />
+        <label htmlFor='search'>
+            <span className='sr-only'>Wpisz frazę wyszukiwania</span>
+        </label>
+        <input type="text" id='search' placeholder='Szukaj' onKeyUp={(e) => searchUser(e)}/>
+        <hr/>
         <div className='navbar--searchbar--users'>
             {searchText === "" ? (
                 <div className='navbar--searchbar--users'>

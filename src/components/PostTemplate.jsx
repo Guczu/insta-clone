@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import getDate from '../methods/getDate';
 import addLikeToPost from '../methods/addLikeToPost';
 import removeLikeFromPost from '../methods/removeLikeFromPost';
@@ -7,6 +7,7 @@ import getPostLikes from '../methods/getPostLikes';
 import addComment from '../methods/addComment';
 import PostPreview from './PostPreview';
 import fetchOneUser from '../methods/fetchOneUser';
+import {default_avatar_url} from '../constants';
 
 export default function PostTemplate(props) {
     const [postDate, setPostDate] = useState(null);
@@ -17,7 +18,6 @@ export default function PostTemplate(props) {
     const [postAuthor, setPostAuthor] = useState(null);
     const [likesAmount, setLikesAmount] = useState(props.post.data.likes);
     const uid = localStorage.getItem('uid');
-    const avatar = "https://firebasestorage.googleapis.com/v0/b/instaclone-cb003.appspot.com/o/profile-pictures%2Fdefault.jpg?alt=media&token=37a6fba9-330d-43f7-852a-e3ac79b41556";
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -50,7 +50,6 @@ export default function PostTemplate(props) {
 
     const checkProfile = (user) => {
       navigate(`/${user}`, { replace: true });
-      window.location.reload();
     }
 
     const handleLike = async () => {
@@ -70,12 +69,6 @@ export default function PostTemplate(props) {
     }
 
     const handlePreviewTrigger = () => {
-      if(!previewTrigger) {
-        document.querySelector('html').style.overflowY = 'hidden';
-      }
-      else {
-        document.querySelector('html').style.overflowY = 'scroll';
-      }
       setPreviewTrigger(oldState => !oldState);
     }
 
@@ -83,21 +76,21 @@ export default function PostTemplate(props) {
     <div className='mainpage--post'>
       {previewTrigger && <PostPreview handleTrigger={handlePreviewTrigger} post={props.post}/>}
       <div className='mainpage--author'>
-          <img src={postAuthor !== null ? postAuthor.data.picture : avatar} onClick={() => {checkProfile(props.post.data.author)}}></img>
-          <p onClick={() => {checkProfile(props.post.data.author)}}>{props.post.data.author}</p>
-          <i className="fa-solid fa-ellipsis fa-xl"></i>
+          <img src={postAuthor ? postAuthor.data.picture : default_avatar_url} alt='zdjęcie profilowe' onClick={() => {checkProfile(props.post.data.author)}} />
+          <Link to={`/${props.post.data.author}`}>{props.post.data.author}</Link>
+          <i className='fa-solid fa-ellipsis fa-xl' />
       </div>
 
       <div className='mainpage--image'>
-          <img src={props.post.data.imgurl}></img>
+          <img src={props.post.data.imgurl} alt='zdjęcie posta' />
       </div>
 
       <div className='mainpage--options'>
-        <i className={!liked ? "fa-regular fa-heart fa-xl" : "fa-solid fa-heart fa-xl red--heart"} onClick={handleLike}></i>
-        <i className="fa-regular fa-comment fa-xl"></i>
-        <i className="fa-regular fa-paper-plane fa-xl"></i>
-        <div className="mainpage--bookmark">
-          <i className="fa-regular fa-bookmark fa-xl"></i>
+        <i className={!liked ? 'fa-regular fa-heart fa-xl' : 'fa-solid fa-heart fa-xl red--heart'} onClick={handleLike} />
+        <i className='fa-regular fa-comment fa-xl'/>
+        <i className='fa-regular fa-paper-plane fa-xl'/>
+        <div className='mainpage--bookmark'>
+          <i className='fa-regular fa-bookmark fa-xl'/>
         </div>
       </div>
 
@@ -111,16 +104,19 @@ export default function PostTemplate(props) {
       </div>
 
       <div className='mainpage--morecomments'>
-        <span onClick={handlePreviewTrigger}>Zobacz wszystkie komentarze: {commentsAmount}</span>
+        <button onClick={handlePreviewTrigger}>Zobacz wszystkie komentarze: {commentsAmount}</button>
       </div>
 
       <div className='mainpage--date'>
         <span>{postDate}</span>
       </div>
-      <hr></hr>
+      <hr/>
       <div className='mainpage--addcomment'>
-        <i className="fa-regular fa-face-smile fa-2x"></i>
-        <input type="text" value={commentContent} placeholder='Dodaj komentarz...' onChange={e => setCommentContent(e.target.value)}></input>
+        <i className='fa-regular fa-face-smile fa-2x' />
+        <label htmlFor='commentTemplate'>
+          <span className='sr-only'>Dodaj komentarz</span>
+        </label>
+        <input type='text' value={commentContent} placeholder='Dodaj komentarz...' id='commentTemplate' onChange={e => setCommentContent(e.target.value)} />
         <button onClick={addCommentToPost}>Opublikuj</button>
       </div>
     </div>

@@ -2,13 +2,12 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import RecommendedUser from './RecommendedUser';
 import fetchUsers from '../methods/fetchUsers';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function RightSide() {
   const [showUsers, setShowUsers] = useState(null);
   const dataFetchedRef = useRef(false);
   const user = useSelector(state => state.user);
-  const darkmode = useSelector(state => state.theme.theme);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,11 +28,11 @@ export default function RightSide() {
   },[user])
 
   return (
-    <div className={`mainpage--right ${darkmode}`}>
+    <div className='mainpage--right'>
       <div className='mainpage--info'>
-        <img src={user.picture}></img>
+        <img src={user.picture} alt='zdjęcie profilowe' onClick={() => navigate(user.username)}/>
         <div className='mainpage--names'>
-          <p className='bold' onClick={() => navigate(`/${user.username}`)}>{user.username}</p>
+          <Link to={user.username}>{user.username}</Link>
           <p className='gray'>{user.name}</p>
         </div>
         <button className='clickable'>Przełącz</button>
@@ -44,10 +43,10 @@ export default function RightSide() {
         <p className='bold clickable'>Zobacz wszystkich</p>
       </div>
 
-      {showUsers !== null && showUsers}
+      {showUsers && showUsers}
       
       <div className='mainpage--recommendedfooter'>
-        <p className='gray'>&copy; 2022 INSTAGRAM FROM X</p>
+        <p className='gray'>&copy; 2022 INSTAGRAM</p>
       </div>
     </div>
   )

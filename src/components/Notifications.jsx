@@ -31,13 +31,16 @@ export default function Notifications(props) {
 
   return (
     <div className='navbar--searchbar'>
-        <div className='navbar--searchbar--close' onClick={props.handleNotifications}>X</div>
+        <button className='navbar--searchbar--close' onClick={props.handleNotifications}>
+          <span className='sr-only'>Zamknij okno</span>
+          <span aria-hidden='true'>X</span>
+        </button>
         <p>Powiadomienia</p>
-        <hr />
+        <hr/>
         <p>Ostatnie</p>
         <div className='navbar--searchbar--users'>
           {showNotifications}
         </div>
-      </div>
+    </div>
   )
 }

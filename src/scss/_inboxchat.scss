@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    background-color: transparent !important;
+    background-color: transparent;
     // \/
     @include desktop {
 
@@ -119,7 +119,7 @@
     align-items: center;
     justify-content: center;
     bottom: 0;
-    background-color: transparent !important;
+    background-color: transparent;
     @include desktop {
         width: 400px;
         height: 10vh;

@@ -115,7 +115,7 @@
     width: 150px;
     height: 55px;
     padding: 20px;
-    background-color: transparent !important;
+    background-color: transparent;
     &:hover {
         cursor: pointer;
     }
@@ -130,8 +130,8 @@
     padding: 10px;
     border-radius: 30px;
     transition: .2s;
-    color: white;
-    background-color: transparent !important;
+    text-decoration: none;
+    border: none;
 
     @include sm-desktop {
         width: 25%;
@@ -177,7 +177,7 @@
         margin-right: 10px;
         transition: .1s;
         color: black;
-        background-color: transparent !important;
+        background-color: transparent;
 
         @include sm-desktop {
             margin: 0;
@@ -204,7 +204,7 @@
     }
 
     &:hover {
-        background-color: $primary-color;
+        background-color: $border-color;
         cursor: pointer;
 
         i {
@@ -369,7 +369,9 @@
     font-size: 24px;
     font-weight: bold;
     color: $border-color;
-
+    border: none;
+    background-color: $primary-color;
+    
     &:hover {
         cursor: pointer
     }
@@ -387,9 +389,9 @@
 }
 
 .navbar--searchbar--notfound {
-    font-weight: normal !important;
+    font-weight: normal;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 !important;
+    margin: 0;
 }

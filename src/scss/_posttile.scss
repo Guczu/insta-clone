@@ -5,7 +5,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 0px;
+    margin: 10px;
+    border: none;
     
     @include phone {
         width: 28vw;
@@ -78,7 +80,7 @@
     justify-content: center;
     align-items: center;
     display: none;
-    background-color: rgba(0, 0, 0, 0.616) !important;
+    background-color: rgba(0, 0, 0, 0.616);
     z-index:0;
     @include phone {
         width: 28vw;
@@ -111,17 +113,17 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
-    background-color: transparent !important;
+    background-color: transparent;
 
     i {
-        color: white !important;
+        color: white;
         transform: scaleX(-1);
     }
 
     p {
         font-size: 20px;
         padding: 10px;
-        color: white !important;
-        background-color: transparent !important;
+        color: white;
+        background-color: transparent;
     }
 }

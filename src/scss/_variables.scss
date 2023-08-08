@@ -1,32 +1,5 @@
 $primary-color: #fafafa;
 $border-color: #dbdbdb;
-$blue-color: #3895f8;
-$blue-hover-color: #38379b;
+$blue-color: #57a8ff;
+$blue-hover-color: #6bb2fd;
 $border-hover-color: #9c9c9c;
-
-.light * {
-    $primaryy-color: #fafafa;
-    $lightmode-text: black;
-    $border-color: #dbdbdb;
-    background-color: $primaryy-color !important;
-    color: $lightmode-text !important;
-    border-color: $border-color !important;
-}
-
-.dark * {
-    $primary-color: #0f0f0f;
-    $darkmode-text: #c9c9c9;
-    $border-color: #252525;
-    background-color: $primary-color !important;
-    color: $darkmode-text !important;
-    border-color: $border-color !important;
-
-    .navbar--image {
-        filter: invert(1);
-    }
-}
-
-.darkhover {
-    $primary-color: #121212;
-    background-color: $primary-color !important;
-}

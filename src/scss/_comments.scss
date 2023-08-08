@@ -28,9 +28,12 @@
         margin: 0;
         padding: 0;
         padding-right: 10px;
-        &:first-child {
-            font-weight: bold;
-        }
+        margin-left: 20px;
+    }
+
+    a {
+        color: black;
+        font-weight: bold;
     }
 }
 

@@ -26,7 +26,6 @@ html {
 }
 
 body {
-    background: #0f0f0f;
     color: black;
     width: 100%;
     margin: 0;
@@ -37,4 +36,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+a {
+    text-decoration: none;
 }

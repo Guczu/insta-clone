@@ -7,24 +7,15 @@ import { db } from './firebase'
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore'
 import { useDispatch } from 'react-redux';
 import { setUser } from './reducers/userSlice';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Inbox from './components/Inbox';
-import { setTheme } from './reducers/themeSlice';
 import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
 
 function App() {
   const dispatch = useDispatch();
-  const darkmode = localStorage.getItem('darkmode');
 
   useEffect(() => {
-    if(darkmode === "light") {
-      document.querySelector('html').style.backgroundColor = '#fafafa';
-      dispatch(setTheme("light"))
-    }
-    else if(darkmode === "dark") {
-      document.querySelector('html').style.backgroundColor = '#0f0f0f';
-      dispatch(setTheme("dark"))
-    }
     const getUserData = async () => {
       const uid = localStorage.getItem('uid');
       if(uid !== null){
@@ -61,14 +52,14 @@ function App() {
         }
     }
     getUserData();
-  }, [darkmode]);
+  }, []);
 
   return (
     <div className="app-container">
         <Routes>
               <Route path="/" element={<PrivateRoute><MainPage /></PrivateRoute>} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
+              <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
               <Route path="/logout" element={<LoginPage />} />
               <Route exact path="/:id" element={<PrivateRoute><Profile /></PrivateRoute>} />
               <Route path="/inbox" element={<PrivateRoute><Inbox /></PrivateRoute>} />

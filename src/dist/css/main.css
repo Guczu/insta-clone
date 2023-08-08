@@ -1,44 +1,10 @@
-.light * {
-  background-color: #fafafa !important;
-  color: black !important;
-  border-color: #dbdbdb !important;
-}
-
-.dark * {
-  background-color: #0f0f0f !important;
-  color: #c9c9c9 !important;
-  border-color: #252525 !important;
-}
-.dark * .navbar--image {
-  filter: invert(1);
-}
-
-.darkhover {
-  background-color: #121212 !important;
-} /*@mixin tablet {
-    @media screen and (max-width: 868px) {
-        @content;
-    }
-}
-
-@mixin mobile {
-    @media screen and (max-width: 480px) {
-        @content;
-    }
-}
-
-@mixin desktop {
-    @media screen and (max-width: 1200px) {
-        @content;
-    }
-}*/
 .loginpage--container {
   width: 100%;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white !important;
+  background-color: white;
 }
 
 .loginpage--content {
@@ -253,23 +219,6 @@
   margin: 15px;
 }
 
-/*@mixin tablet {
-    @media screen and (max-width: 868px) {
-        @content;
-    }
-}
-
-@mixin mobile {
-    @media screen and (max-width: 480px) {
-        @content;
-    }
-}
-
-@mixin desktop {
-    @media screen and (max-width: 1200px) {
-        @content;
-    }
-}*/
 .mainpage--container {
   display: flex;
   width: 100%;
@@ -461,7 +410,7 @@
   width: 150px;
   height: 55px;
   padding: 20px;
-  background-color: transparent !important;
+  background-color: transparent;
 }
 .navbar--image:hover {
   cursor: pointer;
@@ -476,8 +425,8 @@
   padding: 10px;
   border-radius: 30px;
   transition: 0.2s;
-  color: white;
-  background-color: transparent !important;
+  text-decoration: none;
+  border: none;
 }
 @media screen and (min-width: 768px) and (max-width: 992px) {
   .mainpage--link {
@@ -527,7 +476,7 @@
   margin-right: 10px;
   transition: 0.1s;
   color: black;
-  background-color: transparent !important;
+  background-color: transparent;
 }
 @media screen and (min-width: 768px) and (max-width: 992px) {
   .mainpage--link i {
@@ -556,7 +505,7 @@
   }
 }
 .mainpage--link:hover {
-  background-color: #fafafa;
+  background-color: #dbdbdb;
   cursor: pointer;
 }
 .mainpage--link:hover i {
@@ -731,6 +680,8 @@
   font-size: 24px;
   font-weight: bold;
   color: #dbdbdb;
+  border: none;
+  background-color: #fafafa;
 }
 .navbar--searchbar--close:hover {
   cursor: pointer;
@@ -750,30 +701,13 @@
 }
 
 .navbar--searchbar--notfound {
-  font-weight: normal !important;
+  font-weight: normal;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 !important;
+  margin: 0;
 }
 
-/*@mixin tablet {
-    @media screen and (max-width: 868px) {
-        @content;
-    }
-}
-
-@mixin mobile {
-    @media screen and (max-width: 480px) {
-        @content;
-    }
-}
-
-@mixin desktop {
-    @media screen and (max-width: 1200px) {
-        @content;
-    }
-}*/
 .mainpage--middle {
   width: 600px;
   display: flex;
@@ -843,7 +777,7 @@
   padding: 2px;
   border-radius: 100%;
   background-color: #fafafa;
-  border: 2px solid purple !important;
+  border: 2px solid purple;
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
   .mainpage--story img {
@@ -886,23 +820,6 @@
   font-weight: bold;
 }
 
-/*@mixin tablet {
-    @media screen and (max-width: 868px) {
-        @content;
-    }
-}
-
-@mixin mobile {
-    @media screen and (max-width: 480px) {
-        @content;
-    }
-}
-
-@mixin desktop {
-    @media screen and (max-width: 1200px) {
-        @content;
-    }
-}*/
 .mainpage--post {
   width: 550px;
   height: auto;
@@ -957,7 +874,7 @@
   width: 500px;
   height: 100px;
   margin-left: 20px;
-  background-color: transparent !important;
+  background-color: transparent;
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
   .mainpage--author {
@@ -1002,17 +919,18 @@
   cursor: pointer;
   color: gray;
 }
-.mainpage--author p {
+.mainpage--author a {
   margin: 0;
   padding: 0;
   margin-left: 15px;
   font-size: 16px;
   font-weight: bold;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  color: black;
 }
-.mainpage--author p:hover {
+.mainpage--author a:hover {
   cursor: pointer;
-  color: gray;
+  color: #9c9c9c;
 }
 
 .mainpage--image {
@@ -1158,8 +1076,14 @@
     width: 90vw;
   }
 }
-.mainpage--morecomments:hover {
+.mainpage--morecomments button {
+  border: none;
+  padding: 0;
+  background-color: #fafafa;
+}
+.mainpage--morecomments button:hover {
   cursor: pointer;
+  color: #9c9c9c;
 }
 
 .mainpage--date {
@@ -1195,7 +1119,7 @@
   height: 60px;
   border-radius: 10px;
   font-size: 12px;
-  background-color: transparent !important;
+  background-color: transparent;
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
   .mainpage--addcomment {
@@ -1255,26 +1179,9 @@
 }
 
 .red--heart {
-  color: red !important;
+  color: red;
 }
 
-/*@mixin tablet {
-    @media screen and (max-width: 868px) {
-        @content;
-    }
-}
-
-@mixin mobile {
-    @media screen and (max-width: 480px) {
-        @content;
-    }
-}
-
-@mixin desktop {
-    @media screen and (max-width: 1200px) {
-        @content;
-    }
-}*/
 .mainpage--right {
   width: 400px;
   height: 500px;
@@ -1318,10 +1225,13 @@
   height: 60px;
   border-radius: 50px;
 }
+.mainpage--info img:hover {
+  cursor: pointer;
+}
 .mainpage--info button {
   background-color: transparent;
   border: none;
-  color: #3895f8;
+  color: #57a8ff;
   font-weight: bold;
 }
 
@@ -1332,13 +1242,15 @@
   width: 200px;
   height: 75px;
 }
-.rightside--names p {
+.rightside--names a {
   margin: 0;
   margin-left: 10px;
   padding: 2px;
+  color: black;
 }
-.rightside--names p:hover {
+.rightside--names a:hover {
   cursor: pointer;
+  color: #9c9c9c;
 }
 .rightside--names span {
   margin: 0;
@@ -1357,9 +1269,20 @@
   margin: 0;
   margin-left: 10px;
   padding: 2px;
+  color: black;
 }
 .mainpage--names p:hover {
   cursor: pointer;
+}
+.mainpage--names a {
+  margin: 0;
+  margin-left: 10px;
+  padding: 2px;
+  color: black;
+}
+.mainpage--names a:hover {
+  cursor: pointer;
+  color: #9c9c9c;
 }
 .mainpage--names span {
   margin: 0;
@@ -1400,7 +1323,7 @@
   background-color: transparent;
   border: none;
   font-weight: bold;
-  color: #3895f8;
+  color: #57a8ff;
 }
 .mainpage--recommendeduser button:hover {
   cursor: pointer;
@@ -1439,23 +1362,6 @@
   cursor: default !important;
 }
 
-/*@mixin tablet {
-    @media screen and (max-width: 868px) {
-        @content;
-    }
-}
-
-@mixin mobile {
-    @media screen and (max-width: 480px) {
-        @content;
-    }
-}
-
-@mixin desktop {
-    @media screen and (max-width: 1200px) {
-        @content;
-    }
-}*/
 .profile--container {
   width: 1000px;
   margin-top: 20px;
@@ -1503,7 +1409,7 @@
 
 hr {
   margin: 0;
-  border: 1px solid #dbdbdb !important;
+  border: 1px solid #dbdbdb;
   margin-top: 10px;
 }
 @media screen and (min-width: 992px) and (max-width: 1350px) {
@@ -1690,7 +1596,7 @@ hr {
     height: auto;
   }
   .profile--options p {
-    font-size: 5vw !important;
+    font-size: 5vw;
   }
 }
 @media screen and (min-width: 992px) and (max-width: 1350px) {
@@ -1754,8 +1660,8 @@ hr {
 .profile--options button {
   width: auto;
   height: 40px;
-  background-color: #efefef !important;
-  color: black !important;
+  background-color: #efefef;
+  color: black;
   border: none;
   border-radius: 5px;
   font-weight: bold;
@@ -1783,7 +1689,7 @@ hr {
 }
 .profile--options button:hover {
   cursor: pointer;
-  background-color: #dbdbdb !important;
+  background-color: #dbdbdb;
 }
 .profile--options i:hover {
   cursor: pointer;
@@ -1796,6 +1702,13 @@ hr {
   width: 630px;
   height: 70px;
   padding-left: 70px;
+}
+.profile--stats button {
+  border: none;
+  background-color: #fafafa;
+}
+.profile--stats button:hover {
+  color: #9c9c9c;
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
   .profile--stats {
@@ -2175,6 +2088,10 @@ hr {
   align-items: center;
   flex-direction: column;
 }
+.profile--poststext button {
+  border: none;
+  background-color: #fafafa;
+}
 @media screen and (min-width: 480px) and (max-width: 576px) {
   .profile--poststext {
     width: 400px;
@@ -2231,26 +2148,26 @@ hr {
 }
 
 .blue {
-  color: #3895f8;
+  color: #57a8ff;
 }
 .blue:hover {
-  color: #38379b;
+  color: #6bb2fd;
 }
 
 .followbutton {
-  background-color: #3895f8 !important;
+  background-color: #57a8ff !important;
   color: white;
 }
 .followbutton:hover {
-  background-color: #38379b !important;
+  background-color: #6bb2fd !important;
 }
 
 .followedbutton {
-  background-color: #dbdbdb !important;
-  color: black !important;
+  background-color: #dbdbdb;
+  color: black;
 }
 .followedbutton:hover {
-  background-color: #9c9c9c !important;
+  background-color: #9c9c9c;
 }
 
 .clickable {
@@ -2264,30 +2181,13 @@ hr {
   font-size: 22px;
 }
 
-/*@mixin tablet {
-    @media screen and (max-width: 868px) {
-        @content;
-    }
-}
-
-@mixin mobile {
-    @media screen and (max-width: 480px) {
-        @content;
-    }
-}
-
-@mixin desktop {
-    @media screen and (max-width: 1200px) {
-        @content;
-    }
-}*/
 .registerpage--container {
   width: 100%;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white !important;
+  background-color: white;
 }
 
 .registerpage--register {
@@ -2405,7 +2305,7 @@ hr {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.616) !important;
+  background-color: rgba(0, 0, 0, 0.616);
   z-index: 1;
   display: flex;
   justify-content: center;
@@ -2548,7 +2448,7 @@ hr {
   display: flex;
   flex-direction: column;
 }
-.addpost-description p {
+.addpost-description label {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2585,30 +2485,15 @@ hr {
   }
 }
 
-/*@mixin tablet {
-    @media screen and (max-width: 868px) {
-        @content;
-    }
-}
-
-@mixin mobile {
-    @media screen and (max-width: 480px) {
-        @content;
-    }
-}
-
-@mixin desktop {
-    @media screen and (max-width: 1200px) {
-        @content;
-    }
-}*/
 .posttile--container {
   width: 300px;
   height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 0px;
+  margin: 10px;
+  border: none;
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
   .posttile--container {
@@ -2699,7 +2584,7 @@ hr {
   justify-content: center;
   align-items: center;
   display: none;
-  background-color: rgba(0, 0, 0, 0.616) !important;
+  background-color: rgba(0, 0, 0, 0.616);
   z-index: 0;
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
@@ -2742,43 +2627,26 @@ hr {
   justify-content: center;
   align-items: center;
   padding: 10px;
-  background-color: transparent !important;
+  background-color: transparent;
 }
 .posttile--likes i {
-  color: white !important;
+  color: white;
   transform: scaleX(-1);
 }
 .posttile--likes p {
   font-size: 20px;
   padding: 10px;
-  color: white !important;
-  background-color: transparent !important;
+  color: white;
+  background-color: transparent;
 }
 
-/*@mixin tablet {
-    @media screen and (max-width: 868px) {
-        @content;
-    }
-}
-
-@mixin mobile {
-    @media screen and (max-width: 480px) {
-        @content;
-    }
-}
-
-@mixin desktop {
-    @media screen and (max-width: 1200px) {
-        @content;
-    }
-}*/
 .postpreview--container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   min-height: 100vh;
-  background-color: rgba(0, 0, 0, 0.616) !important;
+  background-color: rgba(0, 0, 0, 0.616);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2852,7 +2720,7 @@ hr {
 .postpreview--image {
   width: 700px;
   min-height: 900px;
-  background-color: black !important;
+  background-color: black;
   display: flex;
   align-items: center;
 }
@@ -2895,7 +2763,7 @@ hr {
   width: 700px;
   min-height: 900px;
   max-height: 900px;
-  background-color: black !important;
+  background-color: black;
   -o-object-fit: contain;
      object-fit: contain;
 }
@@ -3016,9 +2884,14 @@ hr {
   width: 40px;
   border-radius: 30px;
 }
-.postpreview--author span {
+.postpreview--author img:hover {
+  cursor: pointer;
+}
+.postpreview--author a {
   font-size: 16px;
   margin-left: 20px;
+  font-weight: bold;
+  color: black;
 }
 
 .postpreview--description {
@@ -3062,9 +2935,18 @@ hr {
   width: 40px;
   border-radius: 30px;
 }
+.postpreview--description img:hover {
+  cursor: pointer;
+}
 .postpreview--description span {
   font-size: 16px;
   margin-left: 20px;
+}
+.postpreview--description a {
+  font-size: 16px;
+  margin-left: 20px;
+  font-weight: bold;
+  color: black;
 }
 
 .postpreview--comments {
@@ -3347,7 +3229,7 @@ hr {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.616) !important;
+  background-color: rgba(0, 0, 0, 0.616);
   z-index: 1;
   display: flex;
   justify-content: center;
@@ -3430,15 +3312,15 @@ hr {
   left: 0;
   top: 0;
   z-index: 999;
-  background-color: white !important;
+  background-color: white;
 }
 
 .loadingscreen--image {
-  background-color: white !important;
+  background-color: white;
 }
 .loadingscreen--image img {
   width: 100px;
-  background-color: white !important;
+  background-color: white;
   animation-name: animation;
   animation-duration: 2s;
   animation-iteration-count: infinite;
@@ -3461,30 +3343,13 @@ hr {
     transform: rotate(0);
   }
 }
-/*@mixin tablet {
-    @media screen and (max-width: 868px) {
-        @content;
-    }
-}
-
-@mixin mobile {
-    @media screen and (max-width: 480px) {
-        @content;
-    }
-}
-
-@mixin desktop {
-    @media screen and (max-width: 1200px) {
-        @content;
-    }
-}*/
 .editprofile--container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.616) !important;
+  background-color: rgba(0, 0, 0, 0.616);
   z-index: 1;
   display: flex;
   justify-content: center;
@@ -3679,10 +3544,11 @@ hr {
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
+  border: none;
 }
 .userlabel--container:hover {
   cursor: pointer;
-  background-color: #fafafa;
+  background-color: #dbdbdb;
 }
 
 .userlabel--image {
@@ -3768,8 +3634,10 @@ hr {
   margin: 0;
   padding: 0;
   padding-right: 10px;
+  margin-left: 20px;
 }
-.comments--content span:first-child {
+.comments--content a {
+  color: black;
   font-weight: bold;
 }
 
@@ -3844,23 +3712,6 @@ hr {
   margin-left: -35px;
 }
 
-/*@mixin tablet {
-    @media screen and (max-width: 868px) {
-        @content;
-    }
-}
-
-@mixin mobile {
-    @media screen and (max-width: 480px) {
-        @content;
-    }
-}
-
-@mixin desktop {
-    @media screen and (max-width: 1200px) {
-        @content;
-    }
-}*/
 .inbox--container {
   width: 1000px;
   min-height: 90vh;
@@ -3999,40 +3850,19 @@ hr {
 }
 
 .inboxuser--container {
+  color: black;
+}
+.inboxuser--container button {
   width: 350px;
   height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  color: black;
+  border: none;
+  background-color: #fafafa;
 }
-@media screen and (min-width: 992px) and (max-width: 1350px) {
-  .inboxuser--container {
-    width: 195px;
-  }
-}
-@media screen and (min-width: 768px) and (max-width: 992px) {
-  .inboxuser--container {
-    width: 195px;
-  }
-}
-@media screen and (min-width: 576px) and (max-width: 768px) {
-  .inboxuser--container {
-    width: 195px;
-  }
-}
-@media screen and (min-width: 480px) and (max-width: 576px) {
-  .inboxuser--container {
-    width: 195px;
-  }
-}
-@media screen and (min-width: 0px) and (max-width: 480px) {
-  .inboxuser--container {
-    width: 35vw;
-  }
-}
-.inboxuser--container img {
+.inboxuser--container button img {
   width: 60px;
   height: 60px;
   border-radius: 100%;
@@ -4040,14 +3870,39 @@ hr {
   margin-right: 20px;
 }
 @media screen and (min-width: 0px) and (max-width: 480px) {
-  .inboxuser--container img {
+  .inboxuser--container button img {
     width: 40px;
     height: 40px;
   }
 }
-.inboxuser--container:hover {
+.inboxuser--container button:hover {
   cursor: pointer;
-  background-color: #fafafa;
+  background-color: #dbdbdb;
+}
+@media screen and (min-width: 992px) and (max-width: 1350px) {
+  .inboxuser--container button {
+    width: 195px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .inboxuser--container button {
+    width: 195px;
+  }
+}
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  .inboxuser--container button {
+    width: 195px;
+  }
+}
+@media screen and (min-width: 480px) and (max-width: 576px) {
+  .inboxuser--container button {
+    width: 195px;
+  }
+}
+@media screen and (min-width: 0px) and (max-width: 480px) {
+  .inboxuser--container button {
+    width: 35vw;
+  }
 }
 
 .inboxchat--container {
@@ -4055,7 +3910,7 @@ hr {
   display: flex;
   flex-direction: column;
   position: relative;
-  background-color: transparent !important;
+  background-color: transparent;
 }
 @media screen and (min-width: 576px) and (max-width: 768px) {
   .inboxchat--container {
@@ -4195,7 +4050,7 @@ hr {
   align-items: center;
   justify-content: center;
   bottom: 0;
-  background-color: transparent !important;
+  background-color: transparent;
 }
 @media screen and (min-width: 992px) and (max-width: 1350px) {
   .inboxchat--send {
@@ -4270,23 +4125,6 @@ hr {
   cursor: pointer;
 }
 
-/*@mixin tablet {
-    @media screen and (max-width: 868px) {
-        @content;
-    }
-}
-
-@mixin mobile {
-    @media screen and (max-width: 480px) {
-        @content;
-    }
-}
-
-@mixin desktop {
-    @media screen and (max-width: 1200px) {
-        @content;
-    }
-}*/
 .inboxmessage--containerleft {
   width: 600px;
   min-height: 50px;
@@ -4490,7 +4328,6 @@ html {
 }
 
 body {
-  background: #0f0f0f;
   color: black;
   width: 100%;
   margin: 0;
@@ -4501,4 +4338,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+a {
+  text-decoration: none;
 }/*# sourceMappingURL=main.css.map */

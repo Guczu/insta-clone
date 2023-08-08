@@ -54,15 +54,14 @@ export default function UserLabel(props) {
         }
 
         navigate(`/${user.username}`);
-        window.location.reload();
     }
 
   return (
-    <div className='userlabel--container' onClick={addRecentSearches}>
-        {user !== null && (
+    <button className='userlabel--container' onClick={addRecentSearches}>
+        {user && (
             <div className='userlabel--user'>
                 <div className='userlabel--image'>
-                <img src={user.picture} className="clickable"></img>
+                <img src={user.picture} alt='zdjęcie profilowe' />
                 </div>
                 <div className='userlabel--names'>
                     <div className='userlabel--username'>
@@ -74,6 +73,6 @@ export default function UserLabel(props) {
                 </div>
             </div>
         )}
-    </div>
+    </button>
   )
 }

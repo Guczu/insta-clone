@@ -20,7 +20,6 @@ import followUser from '../methods/followUser';
 
 export default function Profile() {
     const dispatch = useDispatch();
-    const darkmode = useSelector(state => state.theme.theme);
     const {id} = useParams();
     const location = useLocation();
 
@@ -63,7 +62,6 @@ export default function Profile() {
                     const userData = await fetchOneUser(doc.data().user_followed);
                     followedArray.push(userData);
                 })
-                console.log(followedArray)
                 setFollowedList(followedArray);
         }
 
@@ -86,37 +84,23 @@ export default function Profile() {
 
     }, [location])
 
-    const handleScrollbar = (trigger) => {
-        if(!trigger) {
-          document.querySelector('html').style.overflowY = 'hidden';
-        }
-        else {
-          document.querySelector('html').style.overflowY = 'scroll';
-        }
-    }
-
     const handleAddPost = () => {
-        handleScrollbar(isAddPost);
         setIsAddPost(oldState => !oldState);
     }
 
     const handleFollowedTrigger = () => {
-        handleScrollbar(followedTrigger);
         setFollowedTrigger(oldState => !oldState);
     }
     
     const handleFollowingTrigger = () => {
-        handleScrollbar(followingTrigger);
         setFollowingTrigger(oldState => !oldState);
     }
 
     const handleEditTrigger = () => {
-        handleScrollbar(editTrigger);
         setEditTrigger(oldState => !oldState);
     }
 
     const handleMessageTrigger = () => {
-        handleScrollbar(messageTrigger);
         setMessageTrigger(oldState => !oldState);
     }
 
@@ -176,7 +160,7 @@ export default function Profile() {
     {isLoading ? (
         <LoadingScreen />
     ) : (
-    <div className={`mainpage--container ${darkmode}`}>
+    <div className='mainpage--container'>
         <Navbar />
         {isAddPost && <AddPost handleAddPost={handleAddPost}/>}
         {followedTrigger && <FollowedUsers handleFollowedTrigger={handleFollowedTrigger} followedList={followedList} />}
@@ -186,11 +170,11 @@ export default function Profile() {
 
         <div className='mainpage--content'>
         <div className='mainpage--wrapper'>
-            <div className='mainpage--left'></div>
+            <div className='mainpage--left'/>
             <div className='profile--container'>
                 <div className='profile--content'>
                     <div className='profile--avatar'>
-                        <img src={userData.data.picture}></img>
+                        <img src={userData.data.picture} alt='zdjęcie profilowe' />
                     </div>
                     <div className='profile--info'>
                         <div className='profile--options'>
@@ -200,7 +184,7 @@ export default function Profile() {
                                 <>
                                     <button onClick={handleEditTrigger}>Edytuj profil</button>
                                     <button onClick={handleAddPost}>Dodaj post</button>
-                                    <i className="fa-solid fa-gear fa-xl"></i>
+                                    <i className='fa-solid fa-gear fa-xl'/>
                                 </>
                             ) : (
                                 <>
@@ -211,33 +195,33 @@ export default function Profile() {
                                         <button className='followedbutton' onClick={unfollow}>Obserwujesz</button>
                                     )}  
                                     <button onClick={handleMessageTrigger}>Wyślij wiadomość</button>
-                                    <i className="fa-solid fa-ellipsis fa-xl"></i>
+                                    <i className='fa-solid fa-ellipsis fa-xl'/>
                                 </>
                             )
                             }     
                         </div>
                         <div className='profile--stats'>
                             <p>Posty: <span className='bold'>{userData.data.posts}</span></p>
-                            <p className='clickable' onClick={handleFollowingTrigger}><span className='bold'>{userData.data.following}</span> obserwujących</p>
-                            <p className='clickable' onClick={handleFollowedTrigger}>Obserwowani: <span className='bold'>{userData.data.followed}</span></p>
+                            <button className='clickable' onClick={handleFollowingTrigger}><span className='bold'>{userData.data.following}</span> obserwujących</button>
+                            <button className='clickable' onClick={handleFollowedTrigger}>Obserwowani: <span className='bold'>{userData.data.followed}</span></button>
                         </div>
                         <div className='profile--bio'>
                             <p>{userData.data.bio}</p>
                         </div>
                     </div>
                 </div>
-                <hr></hr>
+                <hr/>
                 <div className='profile--nav'>
                     <div className='profile--navlink'>
-                        <i className="fa-solid fa-table-cells fa-xl"></i>
+                        <i className='fa-solid fa-table-cells fa-xl'/>
                         <p>POSTY</p>
                     </div>
                     <div className='profile--navlink'>
-                        <i className="fa-regular fa-bookmark fa-xl"></i>
+                        <i className='fa-regular fa-bookmark fa-xl'/>
                         <p>ZAPISANE</p>
                     </div>
                     <div className='profile--navlink'>
-                        <i className="fa-solid fa-image-portrait fa-xl"></i>
+                        <i className='fa-solid fa-image-portrait fa-xl'/>
                         <p>Z OZNACZENIEM</p>
                     </div>
                 </div>
@@ -245,12 +229,12 @@ export default function Profile() {
                     { userData.data.posts < 1 && id === user.username ? (
                     <>
                         <div className='profile--img'>
-                            <i className="fa-solid fa-camera fa-4x clickable" onClick={handleAddPost}></i>
+                            <i className='fa-solid fa-camera fa-4x clickable' onClick={handleAddPost}/>
                         </div>
                         <div className='profile--poststext'>
                             <p className='title'>Udostępnij zdjęcia</p>
                             <p className='sizeup'>Gdy udostępnisz zdjęcia, pojawiają się one na Twoim profilu.</p>
-                            <p className='clickable blue' onClick={handleAddPost}>Udostępnij swoje pierwsze zdjęcie</p>
+                            <button className='clickable blue' onClick={handleAddPost}>Udostępnij swoje pierwsze zdjęcie</button>
                         </div>
                     </>
                         ) : (

@@ -40,13 +40,11 @@ export default function RegisterPage() {
         following: 0,
         picture: "https://firebasestorage.googleapis.com/v0/b/instaclone-cb003.appspot.com/o/profile-pictures%2Fdefault.jpg?alt=media&token=37a6fba9-330d-43f7-852a-e3ac79b41556",
         bio: "Biografia",
-        theme: "light",
         timeStamp: serverTimestamp()
       });
       navigate("/login");
     }
     catch(err) {
-      console.log(err.code);
       switch(err.code) {
         case "auth/email-already-in-use":
           setErrorMessage("Email jest już w użyciu");
@@ -67,13 +65,25 @@ export default function RegisterPage() {
     <div className='registerpage--container'>
       <div className='registerpage--register'>
         <div className='registerpage--form'>
-          <img src={logo}></img>
+          <img src={logo} alt='logo' />
           <p className='bold gray'>Zarejestruj się, aby przeglądać zdjęcia i filmy znajomych.</p>
-          <hr></hr>
-          <input type="text" placeholder='Adres email' name="email" onChange={handleInput}></input>
-          <input type="text" placeholder='Imię i nazwisko' name="name" onChange={handleInput}></input>
-          <input type="text" placeholder='Nazwa użytkownika' name="username" onChange={handleInput}></input>
-          <input type="password" placeholder='Hasło' name="password" onChange={handleInput}></input>
+          <hr/>
+          <label htmlFor='email'>
+            <span className='sr-only'>Wpisz email</span>
+          </label>
+          <input type='text' placeholder='Adres email' name='email' id='email' onChange={handleInput}/>
+          <label htmlFor='name'>
+            <span className='sr-only'>Wpisz imię i nazwisko</span>
+          </label>
+          <input type='text' placeholder='Imię i nazwisko' name='name' id='name' onChange={handleInput}/>
+          <label htmlFor='username'>
+            <span className='sr-only'>Wpisz nazwę użytkownika</span>
+          </label>
+          <input type='text' placeholder='Nazwa użytkownika' name='username' id='username' onChange={handleInput}/>
+          <label htmlFor='password'>
+            <span className='sr-only'>Wpisz hasło</span>
+          </label>
+          <input type='password' placeholder='Hasło' name='password' id='password' onChange={handleInput}/>
           
           <p>{errorMessage}</p>
           

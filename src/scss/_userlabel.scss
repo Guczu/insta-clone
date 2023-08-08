@@ -7,10 +7,11 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 10px;
+    border: none;
 
     &:hover {
         cursor: pointer;
-        background-color: $primary-color;
+        background-color: $border-color;
     }
 }
 

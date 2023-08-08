@@ -6,7 +6,7 @@
     left: 0;
     width: 100%;
     min-height: 100vh;
-    background-color: rgba(0, 0, 0, 0.616) !important;
+    background-color: rgba(0, 0, 0, 0.616);
 
     display: flex;
     justify-content: center;
@@ -74,7 +74,7 @@
 .postpreview--image {
     width: 700px;
     min-height: 900px;
-    background-color: black !important;
+    background-color: black;
     display: flex;
     align-items: center;
     @include desktop {
@@ -107,7 +107,7 @@
         width: 700px;
         min-height: 900px;
         max-height: 900px;
-        background-color: black !important;
+        background-color: black;
         object-fit: contain;
         @include desktop {
             width: 45vw;
@@ -197,11 +197,17 @@
     img {
         width: 40px;
         border-radius: 30px;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
-    span {
+    a {
         font-size: 16px;
         margin-left: 20px;
+        font-weight: bold;
+        color: black;
     }
 }
 
@@ -237,11 +243,22 @@
     img {
         width: 40px;
         border-radius: 30px;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     span {
         font-size: 16px;
         margin-left: 20px;
+    }
+
+    a {
+        font-size: 16px;
+        margin-left: 20px;
+        font-weight: bold;
+        color: black;
     }
 }
 

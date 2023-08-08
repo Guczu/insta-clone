@@ -5,6 +5,7 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import fetchOneUserById from '../methods/fetchOneUserById';
 import InboxMessage from './InboxMessage';
 import sendMessage from '../methods/sendMessage';
+import {default_avatar_url} from '../constants';
 
 export default function InboxChat() {
     const { userId } = useParams();
@@ -13,8 +14,9 @@ export default function InboxChat() {
     const [user, setUser] = useState(null);
     const [messages, setMessages] = useState([]);
     const [content, setContent] = useState("");
+    const chatRef = useRef(null);
+    const messageInputRef = useRef(null);
     const messagesEndRef = useRef(null);
-    const avatar = "https://firebasestorage.googleapis.com/v0/b/instaclone-cb003.appspot.com/o/profile-pictures%2Fdefault.jpg?alt=media&token=37a6fba9-330d-43f7-852a-e3ac79b41556";
 
     useEffect(() => {
         const messagesRef = collection(db, "users", uid, "inbox", userId, "messages");
@@ -37,15 +39,14 @@ export default function InboxChat() {
     }, [location])
 
     useEffect(() => {
-        const chat = document.querySelector('.inboxchat--messages');
-        chat.scrollTop = chat.scrollHeight;
+        chatRef.scrollTop = chatRef.scrollHeight;
         requestAnimationFrame(() => {
             messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
         });
     }, [messages])
 
     const sendMess = async () => {
-        document.querySelector('.inputContent').value = "";
+        messageInputRef.current.value = "";
         await sendMessage(userId, content);
     }
 
@@ -65,18 +66,19 @@ export default function InboxChat() {
 
     return (
         <div className='inboxchat--container'>
-                <div className='inboxchat--toplabel'>
-                    <img src={user !== null ? user.picture : avatar}></img>
-                    <p>{user !== null && user.username}</p>
-                </div>
-                <div className='inboxchat--messages'>
-                    {showMessages}
-                    <div ref={messagesEndRef}></div>
-                </div>
-                <div className='inboxchat--send'>
-                    <input type="text" className="inputContent" onKeyDown={handleKeyPress} onChange={(e) => setContent(e.target.value)}></input>
-                    <button onClick={sendMess}>Send Message</button>
-                </div>
+            <div className='inboxchat--toplabel'>
+                <img src={user ? user.picture : default_avatar_url} alt='zdjęcie profilowe' />
+                <p>{user && user.username}</p>
+            </div>
+            <div className='inboxchat--messages' ref={chatRef}>
+                {showMessages}
+                <div ref={messagesEndRef}></div>
+            </div>
+            <div className='inboxchat--send'>
+                <label title='message content' htmlFor='message'></label>
+                <input type='text' className='inputContent' ref={messageInputRef} id='message' onKeyDown={handleKeyPress} onChange={(e) => setContent(e.target.value)} />
+                <button onClick={sendMess}>Wyślij</button>
+            </div>
         </div>
     )
 }

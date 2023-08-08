@@ -33,6 +33,10 @@
         width: 60px;
         height: 60px;
         border-radius: 50px;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     button {
@@ -51,13 +55,15 @@
     width: 200px;
     height: 75px;
 
-    p {
+    a {
         margin: 0;
         margin-left: 10px;
         padding: 2px;
+        color: black;
 
         &:hover {
             cursor: pointer;
+            color: $border-hover-color;
         }
     }
 
@@ -79,10 +85,23 @@
         margin: 0;
         margin-left: 10px;
         padding: 2px;
+        color: black;
 
         &:hover {
             cursor: pointer;
         }
+    }
+
+    a {
+        margin: 0;
+        margin-left: 10px;
+        padding: 2px;
+        color: black;
+
+        &:hover {
+            cursor: pointer;
+            color: $border-hover-color;
+        } 
     }
 
     span {

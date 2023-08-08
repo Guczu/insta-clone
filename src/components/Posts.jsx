@@ -56,7 +56,6 @@ export default function Posts() {
   },[])
 
   return (
-    <>
       <div className='mainpage--middle'>
           <Stories />
           {
@@ -76,6 +75,5 @@ export default function Posts() {
             )
           }
       </div>
-    </>
   )
 }

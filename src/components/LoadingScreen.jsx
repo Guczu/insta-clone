@@ -5,7 +5,7 @@ export default function LoadingScreen() {
   return (
     <div className='loadingscreen--container'>
         <div className='loadingscreen--image'>
-            <img src={loadingscreen}></img>
+            <img src={loadingscreen} alt='ekran ładowania' />
         </div>
     </div>
   )

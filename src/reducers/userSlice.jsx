@@ -6,8 +6,8 @@ const initialState = {
     username: null,
     email: null,
     posts: null,
-    followed: null, // user is following that amount of people
-    following: null, // user is followed by that amount of people
+    followed: null, // user followed that amount of people
+    following: null, // that amount of people is following user
     followers: [],
     picture: null,
     bio: null
