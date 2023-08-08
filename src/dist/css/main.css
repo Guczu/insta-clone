@@ -681,7 +681,7 @@
   font-weight: bold;
   color: #dbdbdb;
   border: none;
-  background-color: #fafafa;
+  background-color: white;
 }
 .navbar--searchbar--close:hover {
   cursor: pointer;
@@ -1079,7 +1079,7 @@
 .mainpage--morecomments button {
   border: none;
   padding: 0;
-  background-color: #fafafa;
+  background-color: white;
 }
 .mainpage--morecomments button:hover {
   cursor: pointer;
@@ -1705,7 +1705,7 @@ hr {
 }
 .profile--stats button {
   border: none;
-  background-color: #fafafa;
+  background-color: white;
 }
 .profile--stats button:hover {
   color: #9c9c9c;
