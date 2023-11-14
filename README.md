@@ -1,5 +1,9 @@
 # Social media app
 
+Deployment: https://insta-clone-guczu.vercel.app/ <br />
+Test user: <br />
+test@example.com:password
+
 Instagram clone app with following features:
 
 -   create account/login/logout
@@ -25,3 +29,8 @@ Instagram clone app with following features:
 -   `REACT_APP_FIREBASE_MESSAGING_SENDER_ID` - Firebase sender id
 -   `REACT_APP_FIREBASE_APP_ID` - Firebase App id
 -   `REACT_APP_MEASUREMENT_ID` - Firebase measurement id
+
+
+![homepage](https://img001.prntscr.com/file/img001/6buBqZkJQBCS9aG40usn3Q.png)
+
+![alt text](https://img001.prntscr.com/file/img001/YrZUvOVeTkaBuDm_2XAsLQ.png)
