@@ -1,9 +1,5 @@
 # Social media app
 
-Deployment: https://insta-clone-guczu.vercel.app/ <br />
-Test user: <br />
-test@example.com:password
-
 Instagram clone app with following features:
 
 -   create account/login/logout
